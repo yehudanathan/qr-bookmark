@@ -1,11 +1,9 @@
-import React from 'react'
+import InsertBar from "../components/InsertBar";
 
 const Home = () => {
     return (
-        <div>
-            Homepage
-        </div>
+        <InsertBar/>
     )
 }
 
-export default Home
+export default Home;

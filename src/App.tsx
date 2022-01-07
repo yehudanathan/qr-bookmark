@@ -5,7 +5,6 @@ import Config from './pages/Config';
 import Links from './pages/Links';
 import SignIn from './pages/SignIn';
 
-
 function App() {
   return (
     <Router>

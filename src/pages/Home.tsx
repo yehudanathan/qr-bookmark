@@ -1,11 +1,9 @@
-import React from 'react'
+import AddLink from "../components/AddLink";
 
 const Home = () => {
     return (
-        <div>
-            Homepage
-        </div>
+        <AddLink/>
     )
 }
 
-export default Home
+export default Home;

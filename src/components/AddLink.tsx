@@ -3,7 +3,7 @@ import { useState } from "react";
 import validator from "validator";
 import { Pictures } from "../models/Pictures";
 import { User } from '../models/User';
-import { authRegister } from '../apis/auth';
+import { authLogin, authRegister } from '../apis/auth';
 import { AuthUser } from '../models/AuthUser';
 
 const fake_user: AuthUser = {
@@ -17,16 +17,12 @@ const AddLink = () => {
 
     // kalo gabut: cari type e apa disini
     const handleSubmit = async (e: any) => {
-        // if (validator.isURL(url)) {
-        //     e.preventDefault();
-        //     alert("URL: " + url);
-        // } else {
-        //     alert("Please enter a valid URL")
-        // }
-        // console.log("proceeding 2");
-        e.preventDefault();
-        const res = await authRegister(fake_user);
-        console.log(res);
+        if (validator.isURL(url)) {
+            e.preventDefault();
+            alert("URL: " + url);
+        } else {
+            alert("Please enter a valid URL")
+        }
     }
 
     return (

@@ -4,13 +4,14 @@ import validator from "validator";
 import { Pictures } from "../models/Pictures";
 import { User } from '../models/User';
 import { authRegister } from '../apis/auth';
+import { AuthUser } from '../models/AuthUser';
 
-// const fake_user : User = {
-//     email: "sososo@soso.so",
-//     name: "Soso",
-//     password: "soso",
-//     displayPicture: Pictures.DEFAULT
-// }
+const fake_user: AuthUser = {
+    email: "jessssss@jesss",
+    password: "jessssss",
+}
+
+
 const AddLink = () => {
     const [url, setURL] = useState('');
 
@@ -23,9 +24,9 @@ const AddLink = () => {
         //     alert("Please enter a valid URL")
         // }
         // console.log("proceeding 2");
-        // e.preventDefault();
-        // const res = await authRegister(fake_user);
-        // console.log(res);
+        e.preventDefault();
+        const res = await authRegister(fake_user);
+        console.log(res);
     }
 
     return (

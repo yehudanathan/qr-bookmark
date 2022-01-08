@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AuthUser } from "../models/AuthUser";
 import { User } from '../models/User';
+import { getCurrentUser, getLatestToken } from "./session";
 
 const baseServerURL = "https://qr-bookmark.herokuapp.com";
 
@@ -29,3 +30,25 @@ export const authLogout = async () => {
     sessionStorage.removeItem("user");
     return true;
 };
+
+export const isSignedIn = async () => {
+    const token = getLatestToken();
+    const user = getCurrentUser();
+    if (token && user) {
+        try {
+            const response = await axios.get(`${baseServerURL}/users/${user.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (response.status === 200) {
+                sessionStorage.setItem("user", JSON.stringify(response.data));
+                return true;
+            }
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+    return false;
+}

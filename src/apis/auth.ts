@@ -1,6 +1,5 @@
 import axios from "axios";
 import { AuthUser } from "../models/AuthUser";
-import { User } from '../models/User';
 import { getCurrentUser, getLatestToken } from "./session";
 
 const baseServerURL = "https://qr-bookmark.herokuapp.com";

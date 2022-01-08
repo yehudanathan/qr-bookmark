@@ -1,15 +1,6 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
-import { Pictures } from "../models/Pictures";
-import { User } from '../models/User';
-import { authLogin, authRegister } from '../apis/auth';
-import { AuthUser } from '../models/AuthUser';
-
-const fake_user: AuthUser = {
-    email: "jessssss@jesss",
-    password: "jessssss",
-}
 
 
 const AddLink = () => {
@@ -51,7 +42,7 @@ const AddLink = () => {
 }
 
 /*
-todo:
+TODO:
 - make sure URL is not already in the database. if yes => error
 - submit URL to database
 */

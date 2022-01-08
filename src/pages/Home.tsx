@@ -1,8 +1,8 @@
-import InsertBar from "../components/InsertBar";
+import AddLink from "../components/AddLink";
 
 const Home = () => {
     return (
-        <InsertBar/>
+        <AddLink/>
     )
 }
 

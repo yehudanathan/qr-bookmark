@@ -1,12 +1,22 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
+import { Pictures } from "../models/Pictures";
+import { User } from '../models/User';
+import { authLogin, authRegister } from '../apis/auth';
+import { AuthUser } from '../models/AuthUser';
+
+const fake_user: AuthUser = {
+    email: "jessssss@jesss",
+    password: "jessssss",
+}
+
 
 const AddLink = () => {
     const [url, setURL] = useState('');
 
     // kalo gabut: cari type e apa disini
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         if (validator.isURL(url)) {
             e.preventDefault();
             alert("URL: " + url);

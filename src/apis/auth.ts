@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AuthUser } from "../models/AuthUser";
 import { User } from '../models/User';
+
 const baseServerURL = "https://qr-bookmark.herokuapp.com";
 
 export const authRegister = async (user: AuthUser) => {

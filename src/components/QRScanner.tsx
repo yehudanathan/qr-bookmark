@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import QrReader from "react-qr-scanner";
 import validator from "validator";
 import { Button } from "@mui/material";
+import DetectRTC from "detectrtc";
 
 const QRScanner = () => {
     const [result, setResult] = useState('No result');
     const [showQrReader, setShowQrReader] = useState(false);
+    const ref = useRef<QrReader>(null);
 
     const previewStyle = {
         height: 400,
@@ -24,10 +26,22 @@ const QRScanner = () => {
         console.error(e);
     }
 
+    const QRReader = (<QrReader
+        ref={ref}
+        style={previewStyle}
+        onScan={handleScan}
+        onError={handleError}
+        legacyMode={DetectRTC.hasWebcam ? false : true}
+        />);
+
+    const openImageDialog = () => {
+        ref?.current?.openImageDialog();
+    }
+
     return (
         <>
             <Button
-                variant = "contained"
+                variant = "text"
                 size= "large"
                 sx={{height:"40px"}}
                 onClick={() => setShowQrReader(!showQrReader)}
@@ -35,11 +49,7 @@ const QRScanner = () => {
                 >
                 {showQrReader ? "Close" : "Open Camera"}
             </Button>
-            {showQrReader && <QrReader
-                style={previewStyle}
-                onScan={handleScan}
-                onError={handleError}
-            />}  
+            {showQrReader && QRReader} 
         </>
     )
 }

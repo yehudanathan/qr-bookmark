@@ -43,6 +43,7 @@ const AddLink = () => {
 /*
 todo:
 - make sure URL is not already in the database. if yes => error
+- submit URL to database
 */
 
 export default AddLink;

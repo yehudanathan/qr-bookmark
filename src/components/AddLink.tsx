@@ -1,18 +1,31 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
+import { Pictures } from "../models/Pictures";
+import { User } from '../models/User';
+import { authRegister } from '../apis/auth';
 
+// const fake_user : User = {
+//     email: "sososo@soso.so",
+//     name: "Soso",
+//     password: "soso",
+//     displayPicture: Pictures.DEFAULT
+// }
 const AddLink = () => {
     const [url, setURL] = useState('');
 
     // kalo gabut: cari type e apa disini
-    const handleSubmit = (e: any) => {
-        if (validator.isURL(url)) {
-            e.preventDefault();
-            alert("URL: " + url);
-        } else {
-            alert("Please enter a valid URL")
-        }
+    const handleSubmit = async (e: any) => {
+        // if (validator.isURL(url)) {
+        //     e.preventDefault();
+        //     alert("URL: " + url);
+        // } else {
+        //     alert("Please enter a valid URL")
+        // }
+        // console.log("proceeding 2");
+        // e.preventDefault();
+        // const res = await authRegister(fake_user);
+        // console.log(res);
     }
 
     return (

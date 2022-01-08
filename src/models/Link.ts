@@ -4,3 +4,5 @@ export interface Link {
     title: string;
     dateTime: string
 }
+
+// TODO tambahin user id

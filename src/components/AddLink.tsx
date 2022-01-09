@@ -1,6 +1,7 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
+import { authLogout } from "../apis/auth";
 
 const AddLink = () => {
     const [url, setURL] = useState('');
@@ -9,6 +10,7 @@ const AddLink = () => {
     const handleSubmit = async (e: any) => {
         if (validator.isURL(url)) {
             e.preventDefault();
+            // authLogout();
             alert("URL: " + url);
         } else {
             alert("Please enter a valid URL")

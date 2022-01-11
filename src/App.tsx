@@ -1,39 +1,51 @@
-import './App.css';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import {Navigate} from 'react-router-dom';
-import Home from './pages/Home';
-import Config from './pages/Config';
-import Links from './pages/Links';
-import SignIn from './pages/SignIn';
-import { isSignedIn, authLogin } from './apis/auth';
-import { useEffect, useState } from 'react';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import Home from "./pages/Home";
+import Config from "./pages/Config";
+import Links from "./pages/Links";
+import SignIn from "./pages/SignIn";
+import { isSignedIn, authLogin } from "./apis/auth";
+import { useEffect, useState } from "react";
+import { truncate } from "fs";
 
-function App() {
-  const [signedIn, setSignedIn] = useState(false);
-  const [loading, setLoading] = useState(false);
+const PrivateRoute = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(() => true);
-    isSignedIn().then(state => setSignedIn(state)).then(state => setLoading(false));
-  }, [])
+    isSignedIn().then((res) => {
+      console.log("before: " + isAuthenticated);
+      setIsAuthenticated(res);
+      console.log("after: " + isAuthenticated);
+      setIsLoading(false);
+    });
+  }, [isAuthenticated]);
 
-  console.log("signed in: " + signedIn);
-  console.log("loading: " + loading);
-  
   return (
     <>
-      { !loading &&
+      {!isLoading && (isAuthenticated ? <Outlet /> : <Navigate to="/signin" />)}
+    </>
+  );
+};
+
+function App() {
+  return (
+    <>
+      {
         <Router>
-        <Routes>
-          <Route path = '/' render = {() => {signedIn? <Home/> : <Navigate to="/signin"/>}}></Route>
-          <Route path = '/config' element = {signedIn? <Config/> : <Navigate to="/signin"/>}></Route>
-          <Route path = '/links' element = {signedIn? <Links/> : <Navigate to="/signin"/>}></Route>
-          <Route path = '/signin' element = {<SignIn/>}></Route> 
-        </Routes>
+          <Routes>
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="" element={<Home />} />
+              <Route path="config" element={<Config />} />
+              <Route path="links" element={<Links />} />
+            </Route>
+            <Route path="/signin" element={<SignIn />}></Route>
+          </Routes>
         </Router>
       }
     </>
-    );
+  );
 }
 
 // TODO: fix the navigate bug :(

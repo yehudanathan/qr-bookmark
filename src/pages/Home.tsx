@@ -7,6 +7,7 @@ const Home = () => {
     return (
         <div className="body">
             <Stack direction="column" spacing={1} alignItems="center">
+                <h1 className="title">Bookmark your link now.</h1>
                 <AddLink/>
                 <QRScanner/>
             </Stack>

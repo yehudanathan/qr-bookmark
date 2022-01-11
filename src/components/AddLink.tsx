@@ -1,7 +1,7 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
-
+import { authLogout } from "../apis/auth";
 
 const AddLink = () => {
     const [url, setURL] = useState('');
@@ -10,6 +10,7 @@ const AddLink = () => {
     const handleSubmit = async (e: any) => {
         if (validator.isURL(url)) {
             e.preventDefault();
+            // authLogout();
             alert("URL: " + url);
         } else {
             alert("Please enter a valid URL")
@@ -19,17 +20,25 @@ const AddLink = () => {
     return (
         <form className="form-control" onSubmit={handleSubmit}>
             <Stack direction="row" spacing = {0} alignItems = "center">
-                <TextField 
+                <TextField
                     label="Insert URL"
-                    sx={{m: 1, width: "50ch", height: "40px"}}
+                    sx={{m: 1, width: "50ch", backgroundColor: "white",
+                    borderTopLeftRadius: "4px",
+                    borderTopRightRadius: "4px",
+                    }}
                     size="small"
                     value={url}
                     onChange={e => setURL(e.target.value)}
+                    color="secondary"
+                    inputProps={{style: {fontFamily: "Product Sans"}}}
+                    variant="filled"
                     />
                 <Button
+                    style={{backgroundColor: "#7c40a9"}}
                     variant = "contained"
                     size= "large"
-                    sx={{height:"40px"}}
+                    sx={{height:"48px",
+                        fontFamily:"Montserrat"}}
                     onClick={() => console.log("saved!")}
                     type="submit"
                     >

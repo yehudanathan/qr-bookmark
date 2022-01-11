@@ -30,7 +30,7 @@ const QRScanner = () => {
                 style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
                 variant = "contained"
                 size= "large"
-                sx={{height:"40px", fontFamily: "Montserrat",}}
+                sx={{height:"48px", fontFamily: "Montserrat",}}
                 onClick={() => setShowQrReader(!showQrReader)}
                 type="submit"
                 >

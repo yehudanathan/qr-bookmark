@@ -25,10 +25,11 @@ function App() {
       { !loading &&
         <Router>
         <Routes>
-          <Route path = '/' render = {() => {signedIn? <Home/> : <Navigate to="/signin"/>}}></Route>
-          <Route path = '/config' element = {signedIn? <Config/> : <Navigate to="/signin"/>}></Route>
-          <Route path = '/links' element = {signedIn? <Links/> : <Navigate to="/signin"/>}></Route>
+          <Route path = '/' element = {<Home/>}></Route>
+          <Route path = '/config' element = {<Config/>}></Route>
+          <Route path = '/links' element = {<Links/>}></Route>
           <Route path = '/signin' element = {<SignIn/>}></Route> 
+          <Route path='*' element={<Navigate to='/'/>}></Route>
         </Routes>
         </Router>
       }

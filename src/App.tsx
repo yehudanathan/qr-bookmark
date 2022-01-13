@@ -4,10 +4,12 @@ import Home from './pages/Home';
 import Config from './pages/Config';
 import Links from './pages/Links';
 import SignIn from './pages/SignIn';
+import SideBar from './components/SideBar'
 
 function App() {
   return (
     <Router>
+      <SideBar />
       <Routes>
         <Route path = '/' element = {<Home/>} />
         <Route path = '/config' element = {<Config/>} />

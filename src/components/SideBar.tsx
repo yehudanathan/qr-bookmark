@@ -7,28 +7,26 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import Hamburger from "../static/hamburger.png";
-import Favorite from "../static/favorite.png"
-import History from "../static/history.png"
-import Settings from "../static/settings.png"
-import Share from "../static/share.png"
-import Sponsor from "../static/sponsor.png"
-import Info from "../static/info.png"
+import Favorite from "../static/favorite.png";
+import History from "../static/history.png";
+import Settings from "../static/settings.png";
+import Share from "../static/share.png";
+import Sponsor from "../static/sponsor.png";
+import Info from "../static/info.png";
 
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     top: false,
-    left: false,
+    left: true,
     bottom: false,
     right: false,
   });
 
   const toggleDrawer = (anchor, open) => {
     setState({ ...state, [anchor]: open });
-    console.log(state)
+    console.log(state);
   };
 
   const list = (anchor) => (
@@ -69,11 +67,14 @@ export default function TemporaryDrawer() {
       </List>
     </Box>
   );
-
+  
+  const path = process.env.PUBLIC_URL + '/hamb.png';
   return (
     <div>
       <React.Fragment>
-        <button style={{backgroundImage: Hamburger, width: "20px", height: "20px"}}></button>
+        <button style={{background: `url("${path}") `, width: "20px", height: "20px", backgroundSize: 'cover', border: 'none'}}
+          onClick={e => toggleDrawer("left", true)}
+        ></button>
         <Drawer
           anchor="left"
           open={state.left}

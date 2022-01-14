@@ -19,7 +19,7 @@ import Info from "../static/info.png";
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     top: false,
-    left: true,
+    left: false,
     bottom: false,
     right: false,
   });
@@ -68,7 +68,7 @@ export default function TemporaryDrawer() {
     </Box>
   );
   
-  const path = process.env.PUBLIC_URL + '/hamb.png';
+  const path = process.env.PUBLIC_URL + '/hamb-blue.png';
   return (
     <div>
       <React.Fragment>

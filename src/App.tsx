@@ -8,6 +8,7 @@ import SignIn from "./pages/SignIn";
 import { isSignedIn, authLogin } from "./apis/auth";
 import { useEffect, useState } from "react";
 import { truncate } from "fs";
+import Register from "./pages/Register";
 
 const PrivateRoute = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -45,7 +46,7 @@ function App() {
           </Routes>
         </Router>
       } */}
-      <Home/>
+      <Register/>
     </>
   );
 }

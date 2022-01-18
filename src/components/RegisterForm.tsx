@@ -45,7 +45,7 @@ const RegisterForm = () => {
                     size="small"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    color="secondary"
+                    color="success"
                     inputProps={{style: {fontFamily: "Product Sans"}}}
                     />
                 <TextField
@@ -58,7 +58,7 @@ const RegisterForm = () => {
                     size="small"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    color="secondary"
+                    color="success"
                     inputProps={{style: {fontFamily: "Product Sans"}}}
                     />
                 <TextField
@@ -72,7 +72,7 @@ const RegisterForm = () => {
                     size="small"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    color="secondary"
+                    color="success"
                     inputProps={{style: {fontFamily: "Product Sans"}}}
                     />
                 <TextField
@@ -86,11 +86,11 @@ const RegisterForm = () => {
                     size="small"
                     value={confPassword}
                     onChange={e => setConfPassword(e.target.value)}
-                    color="secondary"
+                    color="success"
                     inputProps={{style: {fontFamily: "Product Sans"}}}
                     />
                 <Button
-                    style={{backgroundColor: "#7c40a9"}}
+                    style={{backgroundColor: "#2e7d32"}}
                     variant = "contained"
                     size= "large"
                     sx={{height:"40px",

@@ -1,16 +1,16 @@
 import { Stack } from "@mui/material";
-import { authRegister } from "../apis/auth";
 import RegisterForm from "../components/RegisterForm";
+import PictGenerator from "../components/PictGenerator";
 
 const Register = () => {
     return (
         <>
         <Stack direction="row">
-            {/* picture here */}
+            <PictGenerator/>
             <RegisterForm/>
         </Stack>
         </>
-    )
+    );
 }
 
 export default Register;

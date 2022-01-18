@@ -18,7 +18,7 @@ const AddLink = () => {
     }
 
     return (
-        <form className="form-control" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <Stack direction="row" spacing = {0} alignItems = "center">
                 <TextField
                     label="Insert URL"

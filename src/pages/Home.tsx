@@ -6,7 +6,7 @@ import TemporaryDrawer from "../components/SideBar";
 
 const Home = () => {
     return (
-        <div className="body">
+        <div className="body home">
             <TemporaryDrawer/>
             <Stack direction="column" spacing={1} alignItems="center">
                 <h1 className="title">Bookmark your link now.</h1>

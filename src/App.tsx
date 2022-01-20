@@ -33,7 +33,7 @@ const PrivateRoute = () => {
 function App() {
   return (
     <>
-      {/* {
+      {
         <Router>
           <Routes>
             <Route path="/" element={<PrivateRoute />}>
@@ -45,9 +45,9 @@ function App() {
             <Route path='*' element={<Navigate to='/'/>}></Route>
           </Routes>
         </Router>
-      } */}
+      }
       {/* <Home/> */}
-      <Register/>
+      {/* <Register/> */}
     </>
   );
 }

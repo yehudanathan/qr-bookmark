@@ -1,8 +1,10 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authLogin } from '../apis/auth';
 
 const SignInForm = ({ isLoading }) => {
+    let navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -15,6 +17,7 @@ const SignInForm = ({ isLoading }) => {
             alert("Incorrect password");
         } else if (response === "Logged in") {
             alert("User logged in successfully");
+            navigate('/');
         }
     }
 

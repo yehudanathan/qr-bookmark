@@ -8,9 +8,9 @@ const Config = () => {
 
   return (
     <Container>
-      <Stack>
-        <h1>Profile Config</h1>
-        <Card>
+      <Stack alignItems="center">
+        <h1>Configure your profile</h1>
+        <Card sx={{maxWidth: "800px", minWidth: "600px", width: "70%"}} >
           <Stack sx={{padding: 1}} alignItems="center" >
             <img src={Pictures.DEFAULT} alt="profile" width={100}/>
             <span className="config span">Username: {"HAHAHA"}</span>

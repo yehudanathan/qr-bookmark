@@ -9,7 +9,6 @@ const PictGenerator = ({ onGenerate }) => {
         const result = await axios.get(baseUnsplashURL);
         setPhotoAs(result);
         onGenerate();
-        console.log("finishef");
     }
 
     useEffect(() => {

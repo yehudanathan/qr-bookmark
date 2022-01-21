@@ -1,7 +1,9 @@
 import { Button, Stack, TextField } from '@mui/material';
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = ({ isLoading }) => {
+    let navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -92,16 +94,29 @@ const RegisterForm = ({ isLoading }) => {
                             inputProps={{style: {fontFamily: "Product Sans"}}}
                             />
                     </Stack>
-                    <Button
-                        style={{backgroundColor: "#2e7d32"}}
-                        variant = "contained"
-                        size= "large"
-                        sx={{height:"40px",
-                            fontFamily:"Montserrat"}}
-                        type="submit"
-                        >
-                        Register
-                    </Button>
+                    <Stack direction="row" spacing={4} alignItems="center">
+                        <Button
+                            style={{backgroundColor: "#019875"}}
+                            variant = "contained"
+                            size= "large"
+                            sx={{height:"40px",
+                                fontFamily:"Montserrat"}}
+                            type="submit"
+                            >
+                            Register
+                        </Button>
+                        <Button
+                            style={{backgroundColor: "#019875"}}
+                            variant = "contained"
+                            size= "large"
+                            sx={{height:"40px",
+                                fontFamily:"Montserrat",
+                                width:"123.5px"}}
+                            onClick={() => navigate('/signin')}
+                            >
+                            Sign In
+                        </Button>
+                    </Stack>
                 </Stack>
             </form>
             </>

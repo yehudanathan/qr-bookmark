@@ -18,9 +18,10 @@ export const authRegister = async (user: AuthUser) => {
 export const authLogin = async (user: AuthUser) => {
   const response = await axios.post(`${baseServerURL}/login`, user);
   if (response.status === 200) console.log("User logged in successfully");
+  else if (response.status === 400) return ("Incorrect password");
   sessionStorage.setItem("token", response.data.accessToken);
   sessionStorage.setItem("user", JSON.stringify(response.data.user));
-  return response.data;
+  return "Logged in";
 };
 
 export const authLogout = async () => {

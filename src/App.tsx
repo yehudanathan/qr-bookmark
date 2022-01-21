@@ -4,11 +4,9 @@ import { Navigate, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Config from "./pages/Config";
 import Links from "./pages/Links";
-import SignIn from "./pages/SignIn";
-import { isSignedIn, authLogin } from "./apis/auth";
+import { isSignedIn } from "./apis/auth";
 import { useEffect, useState } from "react";
-import { truncate } from "fs";
-import Register from "./pages/Register";
+import AuthPage from "./pages/AuthPage";
 
 const PrivateRoute = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -41,7 +39,8 @@ function App() {
               <Route path="config" element={<Config />} />
               <Route path="links" element={<Links />} />
             </Route>
-            <Route path="/signin" element={<SignIn />}></Route>
+            <Route path="/signin" element={<AuthPage />}></Route>
+            <Route path="/register" element={<AuthPage />}></Route>
             <Route path='*' element={<Navigate to='/'/>}></Route>
           </Routes>
         </Router>

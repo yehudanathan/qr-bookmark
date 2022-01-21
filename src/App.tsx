@@ -47,7 +47,8 @@ function App() {
         </Router>
       } */}
       {/* <Home/> */}
-      <Register/>
+      {/* <Register/> */}
+      <Config></Config>
     </>
   );
 }

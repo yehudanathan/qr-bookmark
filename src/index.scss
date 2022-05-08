@@ -1,5 +1,4 @@
 .body {
-
   &.home {
     background: linear-gradient(45deg,#e8c0ff,#bcd3f2);
     padding: 30px;
@@ -10,7 +9,7 @@
     -moz-osx-font-smoothing: grayscale;
     .title {
       font-size: 40px;
-      font-family: "Montserrat";
+      font-family: "Gotham Medium";
       color: #262254;
     }
   }
@@ -30,6 +29,22 @@
     strong {
       font-style: normal;
       font-size: 30px;
+    }
+  }
+  .header-3 {
+    font-size: 15px;
+    font-family: "Product Sans";
+    color: #000000;
+    font-weight: normal;
+  }
+  .link {
+    font-size: 15px;
+    font-family: "Product Sans";
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    &:hover {
+      color: #004b3a;
     }
   }
 }
@@ -52,3 +67,25 @@
 }
 
 
+.config {
+  &.span {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+h1 {
+  font-size: 40px;
+  font-family: "Gotham Medium";
+  color: #262254;
+}
+
+span {
+  font-family: "Product Sans";
+}
+
+.MuiButton-root {
+  height: 40px;
+  font-family: "Montserrat" !important;
+}

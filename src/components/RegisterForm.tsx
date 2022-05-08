@@ -28,7 +28,7 @@ const RegisterForm = ({ isLoading }) => {
             alert("Passwords do not match");
         } else {
             e.preventDefault();
-            console.log("registered!");
+            console.log("registered!"); //TODO connect ke backend
         }
     }
     if (isLoading) {

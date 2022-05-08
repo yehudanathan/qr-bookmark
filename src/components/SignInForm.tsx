@@ -67,6 +67,10 @@ const SignInForm = ({ isLoading }) => {
                         >
                         Sign In
                     </Button>
+                    <Stack direction="row" alignItems="center" spacing={0.5}>
+                        <h3 className="header-3">Don't have an account?</h3>
+                        <a href="/register" className="link">Register.</a>
+                    </Stack>
                 </Stack>
             </form>
             </>

@@ -7,8 +7,9 @@ const baseServerURL = "https://qr-bookmark.herokuapp.com";
 export const authRegister = async (user: AuthUser) => {
   try {
     const response = await axios.post(`${baseServerURL}/register`, user);
-    if (response.status === 200) console.log("User registered successfully");
-    return response.data;
+    if (response.status === 201) return "Registered";
+    // console.log(response.data);
+    // return response.data;
   } catch (error) {
     console.log(error);
     return error;
@@ -16,12 +17,20 @@ export const authRegister = async (user: AuthUser) => {
 };
 
 export const authLogin = async (user: AuthUser) => {
-  const response = await axios.post(`${baseServerURL}/login`, user);
-  if (response.status === 200) console.log("User logged in successfully");
-  else if (response.status === 400) return ("Incorrect password");
-  sessionStorage.setItem("token", response.data.accessToken);
-  sessionStorage.setItem("user", JSON.stringify(response.data.user));
-  return "Logged in";
+  try {
+    const response = await axios.post(`${baseServerURL}/login`, user);
+    if (response.status === 200) console.log("User logged in successfully");
+    else if (response.status === 400) return ("Incorrect password");
+    sessionStorage.setItem("token", response.data.accessToken);
+    sessionStorage.setItem("user", JSON.stringify(response.data.user));
+    return "Logged in";
+  } catch (error) {
+    let errorMessage = "Failed to do something exceptional";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    console.log(errorMessage);
+  }
 };
 
 export const authLogout = async () => {

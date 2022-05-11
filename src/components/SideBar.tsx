@@ -14,9 +14,12 @@ import Settings from "../static/settings.png";
 import Share from "../static/share.png";
 import Sponsor from "../static/sponsor.png";
 import Info from "../static/info.png";
+import {authLogout, isSignedIn} from "../apis/auth";
+import {useNavigate} from "react-router-dom";
 
 
 export default function TemporaryDrawer() {
+  let navigate = useNavigate();
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -26,7 +29,7 @@ export default function TemporaryDrawer() {
 
   const toggleDrawer = (anchor, open) => {
     setState({ ...state, [anchor]: open });
-    console.log(state);
+    // console.log(state);
   };
 
   const list = (anchor) => (
@@ -58,6 +61,20 @@ export default function TemporaryDrawer() {
           { text: "Info", path: Info },
         ].map((obj) => (
           <ListItem button key={obj.text}>
+            <ListItemIcon>
+              <img src={obj.path} alt="logo" width="20" height="20"/>
+            </ListItemIcon>
+            <ListItemText primary={obj.text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {[
+          { text: "Log out", path: Share }, // to be changed to logout icon
+        ].map((obj) => (
+          <ListItem button key={obj.text}
+          onClick={e => {console.log("logging out"); authLogout(); console.log(isSignedIn()); navigate('/signin')}}>
             <ListItemIcon>
               <img src={obj.path} alt="logo" width="20" height="20"/>
             </ListItemIcon>

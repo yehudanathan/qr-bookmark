@@ -8,7 +8,7 @@ const SignInForm = ({ isLoading }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         const user = {email, password};
         const response = await authLogin(user);

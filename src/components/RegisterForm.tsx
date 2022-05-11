@@ -1,6 +1,7 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authRegister } from '../apis/auth';
 
 const RegisterForm = ({ isLoading }) => {
     let navigate = useNavigate();
@@ -28,7 +29,14 @@ const RegisterForm = ({ isLoading }) => {
             alert("Passwords do not match");
         } else {
             e.preventDefault();
-            console.log("registered!"); //TODO connect ke backend
+            const user = {email, password};
+            const response = await authRegister(user);
+            // console.log(response);
+
+            if (response === "Registered") {
+                alert("User registered successfully");
+                navigate('/'); // this will navigate to signin first, redirects user to signin (again) after registering.
+            }
         }
     }
     if (isLoading) {

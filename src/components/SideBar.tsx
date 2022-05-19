@@ -89,9 +89,7 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <React.Fragment>
-        <button style={{background: `url("${path}") `, width: "20px", height: "20px", backgroundSize: 'cover', border: 'none'}}
-          onClick={e => toggleDrawer("left", true)}
-        ></button>
+        <button style={{background: `url("${path}") `, width: "20px", height: "20px", backgroundSize: 'cover', border: 'none', cursor: 'pointer'}} onClick={e => toggleDrawer("left", true)}></button>
         <Drawer
           anchor="left"
           open={state.left}

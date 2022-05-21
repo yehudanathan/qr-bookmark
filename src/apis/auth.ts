@@ -46,10 +46,14 @@ export const authLogin = async (user: AuthUser) => {
       sessionStorage.setItem("token", "this-is-a-mock-token");
       sessionStorage.setItem("user", JSON.stringify(user));
       return "Logged in";
+    } else if (user.password.length <= 3) {
+      return "Password is too short";
     } else {
       console.log("password incorrect");
       return "Incorrect password";
     }
+  } else {
+    return "Cannot find user";
   }
 };
 

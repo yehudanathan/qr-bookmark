@@ -40,12 +40,12 @@ const RegisterForm = ({ isLoading }) => {
                 navigate('/'); // this will navigate to signin first, redirects user to signin (again) after registering.
             }
             if (response === "Email already exists") {
-                setEmailError("Email is already in use");
+                setEmailError("Email is already in use.");
                 setPasswordError("");
             }
             if (response === "Password is too short") {
                 setEmailError("");
-                setPasswordError("Password is too short");
+                setPasswordError("Password must be at least 4 characters.");
             }
         }
     }

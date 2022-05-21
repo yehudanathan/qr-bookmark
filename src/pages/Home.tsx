@@ -3,6 +3,7 @@ import QRScanner from "../components/QRScanner";
 import { Stack } from "@mui/material";
 import "../index.scss";
 import TemporaryDrawer from "../components/SideBar";
+import CustomSnackBar from "../components/CustomSnackBar";
 
 const Home = () => {
     return (
@@ -13,6 +14,8 @@ const Home = () => {
                 <AddLink/>
                 <QRScanner/>
             </Stack>
+            <CustomSnackBar severity="success" message="You have successfully logged in!" autoHide={6000} open={true}/>
+            {/* how to set such that the snackbar only opens when first time logging in? */}
         </div>
     )
 }

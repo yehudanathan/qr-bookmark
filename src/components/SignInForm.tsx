@@ -15,7 +15,6 @@ const SignInForm = ({ isLoading }) => {
         e.preventDefault();
         const user = {email, password};
         const response = await authLogin(user);
-        const [openSnackBar, setOpenSnackBar] = useState(false);
 
         if (response === "Cannot find user") {
             setEmailError("We could not find an account associated with this email.");
@@ -31,10 +30,8 @@ const SignInForm = ({ isLoading }) => {
             setPasswordError("Password must be at least 4 characters.");
             setEmailError("");
         } else if (response === "Logged in") {
-            setOpenSnackBar(true);
             navigate('/');
             console.log("check!");
-            // return ();
         }
     }
 
@@ -127,7 +124,6 @@ const SignInForm = ({ isLoading }) => {
                     </Stack>
                 </Stack>
             </form>
-            <CustomSnackBar autoHide={null} severity="success" message="You have logged in successfully!"/>
             </>
         )
     }

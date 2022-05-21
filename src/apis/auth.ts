@@ -23,12 +23,9 @@ export const authLogin = async (user: AuthUser) => {
     sessionStorage.setItem("token", response.data.accessToken);
     sessionStorage.setItem("user", JSON.stringify(response.data.user));
     return "Logged in";
-  } catch (error) {
-    let errorMessage = "Failed to do something exceptional";
-    if (error instanceof Error) {
-      errorMessage = error.message;
-    }
-    console.log(errorMessage);
+  } catch (error : any) {
+    console.log(error.response.data);
+    return error.response.data;
   }
 };
 

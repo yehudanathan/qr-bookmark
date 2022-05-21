@@ -81,13 +81,29 @@ h1 {
   color: #262254;
 }
 
+.profile-h1 {
+  color: black;
+  text-align: center;
+}
+
+h2 {
+  font-size: 33px;
+  font-family: "Product Sans";
+}
+
+.full-name {
+  color: #043026;
+}
+
 span {
   font-family: "Product Sans";
+  font-size: 18px;
 }
 
 .MuiButton-root {
   height: 40px;
   font-family: "Montserrat" !important;
+  background-color: #398564;
 }
 
 .parent-roller {
@@ -199,3 +215,16 @@ span {
   font-weight: bold;
   font-size: 11px;
 }
+
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.config-span {
+  align-items: center;
+}
+
+

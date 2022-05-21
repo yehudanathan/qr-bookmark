@@ -31,7 +31,7 @@ const RegisterForm = ({ isLoading }) => {
             alert("Passwords do not match");
         } else {
             e.preventDefault();
-            const user = {email, password};
+            const user = {name, email, password};
             const response = await authRegister(user);
             // console.log(response);
 

@@ -8,6 +8,7 @@ const Config = () => {
   // userFetcher dari sessionStorage
   const user = sessionStorage.getItem("user") || "{}";
   const email = JSON.parse(user)["email"];
+  const fullName = JSON.parse(user)["name"];
 
   return (
     <Box style={{backgroundImage:`url(${geometric})`, backgroundSize: "cover", height: "100vh",}}>
@@ -19,9 +20,8 @@ const Config = () => {
           <Stack sx={{padding: 4}} alignItems="center" spacing={1.5}>
             <img className="profile-picture" src={"https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg"} alt="profile"/>
             {/* profile picture to be changed later, this is just a sample */}
-            <h2 className="full-name">Your full name here</h2>
+            <h2 className="full-name">{fullName}</h2>
             <Stack alignItems="center" spacing={0.5}>
-              <span className="config-span">Your username here</span>
               <span className="config-span">{email}</span>
               <div className="blank"></div>
             </Stack>

@@ -64,7 +64,7 @@ function App() {
           </Routes>
         </Router>
       }
-      {/* <Home /> */}
+      {/* <Config /> */}
     </>
   );
 }

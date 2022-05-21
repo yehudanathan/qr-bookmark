@@ -6,7 +6,8 @@ import geometric from "../static/geometric-4.svg";
 
 const Config = () => {
   // userFetcher dari sessionStorage
-  const username = sessionStorage.getItem("user");
+  const user = sessionStorage.getItem("user") || "{}";
+  const email = JSON.parse(user)["email"];
 
   return (
     <Box style={{backgroundImage:`url(${geometric})`, backgroundSize: "cover", height: "100vh",}}>
@@ -20,8 +21,8 @@ const Config = () => {
             {/* profile picture to be changed later, this is just a sample */}
             <h2 className="full-name">Your full name here</h2>
             <Stack alignItems="center" spacing={0.5}>
-              <span className="config-span">Your username here: {username}</span>
-              <span className="config-span">Your email here</span>
+              <span className="config-span">Your username here</span>
+              <span className="config-span">{email}</span>
               <div className="blank"></div>
             </Stack>
             <Stack direction="row" spacing={2}>

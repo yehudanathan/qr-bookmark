@@ -9,7 +9,7 @@ const Config = () => {
   const fullName = JSON.parse(user)["name"];
 
   return (
-    <Box style={{backgroundImage:`url(${geometric})`, backgroundSize: "cover", height: "100vh",}}>
+    <Box style={{backgroundImage:`url(${geometric})`, backgroundSize: "cover", height: "calc(100vh - 16px)",}}>
       <Stack alignItems="center">
         <Box style={{backgroundColor: "white", height: "90px", borderRadius: "10%", width: "500px"}}>
           <h1 className="profile-h1">Configure Your Profile</h1>

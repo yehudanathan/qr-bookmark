@@ -1,0 +1,109 @@
+{
+  "links" : [
+    {
+      "title" : "YouTube",
+      "URL" : "http://www.youtube.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 1
+    },
+    {
+      "title" : "Google",
+      "URL" : "http://www.google.com/",
+      "dateTime" : "2015-08-08T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 1
+    },
+    {
+      "title" : "Facebook",
+      "URL" : "http://www.facebook.com/",
+      "dateTime" : "2015-04-08T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 1
+    },
+    {
+      "title" : "Spotify",
+      "URL" : "http://www.spotify.com/",
+      "dateTime" : "2020-01-01T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 2
+    },
+    {
+      "title" : "Twitter",
+      "URL" : "http://www.twitter.com/",
+      "dateTime" : "2015-01-03T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 2
+    },
+    {
+      "title" : "Instagram",
+      "URL" : "http://www.instagram.com/",
+      "dateTime" : "2022-01-01T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 2
+    },
+    {
+      "title" : "Wikipedia",
+      "URL" : "http://www.wikipedia.org/",
+      "dateTime" : "2015-06-01T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 3
+    },
+    {
+      "title" : "Yahoo",
+      "URL" : "http://www.yahoo.com/",
+      "dateTime" : "2015-01-09T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 3
+    },
+    {
+      "title" : "Amazon",
+      "URL" : "http://www.amazon.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 3
+    },
+    {
+      "title" : "LinkedIn",
+      "URL" : "http://www.linkedin.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 3
+    },
+    {
+      "title" : "Craigslist",
+      "URL" : "http://www.craigslist.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 3
+    },
+    {
+      "title" : "Ebay",
+      "URL" : "http://www.ebay.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 3
+    },
+    {
+      "title" : "Reddit",
+      "URL" : "http://www.reddit.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 3
+    },
+    {
+      "title" : "Stack Overflow",
+      "URL" : "http://www.stackoverflow.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : false,
+      "userID" : 3
+    },
+    {
+      "title" : "TripAdvisor",
+      "URL" : "http://www.tripadvisor.com/",
+      "dateTime" : "2015-01-01T00:00:00.000Z",
+      "favorite" : true,
+      "userID" : 3
+    }
+  ]
+}

@@ -1,8 +1,7 @@
 export interface Link {
-    URL: string;
-    favorite: boolean;
     title: string;
+    URL: string;
     dateTime: string
+    favorite: boolean;
+    userID: number;    
 }
-
-// TODO tambahin user id

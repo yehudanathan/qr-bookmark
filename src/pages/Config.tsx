@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Button, Card, Box } from "@mui/material";
 import { Stack } from "@mui/material";
-import { Pictures } from "../models/Pictures";
 import geometric from "../static/geometric-4.svg";
 
 const Config = () => {

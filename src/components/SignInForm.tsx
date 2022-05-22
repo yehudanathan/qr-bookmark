@@ -1,8 +1,7 @@
-import { Button, Stack, TextField, Snackbar, Alert } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authLogin } from '../apis/auth';
-import CustomSnackBar from './CustomSnackBar';
 import users from "../data/users.json";
 
 const SignInForm = ({ isLoading }) => {
@@ -16,8 +15,9 @@ const SignInForm = ({ isLoading }) => {
         e.preventDefault();
         const findUser = users["registered-users"].find(user => user.email === email) || "{}"
         const name = findUser["name"];
+        const userID = findUser["userID"];
         console.log(name);
-        const user = {name, email, password};
+        const user = {userID, name, email, password};
         const response = await authLogin(user);
 
         if (response === "Cannot find user") {

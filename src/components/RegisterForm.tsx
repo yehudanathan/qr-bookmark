@@ -1,4 +1,4 @@
-import { Button, Stack, TextField, Box } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authRegister } from '../apis/auth';
@@ -11,6 +11,7 @@ const RegisterForm = ({ isLoading }) => {
     const [confPassword, setConfPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [userIDCount, addUserIDCount] = useState(0);
 
     const handleSubmit = async (e: any) => {
         const emptyName = name === "";
@@ -31,7 +32,10 @@ const RegisterForm = ({ isLoading }) => {
             alert("Passwords do not match");
         } else {
             e.preventDefault();
-            const user = {name, email, password};
+            const userID = userIDCount + 1;
+            addUserIDCount(userID); 
+            const user = {userID, name, email, password};
+            // currently userID diset dari 1 disini
             const response = await authRegister(user);
             // console.log(response);
 

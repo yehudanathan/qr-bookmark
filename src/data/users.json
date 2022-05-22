@@ -1,16 +1,19 @@
 {
   "registered-users": [
     {
+      "userId" : 1,
       "name" : "Jessica Mary Listijo",
       "email": "jessicamary472@gmail.com",
       "password": "asdfghjkl"
     },
     {
+      "userId" : 2,
       "name" : "John Doe",
       "email": "listijojess@gmail.com",
       "password": "asdfgh"
     },
     {
+      "userId" : 3,
       "name" : "Jane Doe",
       "email": "jessicamary@gmail.com",
       "password": "12345678"

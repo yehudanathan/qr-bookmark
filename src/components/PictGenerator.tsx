@@ -14,7 +14,7 @@ const PictGenerator = ({ onGenerate }) => {
 
     useEffect(() => {
         setPhoto();
-    }, [])
+    });
 
     if (photo === null) {
         return <LoadingPage/>;
@@ -25,7 +25,7 @@ const PictGenerator = ({ onGenerate }) => {
                 target="_blank"
                 href={`https://unsplash.com/@${photo.data.user.username}`}
             >
-                <img className="img" src={photo.data.urls.regular}/>
+                <img className="img" src={photo.data.urls.regular} alt="background"/>
             </a>
         );
     }

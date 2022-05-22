@@ -106,6 +106,9 @@ h2 {
 span {
   font-family: "Product Sans";
   font-size: 18px;
+  &.smaller {
+    font-size: 15px;
+  }
 }
 
 .MuiButton-root {
@@ -229,10 +232,29 @@ span {
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
+  &.small {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .config-span {
   align-items: center;
+  &.small {
+    font-weight: bold;
+  }
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0px;
+  align-items: center;
+  width: calc(100% - 60px);
+  margin-bottom: 20px;
+}
+
+.copyright-text {
+  text-align: center;
 }
 
 

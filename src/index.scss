@@ -58,6 +58,7 @@
 .credit {
   .img {
     object-fit: cover;
+    float: left;
     width: calc(100vw - (416px + 32px));
     height: 100vh;
   }

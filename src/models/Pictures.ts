@@ -1,4 +1,5 @@
 // cannot get the ROCKET SCIENCE and DIAMOND
+// TODO replace with a proper one
 export enum Pictures {
   DEFAULT = "https://cdn-icons-png.flaticon.com/512/4442/4442696.png",
   ROCKET = "https://cdn-icons.flaticon.com/png/512/3049/premium/3049618.png?token=exp=1641552873~hmac=2543c7f783114148dadef6c6e94480e4",

@@ -12,6 +12,8 @@ import Settings from "../static/settings.png";
 import Share from "../static/share.png";
 import Sponsor from "../static/sponsor.png";
 import Info from "../static/info.png";
+import Logout from "../static/logout.png";
+import Bookmarks from "../static/bookmark.png";
 import {authLogout, isSignedIn} from "../apis/auth";
 import {useNavigate} from "react-router-dom";
 
@@ -39,11 +41,11 @@ export default function TemporaryDrawer() {
     >
       <List>
         {[
-          { text: "Favorites", path: Favorite },
-          { text: "History", path: History },
-          { text: "Settings", path: Settings },
+          { text: "Favorites", path: Favorite, onClick: () => navigate("/links") },
+          { text: "Bookmarks", path: Bookmarks, onClick: () => navigate("/links") },
+          { text: "Settings", path: Settings, onClick: () => navigate("/config") },
         ].map((obj) => (
-          <ListItem button key={obj.text}>
+          <ListItem button key={obj.text} onClick={obj.onClick}>
             <ListItemIcon>
               <img src={obj.path} alt="logo" width="20" height="20"/>
             </ListItemIcon>
@@ -52,11 +54,11 @@ export default function TemporaryDrawer() {
         ))}
       </List>
       <Divider />
-      <List>
+      {/* <List>
         {[
           { text: "Share", path: Share },
           { text: "Sponsors", path: Sponsor },
-          { text: "Info", path: Info },
+          { text: "About", path: Info },
         ].map((obj) => (
           <ListItem button key={obj.text}>
             <ListItemIcon>
@@ -65,20 +67,20 @@ export default function TemporaryDrawer() {
             <ListItemText primary={obj.text} />
           </ListItem>
         ))}
-      </List>
-      <Divider />
+      </List> */}
       <List>
-        {[
-          { text: "Log out", path: Share }, // to be changed to logout icon
-        ].map((obj) => (
-          <ListItem button key={obj.text}
-          onClick={e => {console.log("logging out"); authLogout(); console.log(isSignedIn()); navigate('/signin')}}>
-            <ListItemIcon>
-              <img src={obj.path} alt="logo" width="20" height="20"/>
-            </ListItemIcon>
-            <ListItemText primary={obj.text} />
-          </ListItem>
-        ))}
+        <ListItem button key="About">
+          <ListItemIcon>
+            <img src={Info} alt="logo" width="20" height="20"/>
+          </ListItemIcon>
+          <ListItemText primary="About" />
+        </ListItem>
+        <ListItem button key="Log out" onClick={e => {console.log("logging out"); authLogout(); console.log(isSignedIn()); navigate('/signin')}}>
+          <ListItemIcon>
+            <img src={Logout} alt="logo" width="20" height="20"/>
+          </ListItemIcon>
+          <ListItemText primary="Log out" />
+        </ListItem>
       </List>
     </Box>
   );

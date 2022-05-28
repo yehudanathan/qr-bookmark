@@ -20,9 +20,7 @@ const Home = () => {
             </Stack>
             <CustomSnackBar severity="success" message="You have successfully logged in!" autoHide={6000} open={true}/>
             {/* how to set such that the snackbar only opens when first time logging in? */}
-            <div className="copyright">
-                <p className="copyright-text">Copyright here</p>
-            </div>
+            {/* locate previous page, pake useHistory() https://reactrouter.com/docs/en/v6/routers/history-router */}
         </div>
     )
 }

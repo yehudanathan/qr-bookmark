@@ -94,6 +94,16 @@ h1 {
   text-align: center;
 }
 
+// TODO for sidebar
+// .MuiPaper-root-MuiDrawer-paper {
+//   background-color: #f2dcff;
+// }
+
+// .MuiTypography-root {
+//   font-size: 17px;
+//   font-family: "Product Sans";
+// }
+
 h2 {
   font-size: 33px;
   font-family: "Product Sans";
@@ -242,6 +252,12 @@ span {
   align-items: center;
   &.small {
     font-weight: bold;
+    &.profile-section {
+      &:hover {
+        cursor: pointer;
+        text-shadow: #ffffff 0.5px 0 5px;
+      }
+    }
   }
 }
 

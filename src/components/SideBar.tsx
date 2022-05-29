@@ -49,7 +49,7 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <img src={obj.path} alt="logo" width="20" height="20"/>
             </ListItemIcon>
-            <ListItemText primary={obj.text} />
+            <ListItemText primary={obj.text} sx={{fontFamily: "Product Sans", fontSize: "17px", color: "black"}}/>
           </ListItem>
         ))}
       </List>

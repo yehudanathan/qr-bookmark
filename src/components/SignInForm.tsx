@@ -16,7 +16,7 @@ const SignInForm = ({ isLoading }) => {
         const findUser = users["registered-users"].find(user => user.email === email) || "{}"
         const name = findUser["name"];
         const userID = findUser["userID"];
-        console.log(name);
+        // console.log(name);
         const user = {userID, name, email, password};
         const response = await authLogin(user);
 
@@ -34,7 +34,7 @@ const SignInForm = ({ isLoading }) => {
             setPasswordError("Password must be at least 4 characters.");
             setEmailError("");
         } else if (response === "Logged in") {
-            navigate('/');
+            navigate('/', { state : { user } });
             console.log("check!");
         }
     }

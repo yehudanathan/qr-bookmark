@@ -1,7 +1,7 @@
 export interface Link {
     title: string;
     URL: string;
-    dateTime: string
+    datetime: string;
     favorite: boolean;
     userID: number;    
 }

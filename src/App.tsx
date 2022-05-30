@@ -7,6 +7,7 @@ import Links from "./pages/Links";
 import { isSignedIn } from "./apis/auth";
 import { useEffect, useState } from "react";
 import AuthPage from "./pages/AuthPage";
+import Bookmark from "./pages/Bookmark";
 
 const PrivateRoute = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
@@ -48,7 +49,7 @@ const SignInRoute = () => {
 function App() {
   return (
     <>
-      {
+      {/* {
         <Router>
           <Routes>
             <Route path="/" element={<PrivateRoute />}>
@@ -63,8 +64,8 @@ function App() {
             <Route path='*' element={<Navigate to='/'/>}></Route>
           </Routes>
         </Router>
-      }
-      {/* <Home /> */}
+      } */}
+      <Bookmark />
     </>
   );
 }

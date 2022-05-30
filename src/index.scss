@@ -18,6 +18,11 @@
   height: 100vh;
 }
 
+p {
+  font-size: 18px;
+  font-family: "Product Sans";
+}
+
 .form-control {
   background: linear-gradient(270deg, #ddedea, #fcf4dd);
   padding: 1rem;
@@ -246,6 +251,19 @@ span {
     width: 50px;
     height: 50px;
   }
+  &.about {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.zoom img {
+  transition: transform .25s, visibility .25s ease-in;
+  transform-origin: 50% 30%;
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
 }
 
 .config-span {
@@ -272,5 +290,22 @@ span {
 .copyright-text {
   text-align: center;
 }
+
+.about-h2 {
+  font-family: "Gotham Medium";
+}
+
+.about-div {
+  margin: auto;
+  width: 50%;
+  text-align: justify;
+  margin-top: 40px;
+}
+
+.p-name {
+  text-align: center;
+}
+
+
 
 

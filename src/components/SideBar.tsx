@@ -69,13 +69,13 @@ export default function TemporaryDrawer() {
         ))}
       </List> */}
       <List>
-        <ListItem button key="About">
+        <ListItem button key="About" onClick={() => navigate('/about')}>
           <ListItemIcon>
             <img src={Info} alt="logo" width="20" height="20"/>
           </ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
-        <ListItem button key="Log out" onClick={e => {console.log("logging out"); authLogout(); console.log(isSignedIn()); navigate('/signin')}}>
+        <ListItem button key="Log out" onClick={() => {authLogout(); navigate('/signin')}}>
           <ListItemIcon>
             <img src={Logout} alt="logo" width="20" height="20"/>
           </ListItemIcon>

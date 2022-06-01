@@ -13,24 +13,30 @@ import {
 } from "@mui/material";
 import React from "react";
 
+import { getUserLinks } from "../../apis/link";
+import { getCurrentUserId } from "../../apis/session";
 
-const Post = () => {
+const mobilePost = () => {
+  const links = await getUserLinks(getCurrentUserId());
+
 	return (
-		<Card sx={{ margin: "5px"}}>
+		<Card sx={{ margin: "5px", display: { xs: "flex", sm: "none" } }}>
 			<CardMedia
 				component="img"
-				height="20%"
+				height="5%"
 				image="https://images.pexels.com/photos/11943236/pexels-photo-11943236.jpeg?cs=srgb&dl=pexels-stephen-tam-11943236.jpg&fm=jpg"
 				alt="Travelling"
 			/>
 			<CardContent>
 				<Typography variant="body2" color="text.secondary">
-					This impressive paella is a perfect party dish and a fun meal to cook
-					together with your guests. Add 1 cup of frozen peas along with the
-					mussels, if you like.
+					{}
+					Link: Visited on ______
 				</Typography>
 			</CardContent>
-			<CardActions disableSpacing>
+			<CardActions
+				disableSpacing
+				sx={{ position: "absolute", bottom: "10px", right: "10px" }}
+			>
 				<IconButton aria-label="add to favorites">
 					<Checkbox
 						icon={<FavoriteBorder />}
@@ -42,6 +48,46 @@ const Post = () => {
 				</IconButton>
 			</CardActions>
 		</Card>
+	);
+};
+
+const desktopPost = () => {
+	return (
+		<Card sx={{ margin: "5px", display: { xs: "none", sm: "flex" } }}>
+			<CardMedia
+				component="img"
+				height="5%"
+				image="https://images.pexels.com/photos/11943236/pexels-photo-11943236.jpeg?cs=srgb&dl=pexels-stephen-tam-11943236.jpg&fm=jpg"
+				alt="Travelling"
+			/>
+			<CardContent>
+				<Typography variant="body2" color="text.secondary">
+					Link: _____________ Visited on ______
+				</Typography>
+			</CardContent>
+			<CardActions
+				disableSpacing
+				sx={{ position: "absolute", bottom: "10px", right: "10px" }}
+			>
+				<IconButton aria-label="add to favorites">
+					<Checkbox
+						icon={<FavoriteBorder />}
+						checkedIcon={<Favorite sx={{ color: "red" }} />}
+					/>
+				</IconButton>
+				<IconButton aria-label="share">
+					<Share />
+				</IconButton>
+			</CardActions>
+		</Card>
+	);
+};
+
+const Post = () => {
+	return (
+		<>
+			<button onClick={console.log(links)}>Press me for links</button>
+		</>
 	);
 };
 

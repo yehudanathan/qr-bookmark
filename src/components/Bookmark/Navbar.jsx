@@ -69,7 +69,7 @@ const Navbar = () => {
 	const [open, setOpen] = React.useState(false);
 
 	return (
-		<AppBar sx={{position:"sticky"}}>
+		<AppBar sx={{position:"sticky", margin: "0px"}}>
 			<StyledToolbar>
 				<TitleBox>
 					<CropFree sx={{ fontSize: "40px" }} />

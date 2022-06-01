@@ -9,6 +9,9 @@ const RegisterForm = ({ isLoading }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confPassword, setConfPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [userIDCount, addUserIDCount] = useState(0);
 
     const handleSubmit = async (e: any) => {
         const emptyName = name === "";
@@ -29,13 +32,24 @@ const RegisterForm = ({ isLoading }) => {
             alert("Passwords do not match");
         } else {
             e.preventDefault();
-            const user = {email, password};
+            const userID = userIDCount + 1;
+            addUserIDCount(userID); 
+            const user = {userID, name, email, password};
+            // currently userID diset dari 1 disini
             const response = await authRegister(user);
             // console.log(response);
 
             if (response === "Registered") {
                 alert("User registered successfully");
                 navigate('/'); // this will navigate to signin first, redirects user to signin (again) after registering.
+            }
+            if (response === "Email already exists") {
+                setEmailError("Email is already in use.");
+                setPasswordError("");
+            }
+            if (response === "Password is too short") {
+                setEmailError("");
+                setPasswordError("Password must be at least 4 characters.");
             }
         }
     }
@@ -60,7 +74,7 @@ const RegisterForm = ({ isLoading }) => {
                             color="success"
                             inputProps={{style: {fontFamily: "Product Sans"}}}
                             />
-                        <TextField
+                        { !emailError? <TextField
                             required
                             label="Email"
                             sx={{m: 1, width: "50ch", backgroundColor: "white",
@@ -72,8 +86,27 @@ const RegisterForm = ({ isLoading }) => {
                             onChange={e => setEmail(e.target.value)}
                             color="success"
                             inputProps={{style: {fontFamily: "Product Sans"}}}
+                            /> : <Stack> 
+                                <TextField
+                            className="error-text-field"
+                            error
+                            required
+                            helperText={emailError}
+                            label="Email"
+                            sx={{m: 1, width: "50ch",
+                            borderTopLeftRadius: "4px",
+                            borderTopRightRadius: "4px",
+                            display: "flex",
+                            }}
+                            size="small"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            inputProps={{style: {fontFamily: "Product Sans"}}}
                             />
-                        <TextField
+                            <div className="blank"></div>
+                            </Stack>
+                                }
+                        { !passwordError? <TextField
                             required
                             type="password"
                             label="Password"
@@ -86,7 +119,27 @@ const RegisterForm = ({ isLoading }) => {
                             onChange={e => setPassword(e.target.value)}
                             color="success"
                             inputProps={{style: {fontFamily: "Product Sans"}}}
+                            /> : <Stack> 
+                                <TextField
+                            className="error-text-field"
+                            error
+                            type="password"
+                            required
+                            helperText={passwordError}
+                            label="Password"
+                            sx={{m: 1, width: "50ch",
+                            borderTopLeftRadius: "4px",
+                            borderTopRightRadius: "4px",
+                            display: "flex",
+                            }}
+                            size="small"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            inputProps={{style: {fontFamily: "Product Sans"}}}
                             />
+                            <div className="blank"></div>
+                            </Stack>
+                            }
                         <TextField
                             required
                             type="password"

@@ -1,19 +1,18 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
-import { authLogout } from "../apis/auth";
 
 const AddLink = () => {
     const [url, setURL] = useState('');
 
-    // kalo gabut: cari type e apa disini
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         if (validator.isURL(url)) {
             e.preventDefault();
             // authLogout();
             alert("URL: " + url);
         } else {
-            alert("Please enter a valid URL")
+            e.preventDefault();
+            alert("Please enter a valid URL");
         }
     }
 

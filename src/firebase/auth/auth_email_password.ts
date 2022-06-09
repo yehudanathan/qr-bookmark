@@ -21,9 +21,9 @@ export const emailSignUp = async (email, password) => {
     return errorCode;
   });
 }
-export const emailSignIn = (email, password) => {
+export const emailSignIn = async (email, password) => {
   const auth = getAuth(app);
-  signInWithEmailAndPassword(auth, email, password)
+  return await signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     return userCredential.user;
   })
@@ -31,6 +31,7 @@ export const emailSignIn = (email, password) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log({ errorCode, errorMessage });
+    return errorCode;
   });
 }
 

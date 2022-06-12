@@ -10,12 +10,16 @@ import Links from "./pages/Links";
 import { useEffect, useState } from "react";
 import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
+import { isSignedIn } from "./firebase/auth/auth_user";
 
 const PrivateRoute = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
   const auth = getAuth();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, loading, error] = useAuthState(auth);
 
   // useEffect(() => {
   //   isSignedIn().then((res) => {
@@ -23,21 +27,18 @@ const PrivateRoute = () => {
   //     setIsAuthenticated(res);
   //     console.log("after: " + isAuthenticated);
   //     setIsLoading(false);
-  //   });
+  //   });;
   // }, [isAuthenticated]);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(user => {
       if (user) {
         setIsAuthenticated(true);
-        setIsLoading(false);
-      } else {
-        setIsAuthenticated(false);
-        setIsLoading(false);
       }
-    });
+      setIsLoading(false);
+    })
   }, [isAuthenticated]);
-
+  
   return (
     <>
       {!isLoading && (isAuthenticated ? <Outlet /> : <Navigate to="/signin" />)}

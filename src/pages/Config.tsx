@@ -1,8 +1,9 @@
 import { Button, Card, Box } from "@mui/material";
 import { Stack } from "@mui/material";
-import { authLogout } from "../apis/auth";
+// import { authLogout } from "../apis/auth";
 import geometric from "../static/geometric-4.svg";
 import { useNavigate } from "react-router-dom";
+import { logOut } from "../firebase/auth/auth_user";
 
 const Config = () => {
   // userFetcher dari sessionStorage
@@ -32,7 +33,7 @@ const Config = () => {
               <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large">Delete Account</Button>
             </Stack>
             <Stack direction="row" spacing={2} justifyContent="space-evenly">
-              <Button style={{height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="text" size="large" onClick={() =>{authLogout(); navigate("/signin");}}>Log out</Button>
+              <Button style={{height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="text" size="large" onClick={() =>{logOut(); navigate("/signin");}}>Log out</Button>
               <Button style={{height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="text" size="large" onClick={() => navigate("/")}>Back</Button>
             </Stack>
           </Stack>

@@ -6,7 +6,7 @@ export const getUser = () => {
     return auth.currentUser;
 }
 
-export const updateUser = (user) => {
+export const updateUser = (user : Profile) => {
     const auth = getAuth();
     if (auth.currentUser) {
         updateProfile(auth.currentUser, user);

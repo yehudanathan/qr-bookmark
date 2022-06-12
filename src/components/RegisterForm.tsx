@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { authRegister } from '../apis/auth';
 import { emailSignUp } from '../firebase/auth/auth_email_password';
+import { updateUser } from '../firebase/auth/auth_user';
 
 const RegisterForm = ({ isLoading }) => {
     let navigate = useNavigate();
@@ -68,7 +69,11 @@ const RegisterForm = ({ isLoading }) => {
             // }
 
             const response = await emailSignUp(email, password);
-            console.log(response);                
+            const profile = {
+                displayName: name,
+                photoURL: null,
+            }
+            // console.log(response);                
             
             if (typeof response === "string") {
                 if (response === Object.keys(errorCodes["password"])[0]) {
@@ -77,6 +82,7 @@ const RegisterForm = ({ isLoading }) => {
                     setEmailError(errorCodes["email"][response]);
                 }
             } else {
+                updateUser(profile);
                 alert("User registered successfully");
                 navigate('/'); 
                 // this will redirect to /signin first, 

@@ -37,7 +37,7 @@ const PrivateRoute = () => {
       }
       setIsLoading(false);
     })
-  }, [isAuthenticated]);
+  }, []);
   
   return (
     <>

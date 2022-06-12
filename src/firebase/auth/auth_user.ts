@@ -2,7 +2,7 @@ import { getAuth, updateProfile, signOut } from "firebase/auth";
 
 export const getUser = () => {
     const auth = getAuth();
-    console.log(auth.currentUser);
+    // console.log(auth.currentUser);
     return auth.currentUser;
 }
 

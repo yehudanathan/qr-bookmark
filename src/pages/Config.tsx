@@ -3,13 +3,19 @@ import { Stack } from "@mui/material";
 // import { authLogout } from "../apis/auth";
 import geometric from "../static/geometric-4.svg";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "../firebase/auth/auth_user";
+import { getUser, logOut } from "../firebase/auth/auth_user";
 
 const Config = () => {
   // userFetcher dari sessionStorage
-  const user = sessionStorage.getItem("user") || "{}";
-  const email = JSON.parse(user)["email"];
-  const fullName = JSON.parse(user)["name"];
+  // for MOCK DATA. uncomment if backend is not available
+  // const user = sessionStorage.getItem("user") || "{}";
+  // const email = JSON.parse(user)["email"];
+  // const fullName = JSON.parse(user)["name"];
+
+  const user = getUser() || "{}";
+  const email = user === "{}" ? "" : user.email;
+  const fullName = user === "{}" ? "" : user.displayName;
+
   let navigate = useNavigate();
 
   return (

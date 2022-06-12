@@ -1,14 +1,21 @@
 import { Button, Card, Box } from "@mui/material";
 import { Stack } from "@mui/material";
-import { authLogout } from "../apis/auth";
+// import { authLogout } from "../apis/auth";
 import geometric from "../static/geometric-4.svg";
 import { useNavigate } from "react-router-dom";
+import { getUser, logOut } from "../firebase/auth/auth_user";
 
 const Config = () => {
   // userFetcher dari sessionStorage
-  const user = sessionStorage.getItem("user") || "{}";
-  const email = JSON.parse(user)["email"];
-  const fullName = JSON.parse(user)["name"];
+  // for MOCK DATA. uncomment if backend is not available
+  // const user = sessionStorage.getItem("user") || "{}";
+  // const email = JSON.parse(user)["email"];
+  // const fullName = JSON.parse(user)["name"];
+
+  const user = getUser() || "{}";
+  const email = user === "{}" ? "" : user.email;
+  const fullName = user === "{}" ? "" : user.displayName;
+
   let navigate = useNavigate();
 
   return (
@@ -32,7 +39,7 @@ const Config = () => {
               <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large">Delete Account</Button>
             </Stack>
             <Stack direction="row" spacing={2} justifyContent="space-evenly">
-              <Button style={{height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="text" size="large" onClick={() =>{authLogout(); navigate("/signin");}}>Log out</Button>
+              <Button style={{height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="text" size="large" onClick={() =>{logOut(); navigate("/signin");}}>Log out</Button>
               <Button style={{height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="text" size="large" onClick={() => navigate("/")}>Back</Button>
             </Stack>
           </Stack>

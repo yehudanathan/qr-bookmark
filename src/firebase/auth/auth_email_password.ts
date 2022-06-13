@@ -2,13 +2,14 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendEmailVerification as sendVerification
+  sendEmailVerification as sendVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import app from "..";
 
 export const emailSignUp = (email, password) => {
   const auth = getAuth(app);
-  createUserWithEmailAndPassword(auth, email, password)
+  return createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     return userCredential.user;
   })
@@ -21,7 +22,7 @@ export const emailSignUp = (email, password) => {
 }
 export const emailSignIn = (email, password) => {
   const auth = getAuth(app);
-  signInWithEmailAndPassword(auth, email, password)
+  return signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     return userCredential.user;
   })
@@ -32,9 +33,14 @@ export const emailSignIn = (email, password) => {
   });
 }
 
-export const sendEmailVerification = () => {
+export const sendEmailVerification = (callback: VoidFunction) => {
   const auth = getAuth(app);
   if (auth.currentUser) {
-    return sendVerification(auth.currentUser);
+    return sendVerification(auth.currentUser).then(callback);
   }
+}
+
+export const resetPassword = (email: string, callback: VoidFunction) => {
+  const auth = getAuth(app);
+  sendPasswordResetEmail(auth, email).then(callback);
 }

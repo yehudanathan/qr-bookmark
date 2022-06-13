@@ -1,25 +1,58 @@
-import { getAuth, updateProfile, signOut } from "firebase/auth";
+import app from '..';
+import {
+  getAuth,
+  updateProfile,
+  signOut,
+  UserInfo,
+  User,
+  updateEmail as setEmail,
+  updatePassword as setPassword,
+} from "firebase/auth";
 
-export const getUser = () => {
-    const auth = getAuth();
-    return auth.currentUser;
+export const getUser = (): User | null => {
+  const auth = getAuth(app);
+  return auth.currentUser;
+};
+
+export const updateUser = (
+  userInfo: Partial<UserInfo>,
+  callback: () => void
+) => {
+  const auth = getAuth(app);
+  if (auth.currentUser)
+    updateProfile(auth.currentUser, userInfo).then(callback);
+};
+
+export const updateEmail = (email: string, callback: () => void) => {
+  const auth = getAuth(app);
+  if (auth.currentUser) setEmail(auth.currentUser, email).then(callback);
+};
+
+export const updatePassword = (password: string, callback: () => void) => {
+    const auth = getAuth(app);
+    if (auth.currentUser) setPassword(auth.currentUser, password).then(callback);
 }
 
-export const updateUser = (user: AuthUser) => {
-    const auth = getAuth();
-    if (auth.currentUser) {
-        return updateProfile(auth.currentUser, user);
-    }
+export const deleteUser = (callback: () => void) => {
+    const auth = getAuth(app);
+    if (auth.currentUser) auth.currentUser.delete().then(callback);
 }
+
+export const isLoggedIn = () => {
+  const user = getUser();
+  return user !== null;
+};
 
 export const logOut = () => {
-    const auth = getAuth();
-    if (auth.currentUser) {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-        }).catch((error) => {
-            // An error happened.
-            console.log(error);
-        });
-    }
-}
+  const auth = getAuth(app);
+  if (auth.currentUser) {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  }
+};

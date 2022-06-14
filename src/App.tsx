@@ -13,6 +13,7 @@ import About from "./pages/About";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { isSignedIn } from "./firebase/auth/auth_user";
+import EditProfile from "./components/EditProfile";
 
 const PrivateRoute = () => {
   const auth = getAuth();
@@ -81,7 +82,9 @@ function App() {
           <Routes>
             <Route path="/" element={<PrivateRoute />}>
               <Route path="" element={<Home />} />
-              <Route path="config" element={<Config />} />
+              <Route path="config" element={<Config />}> 
+                <Route path="edit-profile" element={<EditProfile />} />
+              </Route>
               <Route path="links" element={<Links />} />
               <Route path="about" element={<About />} />
             </Route>

@@ -14,7 +14,9 @@ const AuthPage = () => {
         return (
             <div className="body">
             <Stack direction="row" className="stack">
-                <PictGenerator onGenerate={toggleLoading} />
+                <div className="side-pic">
+                    <PictGenerator onGenerate={toggleLoading} />
+                </div>
                 <RegisterForm isLoading={isLoading} />
             </Stack>
             </div>
@@ -23,7 +25,9 @@ const AuthPage = () => {
         return (
             <div className="body">
             <Stack direction="row" className="stack">
-                <PictGenerator onGenerate={toggleLoading} />
+                <div className="side-pic">
+                    <PictGenerator onGenerate={toggleLoading} />
+                </div>
                 <SignInForm isLoading={isLoading} />
             </Stack>
             </div>

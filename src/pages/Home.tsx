@@ -10,12 +10,14 @@ import { useLocation } from "react-router-dom";
 const Home = () => {
     const location = useLocation();
     const checkPreviousLocation = () => {
+        console.log(location.state);
         if (location.state !== null) {
             return true;
         }
         return false;
     }
 
+    console.log("rendering home");
     return (
         <div className="body home">
             <Stack direction="row" justifyContent="space-between">

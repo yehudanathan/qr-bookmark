@@ -32,9 +32,11 @@ const PrivateRoute = () => {
   // }, [isAuthenticated]);
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => { // TODO masukin firebase api
       if (user) {
         setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
       }
       setIsLoading(false);
     })
@@ -65,7 +67,7 @@ const SignInRoute = () => {
       } else {
         setSignedIn(false);
       }});
-  }, [signedIn]);
+  }, []);
 
   if (signedIn) {
     return (<Navigate to="/" />);
@@ -75,6 +77,7 @@ const SignInRoute = () => {
 }
 
 function App() {
+  console.log("rendering app");
   return (
     <>
       {

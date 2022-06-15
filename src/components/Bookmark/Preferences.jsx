@@ -20,6 +20,7 @@ import {
 	styled,
 	TextField,
 	Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -81,6 +82,8 @@ const Preferences = () => {
 
 	const [value, setValue] = useState(new Date());
 
+  const matches = useMediaQuery((theme) => theme.breakpoints.up('sm'));
+
 	return (
 		<StyledBox>
 			{/* For big devices */}
@@ -88,7 +91,7 @@ const Preferences = () => {
 				<Button
 					flex={1}
 					variant="outlined"
-					startIcon={ <FilterList />}
+					startIcon={matches ? <FilterList /> : <></>}
 					sx={{
 						textTransform: "none",
 						display: "flex",
@@ -169,9 +172,9 @@ const Preferences = () => {
 				<FormControl sx={{ flexGrow: 1 }}>
 					<InputLabel
 						id="demo-simple-select-label"
-						sx={{ fontSize: "10px", display: { xs: "flex", sm: "none" }, alignItems: "center", justifyContent: "center" }}
+						sx={{ fontSize:  {matches : true ? "17px" : "10px"},display: { xs: "flex", sm: "none" }, alignItems: "center", justifyContent: "center" }}
 					>
-						Sort
+						{matches ? "Sort by" : "Sort" }
 					</InputLabel>
 					<InputLabel
 						id="demo-simple-select-label"

@@ -14,8 +14,10 @@ import Sponsor from "../static/sponsor.png";
 import Info from "../static/info.png";
 import Logout from "../static/logout.png";
 import Bookmarks from "../static/bookmark.png";
-import {authLogout, isSignedIn} from "../apis/auth";
+// commented code is for mock data.
+// import {authLogout, isSignedIn} from "../apis/auth";
 import {useNavigate} from "react-router-dom";
+import { logOut } from "../firebase/auth/auth_user";
 
 
 export default function TemporaryDrawer() {
@@ -75,7 +77,7 @@ export default function TemporaryDrawer() {
           </ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
-        <ListItem button key="Log out" onClick={() => {authLogout(); navigate('/signin')}}>
+        <ListItem button key="Log out" onClick={() => {logOut(); navigate('/signin')}}>
           <ListItemIcon>
             <img src={Logout} alt="logo" width="20" height="20"/>
           </ListItemIcon>

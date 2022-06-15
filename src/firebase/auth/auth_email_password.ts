@@ -2,26 +2,29 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendEmailVerification as sendVerification
+  sendEmailVerification as sendVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import app from "..";
 
-export const emailSignUp = (email, password) => {
+export const emailSignUp = async (email, password) => {
   const auth = getAuth(app);
-  createUserWithEmailAndPassword(auth, email, password)
+  return createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
+    console.log(userCredential.user);
     return userCredential.user;
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log({ errorCode, errorMessage });
-    // ..
+    // alert(errorCode);
+    return errorCode;
   });
 }
-export const emailSignIn = (email, password) => {
+export const emailSignIn = async (email, password) => {
   const auth = getAuth(app);
-  signInWithEmailAndPassword(auth, email, password)
+  return signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     return userCredential.user;
   })
@@ -29,12 +32,18 @@ export const emailSignIn = (email, password) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log({ errorCode, errorMessage });
+    return errorCode;
   });
 }
 
-export const sendEmailVerification = () => {
+export const sendEmailVerification = (callback: VoidFunction) => {
   const auth = getAuth(app);
   if (auth.currentUser) {
-    return sendVerification(auth.currentUser);
+    return sendVerification(auth.currentUser).then(callback);
   }
+}
+
+export const resetPassword = (email: string, callback: VoidFunction) => {
+  const auth = getAuth(app);
+  sendPasswordResetEmail(auth, email).then(callback);
 }

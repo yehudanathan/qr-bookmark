@@ -7,20 +7,22 @@ import {
 } from "firebase/auth";
 import app from "..";
 
-export const emailSignUp = (email, password) => {
+export const emailSignUp = async (email, password) => {
   const auth = getAuth(app);
   return createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
+    console.log(userCredential.user);
     return userCredential.user;
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log({ errorCode, errorMessage });
-    // ..
+    // alert(errorCode);
+    return errorCode;
   });
 }
-export const emailSignIn = (email, password) => {
+export const emailSignIn = async (email, password) => {
   const auth = getAuth(app);
   return signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
@@ -30,6 +32,7 @@ export const emailSignIn = (email, password) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log({ errorCode, errorMessage });
+    return errorCode;
   });
 }
 

@@ -4,23 +4,41 @@ import { Navigate, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Config from "./pages/Config";
 import Links from "./pages/Links";
-import { isSignedIn } from "./apis/auth";
+// PART FOR MOCK DATA
+// uncomment this part if backend is not available
+// import { isSignedIn } from "./apis/auth";
 import { useEffect, useState } from "react";
 import AuthPage from "./pages/AuthPage";
+import About from "./pages/About";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
+import { isSignedIn } from "./firebase/auth/auth_user";
 
 const PrivateRoute = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const auth = getAuth();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, loading, error] = useAuthState(auth);
+
+  // useEffect(() => {
+  //   isSignedIn().then((res) => {
+  //     console.log("before: " + isAuthenticated);
+  //     setIsAuthenticated(res);
+  //     console.log("after: " + isAuthenticated);
+  //     setIsLoading(false);
+  //   });;
+  // }, [isAuthenticated]);
 
   useEffect(() => {
-    isSignedIn().then((res) => {
-      console.log("before: " + isAuthenticated);
-      setIsAuthenticated(res);
-      console.log("after: " + isAuthenticated);
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        setIsAuthenticated(true);
+      }
       setIsLoading(false);
-    });
-  }, [isAuthenticated]);
-
+    })
+  }, []);
+  
   return (
     <>
       {!isLoading && (isAuthenticated ? <Outlet /> : <Navigate to="/signin" />)}
@@ -30,12 +48,22 @@ const PrivateRoute = () => {
 
 const SignInRoute = () => {
   const [signedIn, setSignedIn] = useState(false);
+  const auth = getAuth();
+
+  // useEffect(() => {
+  //   isSignedIn().then((res) => {
+  //     console.log("Info retrieved; signed in state set.");
+  //     setSignedIn(res);
+  //   });
+  // }, [signedIn]);
 
   useEffect(() => {
-    isSignedIn().then((res) => {
-      console.log("Info retrieved; signed in state set.");
-      setSignedIn(res);
-    });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setSignedIn(true);
+      } else {
+        setSignedIn(false);
+      }});
   }, [signedIn]);
 
   if (signedIn) {
@@ -55,6 +83,7 @@ function App() {
               <Route path="" element={<Home />} />
               <Route path="config" element={<Config />} />
               <Route path="links" element={<Links />} />
+              <Route path="about" element={<About />} />
             </Route>
             <Route path="/signin" element={<SignInRoute />}>
               <Route path="" element={<AuthPage />} />

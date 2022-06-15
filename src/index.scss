@@ -18,6 +18,11 @@
   height: 100vh;
 }
 
+p {
+  font-size: 18px;
+  font-family: "Product Sans";
+}
+
 .form-control {
   background: linear-gradient(270deg, #ddedea, #fcf4dd);
   padding: 1rem;
@@ -94,6 +99,16 @@ h1 {
   text-align: center;
 }
 
+// TODO for sidebar
+// .MuiPaper-root-MuiDrawer-paper {
+//   background-color: #f2dcff;
+// }
+
+// .MuiTypography-root {
+//   font-size: 17px;
+//   font-family: "Product Sans";
+// }
+
 h2 {
   font-size: 33px;
   font-family: "Product Sans";
@@ -106,6 +121,9 @@ h2 {
 span {
   font-family: "Product Sans";
   font-size: 18px;
+  &.smaller {
+    font-size: 15px;
+  }
 }
 
 .MuiButton-root {
@@ -229,10 +247,65 @@ span {
   height: 200px;
   object-fit: cover;
   border-radius: 50%;
+  &.small {
+    width: 50px;
+    height: 50px;
+  }
+  &.about {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.zoom img {
+  transition: transform .25s, visibility .25s ease-in;
+  transform-origin: 50% 30%;
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
 }
 
 .config-span {
   align-items: center;
+  &.small {
+    font-weight: bold;
+    &.profile-section {
+      &:hover {
+        cursor: pointer;
+        text-shadow: #ffffff 0.5px 0 5px;
+      }
+    }
+  }
 }
+
+.copyright {
+  position: absolute;
+  bottom: 0px;
+  align-items: center;
+  width: calc(100% - 60px);
+  margin-bottom: 20px;
+}
+
+.copyright-text {
+  text-align: center;
+}
+
+.about-h2 {
+  font-family: "Gotham Medium";
+}
+
+.about-div {
+  margin: auto;
+  width: 50%;
+  text-align: justify;
+  margin-top: 40px;
+}
+
+.p-name {
+  text-align: center;
+}
+
+
 
 

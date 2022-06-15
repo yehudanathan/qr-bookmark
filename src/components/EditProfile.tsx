@@ -9,8 +9,11 @@ const EditProfile = () => {
   let navigate = useNavigate();
 
   const user = getUser() || "{}";
+  const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
   const currentName = user === "{}" ? "" : user.displayName;
+  const currentPhotoURL = user === "{}" ? defaultURL : user.photoURL;
   const [displayName, setDisplayName] = useState(currentName);
+  const [photoURL, setPhotoURL] = useState(currentPhotoURL);
 
   const handleBack = () => {
     navigate("/config");
@@ -21,7 +24,7 @@ const EditProfile = () => {
     // save changes to backend
     updateUser({
       displayName: displayName,
-      photoURL: null,
+      photoURL: undefined,
     });
     navigate("/config");
   }
@@ -41,12 +44,12 @@ const EditProfile = () => {
         
         <label htmlFor="icon-button-file">
           <Button className="profile-picture-hover" component="span" sx={{borderRadius:"50%"}} >
-            <img className="profile-picture edit" src={"https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg"} alt="profile"/>
+            <img className="profile-picture edit" src={defaultURL} alt="profile"/>
           </Button>
         </label>
         
           
-        <Input id="icon-button-file" type="file" sx={{display: "none"}}/>          
+        <Input id="icon-button-file" type="file" sx={{display: "none"}} value={photoURL} onChange={handleEditPicture}/>          
         <label htmlFor="icon-button-file">
           <div className="profile-picture-middle">
             {/* <button style={{background: Edit, width: "30px", height: "30px", backgroundSize: "cover", border: "none", cursor: "pointer"}}></button> */}

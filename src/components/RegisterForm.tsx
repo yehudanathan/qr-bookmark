@@ -71,7 +71,7 @@ const RegisterForm = ({ isLoading }) => {
             const response = await emailSignUp(email, password);
             const profile = {
                 displayName: name,
-                photoURL: null,
+                photoURL: undefined,
             }
             // console.log(response);                
             

@@ -34,11 +34,14 @@ const StyledBox = styled(Box)({
 
 // Container for each pair of icon and text for big devices
 const IconAndText = styled(Box)(({ theme }) => ({
-	display: "none",
-	gap: "20px",
+	display: "flex",
+	gap: "10px",
 	alignItems: "center",
 	[theme.breakpoints.up("sm")]: {
-		display: "flex",
+		gap: { xs: "15px" },
+	},
+	[theme.breakpoints.up("md")]: {
+		gap: { xs: "20px" },
 	},
 }));
 
@@ -61,7 +64,7 @@ const StyledModal = styled(Modal)({
 const Preferences = () => {
 	const [filterOpen, setFilterOpen] = useState(false);
 
-	const [sort, setSort] = React.useState("");
+	const [sort, setSort] = useState("");
 	const handleSort = (event) => {
 		setSort(event.target.value);
 	};
@@ -80,15 +83,23 @@ const Preferences = () => {
 
 	return (
 		<StyledBox>
+			{/* For big devices */}
 			<IconAndText>
 				<Button
+					flex={1}
 					variant="outlined"
-					startIcon={<FilterList />}
-					sx={{ textTransform: "none" }}
+					startIcon={ <FilterList />}
+					sx={{
+						textTransform: "none",
+						display: "flex",
+						height: "55px",
+						flexGrow: 1,
+						p: { xs: 0, sm: 0 },
+					}}
 					onClick={(e) => setFilterOpen(true)}
 					endIcon={<KeyboardArrowDown />}
 				>
-					<Typography fontSize="17px">Filter by date</Typography>
+					<Typography sx={{}}>Filter</Typography>
 				</Button>
 				<StyledModal
 					open={filterOpen}
@@ -97,23 +108,29 @@ const Preferences = () => {
 					aria-describedby="modal-modal-description"
 				>
 					<Box
-						width={400}
-						height={280}
+						width={550}
+						height={150}
 						bgcolor={"background.default"}
 						color={"text.primary"}
 						p={3}
 						borderRadius={5}
+						sx={{ position: "relative" }}
 					>
-						<Typography variant="h6" color="gray" textAlign="center">
+						<Typography variant="h6" color="gray" textAlign="center" mb="15px">
 							Filter Settings
 						</Typography>
-						<Box sx={{ display: "flex", justifyContent: "space-between" }}>
+						<Box
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								mb: "15px",
+							}}
+						>
 							<div>
-								<Typography fontWeight={500}>From</Typography>
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DateTimePicker
 										renderInput={(props) => <TextField {...props} />}
-										label="DateTimePicker"
+										label="From"
 										value={value}
 										onChange={(newValue) => {
 											setValue(newValue);
@@ -123,11 +140,10 @@ const Preferences = () => {
 							</div>
 							<Divider orientation="vertical" flexItem />
 							<div>
-								<Typography fontWeight={500}>To</Typography>
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DateTimePicker
 										renderInput={(props) => <TextField {...props} />}
-										label="DateTimePicker"
+										label="To"
 										value={value}
 										onChange={(newValue) => {
 											setValue(newValue);
@@ -136,15 +152,31 @@ const Preferences = () => {
 								</LocalizationProvider>
 							</div>
 						</Box>
-						<Divider variant="middle" />
-						<Box sx={{ display: "flex", gap: "10px" }}>
+						<Box
+							sx={{
+								display: "flex",
+								gap: "5px",
+								alignItems: "center",
+								position: "absolute",
+								right: "25px",
+							}}
+						>
+							<Checkbox />
 							<Typography fontWeight={500}>Favourites Only</Typography>
-							<Checkbox defaultChecked />
 						</Box>
 					</Box>
 				</StyledModal>
-				<FormControl fullWidth>
-					<InputLabel id="demo-simple-select-label" sx={{ fontSize: "17px" }}>
+				<FormControl sx={{ flexGrow: 1 }}>
+					<InputLabel
+						id="demo-simple-select-label"
+						sx={{ fontSize: "10px", display: { xs: "flex", sm: "none" }, alignItems: "center", justifyContent: "center" }}
+					>
+						Sort
+					</InputLabel>
+					<InputLabel
+						id="demo-simple-select-label"
+						sx={{ fontSize: "17px", display: { xs: "none", sm: "flex" }, alignItems: "center", justifyContent: "center"  }}
+					>
 						Sort by
 					</InputLabel>
 					<Select
@@ -158,7 +190,7 @@ const Preferences = () => {
 						<MenuItem value={"Newest"}>Newest</MenuItem>
 					</Select>
 				</FormControl>
-				<FormControl fullWidth>
+				<FormControl sx={{ flexGrow: 1 }}>
 					<InputLabel id="demo-simple-select-label" sx={{ fontSize: "17px" }}>
 						Display Settings
 					</InputLabel>
@@ -173,7 +205,7 @@ const Preferences = () => {
 						<MenuItem value={"List"}>List</MenuItem>
 					</Select>
 				</FormControl>
-				<FormControl fullWidth>
+				<FormControl sx={{ flexGrow: 1 }}>
 					<InputLabel id="demo-simple-select-label" sx={{ fontSize: "17px" }}>
 						Clear
 					</InputLabel>
@@ -189,7 +221,8 @@ const Preferences = () => {
 					</Select>
 				</FormControl>
 			</IconAndText>
-			<OnlyIcon>
+			{/* For small devices */}
+			{/* <OnlyIcon>
 				<IconButton aria-label="filter">
 					<FilterList />
 				</IconButton>
@@ -202,7 +235,7 @@ const Preferences = () => {
 				<IconButton aria-label="delete">
 					<Delete />
 				</IconButton>
-			</OnlyIcon>
+			</OnlyIcon> */}
 		</StyledBox>
 	);
 };

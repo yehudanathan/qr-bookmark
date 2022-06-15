@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Bookmark from './pages/Bookmark';
+import Links from './pages/Links';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,6 +4,7 @@ import SignInForm from "../components/SignInForm";
 import PictGenerator from "../components/PictGenerator";
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
+import LoadingPage from "../components/LoadingPage";
 
 const AuthPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -33,7 +34,7 @@ const AuthPage = () => {
             </div>
         );
     } else {
-        return <>Not Found</>;
+        return <LoadingPage />;
     }
     
 }

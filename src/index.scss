@@ -261,6 +261,41 @@ span {
     width: 150px;
     height: 150px;
   }
+  &.edit {
+    transition: .3s ease;
+    backface-visibility: hidden;
+    display: block;
+  }
+}
+
+.profile-picture-hover {
+  position: relative;
+  border-radius: 50%;
+  border: none;
+  width: 200px;
+  height: 200px;
+}
+
+.profile-picture-middle {
+  transition: .3s ease;
+  opacity: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  align-items: center;
+}
+
+.profile-picture-hover:hover .profile-picture {
+  &.edit {
+    filter: brightness(70%);
+  }
+}
+
+.profile-picture-hover:hover .profile-picture-middle {
+  opacity: 1;
 }
 
 .zoom img {

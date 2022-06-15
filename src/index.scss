@@ -264,6 +264,7 @@ span {
   &.edit {
     transition: .3s ease;
     backface-visibility: hidden;
+    border-radius: 50%;
   }
 }
 
@@ -290,11 +291,13 @@ span {
 .profile-picture-hover:hover .profile-picture {
   &.edit {
     filter: brightness(70%);
+    border-radius: 50%;
   }
 }
 
 .profile-picture-hover:hover .profile-picture-middle {
   opacity: 1;
+  border-radius: 50%;
 }
 
 .zoom img {

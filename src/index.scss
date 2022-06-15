@@ -63,6 +63,7 @@ p {
 .credit {
   .img {
     object-fit: cover;
+    margin-bottom: -8px;
   }
 }
 
@@ -70,6 +71,7 @@ p {
   .img {
     width: calc(100vw - (416px + 32px));
     height: 100vh;
+    margin-bottom: -8px;
   }
 }
 

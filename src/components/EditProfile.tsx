@@ -9,7 +9,8 @@ const EditProfile = () => {
   let navigate = useNavigate();
 
   const user = getUser() || "{}";
-  const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
+  // const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
+  const defaultURL = "https://firebasestorage.googleapis.com/v0/b/qr-bookmark-36010.appspot.com/o/fukfuk.png?alt=media&token=abc7fb8f-e5b2-49fe-8d93-73dd94558255";
   const currentName = user === "{}" ? "" : user.displayName;
   const currentPhotoURL = user === "{}" ? defaultURL : user.photoURL;
   const [displayName, setDisplayName] = useState(currentName);
@@ -34,6 +35,7 @@ const EditProfile = () => {
     alert("To be implemented :)");
   }
 
+  console.log(currentPhotoURL);
   return (
     <>
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
@@ -44,7 +46,7 @@ const EditProfile = () => {
         
         <label htmlFor="icon-button-file">
           <Button className="profile-picture-hover" component="span" sx={{borderRadius:"50%"}} >
-            <img className="profile-picture edit" src={defaultURL} alt="profile"/>
+            <img className="profile-picture edit" src={defaultURL as string} alt="profile"/>
           </Button>
         </label>
         

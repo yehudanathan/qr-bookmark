@@ -12,7 +12,7 @@ import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
-import { isSignedIn } from "./firebase/auth/auth_user";
+// import { isSignedIn } from "./firebase/auth/auth_user";
 import EditProfile from "./components/EditProfile";
 
 const PrivateRoute = () => {

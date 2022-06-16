@@ -26,8 +26,8 @@ const EditProfile = () => {
     updateUser({
       displayName: displayName,
       photoURL: undefined,
-    });
-    navigate("/config");
+    }, () => {navigate("/config")});
+    // navigate("/config");
   }
 
   const handleEditPicture = (e) => {

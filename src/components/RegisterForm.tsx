@@ -82,9 +82,9 @@ const RegisterForm = ({ isLoading }) => {
                     setEmailError(errorCodes["email"][response]);
                 }
             } else {
-                updateUser(profile);
-                alert("User registered successfully");
-                navigate('/'); 
+                updateUser(profile, () => {alert("User registered successfully"); navigate('/');});
+                // alert("User registered successfully");
+                // navigate('/'); 
                 // this will redirect to /signin first, 
                 // asking user to signin again after registering.
             }

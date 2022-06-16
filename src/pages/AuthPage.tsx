@@ -4,6 +4,7 @@ import SignInForm from "../components/SignInForm";
 import PictGenerator from "../components/PictGenerator";
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
+import LoadingPage from "../components/LoadingPage";
 
 const AuthPage = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -14,7 +15,9 @@ const AuthPage = () => {
         return (
             <div className="body">
             <Stack direction="row" className="stack">
-                <PictGenerator onGenerate={toggleLoading} />
+                <div className="side-pic">
+                    <PictGenerator onGenerate={toggleLoading} />
+                </div>
                 <RegisterForm isLoading={isLoading} />
             </Stack>
             </div>
@@ -23,13 +26,15 @@ const AuthPage = () => {
         return (
             <div className="body">
             <Stack direction="row" className="stack">
-                <PictGenerator onGenerate={toggleLoading} />
+                <div className="side-pic">
+                    <PictGenerator onGenerate={toggleLoading} />
+                </div>
                 <SignInForm isLoading={isLoading} />
             </Stack>
             </div>
         );
     } else {
-        return <>Not Found</>;
+        return <LoadingPage />;
     }
     
 }

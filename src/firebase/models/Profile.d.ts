@@ -1,4 +1,4 @@
 interface Profile {
-    displayName: string;
-    photoURL: string | null; 
+    displayName: string | null;
+    photoURL: string | undefined; 
 }

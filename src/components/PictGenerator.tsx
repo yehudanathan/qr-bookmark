@@ -22,11 +22,12 @@ const PictGenerator = ({ onGenerate }) => {
     useEffect(() => {
         setPhoto();
     }, []);
-
+    
     if (photoError) {
         return <img className="img" src="https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg" alt="background" />;
     } else if (photo === null) {
-        return <LoadingPage/>;
+        return <></>; 
+        // TODO create error page
     } else {
         return (
             <a

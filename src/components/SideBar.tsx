@@ -11,6 +11,7 @@ import History from "../static/history.png";
 import Settings from "../static/settings.png";
 import Share from "../static/share.png";
 import Sponsor from "../static/sponsor.png";
+import User from "../static/user.png";
 import Info from "../static/info.png";
 import Logout from "../static/logout.png";
 import Bookmarks from "../static/bookmark.png";
@@ -45,7 +46,7 @@ export default function TemporaryDrawer() {
         {[
           { text: "Favorites", path: Favorite, onClick: () => navigate("/links") },
           { text: "Bookmarks", path: Bookmarks, onClick: () => navigate("/links") },
-          { text: "Settings", path: Settings, onClick: () => navigate("/config") },
+          { text: "Profile", path: User, onClick: () => navigate("/config") },
         ].map((obj) => (
           <ListItem button key={obj.text} onClick={obj.onClick}>
             <ListItemIcon>

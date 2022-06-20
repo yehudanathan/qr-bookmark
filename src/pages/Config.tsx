@@ -14,9 +14,10 @@ const Config = () => {
   // const email = JSON.parse(user)["email"];
   // const fullName = JSON.parse(user)["name"];
 
-  const user = getUser() || "{}";
-  const email = user === "{}" ? "" : user.email;
-  const fullName = user === "{}" ? "" : user.displayName;
+  const user = getUser();
+  const email = user?.email;
+  const fullName = user?.displayName;
+  const displayPicture = user?.photoURL;
 
   let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -39,7 +40,7 @@ const Config = () => {
               <Outlet/> :
              <Stack sx={{padding: 3}} alignItems="center" spacing={1.5}>
                 <h1 className="profile-h1">Your Profile</h1>
-                <img className="profile-picture" src={"https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg"} alt="profile"/>
+                <img className="profile-picture" src={displayPicture as string} alt="profile"/>
                 <h2 className="full-name">{fullName}</h2>
                 <Stack alignItems="center" spacing={0.5}>
                   <span className="config-span">{email}</span>

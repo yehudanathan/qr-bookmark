@@ -318,6 +318,7 @@ span {
       &:hover {
         cursor: pointer;
         text-shadow: #ffffff 0.5px 0 5px;
+        transition: 0.3s ease;
       }
     }
   }

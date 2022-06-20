@@ -25,8 +25,8 @@ export const getUploadStatusFromSnapshot = (snapshot: UploadTaskSnapshot) => {
   }
 };
 
-export const getDownloadURLFromTask = async (uploadTask: UploadTask) => {
-  return await getDownloadURL(uploadTask.snapshot.ref)
+export const getDownloadURLFromSnapshot = async (snapshot: UploadTaskSnapshot) => {
+  return await getDownloadURL(snapshot.ref)
     .then((url) => {
       return url;
     })

@@ -8,9 +8,10 @@ const Profile = () => {
   // const email = JSON.parse(user)["email"];
   // const fullName = JSON.parse(user)["name"];
 
-  const user = getUser() || "{}";
-  const email = user === "{}" ? "" : user.email;
-  const fullName = user === "{}" ? "" : user.displayName;
+  const user = getUser();
+  const email = user?.email;
+  const fullName = user?.displayName;
+  const displayPicture = user?.photoURL;
 
   let navigate = useNavigate();
 
@@ -21,8 +22,7 @@ const Profile = () => {
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
-      <img alt="profile" className="profile-picture small" src={"https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg"}/>
-      {/* gimana caranya biar bisa fetch profile picture wey :( */}
+      <img alt="profile" className="profile-picture small" src={displayPicture as string}/>
       <Stack>
         <span className="config-span small profile-section" onClick={handleClick}>{fullName}</span>
         <span className="config-span smaller profile-section">{email}</span>

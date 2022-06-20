@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Config from "./pages/Config";
-import Links from "./pages/Links";
 // PART FOR MOCK DATA
 // uncomment this part if backend is not available
 // import { isSignedIn } from "./apis/auth";
@@ -13,6 +12,7 @@ import About from "./pages/About";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import { isSignedIn } from "./firebase/auth/auth_user";
+import Bookmark from "./pages/Bookmark";
 
 const PrivateRoute = () => {
   const auth = getAuth();
@@ -82,7 +82,7 @@ function App() {
             <Route path="/" element={<PrivateRoute />}>
               <Route path="" element={<Home />} />
               <Route path="config" element={<Config />} />
-              <Route path="links" element={<Links />} />
+              <Route path="links" element={<Bookmark />} />
               <Route path="about" element={<About />} />
             </Route>
             <Route path="/signin" element={<SignInRoute />}>

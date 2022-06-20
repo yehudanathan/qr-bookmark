@@ -536,8 +536,8 @@ const Post = (theme) => {
 			) : (
 				<MobilePost arrUserLinks={arrUserLinks} />
 			)} */}
-			{/* <DesktopPost arrUserLinks={{ alex: "hello" }} /> */}
-			<MobilePost arrUserLinks={{ alex: "hello" }} />
+			<DesktopPost arrUserLinks={{ alex: "hello" }} />
+			{/* <MobilePost arrUserLinks={{ alex: "hello" }} /> */}
 		</>
 	);
 };

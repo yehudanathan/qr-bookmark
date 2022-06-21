@@ -29,7 +29,7 @@ export const emailSignIn = async (email, password) => {
     if (userCredential.user.emailVerified) {
       return userCredential.user;
     }
-    return "unverified-email";
+    return "auth/unverified-email";
   })
   .catch((error) => {
     const errorCode = error.code;

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // import users from "../data/users.json";
 import { emailSignIn } from '../firebase/auth/auth_email_password';
 import { googleSignIn } from '../firebase/auth/auth_google';
+import VerificationEmailModal from './VerificationEmailModal';
 
 const SignInForm = ({ isLoading }) => {
     let navigate = useNavigate();
@@ -19,7 +20,7 @@ const SignInForm = ({ isLoading }) => {
             "auth/invalid-email" : "Invalid email address.",
             "auth/user-not-found" : "We could not find an account associated with this email.",
             "auth/user-disabled" : "This account is currently disabled.",
-            "unverified-email" : "Please make sure that your email has been verified."
+            "auth/unverified-email" : "Please make sure that your email has been verified."
         },
         "password" : {
             "auth/wrong-password" : "Incorrect password.",
@@ -69,10 +70,6 @@ const SignInForm = ({ isLoading }) => {
                 setEmailError(errorCodes["email"][response]);
                 setPassword("");
             }
-        // } else if (response === false) {
-        //     console.log("unverified email");
-        //     setEmailError("Please make sure that your email has been verified.");
-        //     setPassword("");
         } else {
             console.log("login success");
             navigate('/', { state : response });
@@ -85,15 +82,22 @@ const SignInForm = ({ isLoading }) => {
         googleSignIn();
     }
 
+    const [openModal, setOpenModal] = useState(false);
+    const handleCloseModal = () => {
+        setOpenModal(false);
+      }
+
     if (isLoading) {
         return (<></>);
     } else {
         return ( 
         <>
+        <VerificationEmailModal openState={openModal} handleCloseModal={handleCloseModal} />
         <form className="form-control" onSubmit={handleSubmit}>
             <Stack alignItems="center" spacing={3}>
                 <Stack alignItems="center">
                     <h1 className="subtitle"><strong>Sign in to your account.</strong></h1>
+                    
                     {!emailError? <TextField
                         required
                         label="Email"
@@ -126,6 +130,7 @@ const SignInForm = ({ isLoading }) => {
                             <div className="blank"></div>
                         </Stack>
                         }
+                    
                     {!passwordError ? <TextField
                         required
                         type="password"

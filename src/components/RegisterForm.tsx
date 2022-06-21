@@ -84,15 +84,13 @@ const RegisterForm = ({ isLoading }) => {
             } else {
                 updateUser(profile, () => {
                     sendEmailVerification(() => {
-                        alert("Email verification sent. Please check your email.");
+                        // alert("Email verification sent. Please check your email.");
                         logOut();
                         navigate('/signin');
+                        // this will redirect to /signin first, 
+                        // asking user to signin again after registering (and have their email verified).
                     });
                 });
-                // alert("User registered successfully");
-                // navigate('/'); 
-                // this will redirect to /signin first, 
-                // asking user to signin again after registering.
             }
         }
     }

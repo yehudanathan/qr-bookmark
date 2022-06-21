@@ -6,6 +6,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { getUser, logOut } from "../firebase/auth/auth_user";
 import { useState } from "react";
 import PictGenerator from "../components/PictGenerator";
+import MetaTags from "react-meta-tags";
 
 const Config = () => {
   // userFetcher dari sessionStorage
@@ -27,6 +28,12 @@ const Config = () => {
   
   return (
     <>
+    <MetaTags>
+      <title>Profile</title>
+      <meta name="description" content="Profile page" />
+      <meta property="og:title" content="Profile" />
+    </MetaTags>
+
     <div className="pict-generator-config">
       <PictGenerator onGenerate={toggleLoading} />
     </div>

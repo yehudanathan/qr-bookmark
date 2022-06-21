@@ -13,7 +13,7 @@ import About from "./pages/About";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 // import { isSignedIn } from "./firebase/auth/auth_user";
-import EditProfile from "./components/EditProfile";
+import EditProfile from "./pages/EditProfile";
 
 const PrivateRoute = () => {
   const auth = getAuth();

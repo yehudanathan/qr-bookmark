@@ -19,6 +19,7 @@ const SignInForm = ({ isLoading }) => {
             "auth/invalid-email" : "Invalid email address.",
             "auth/user-not-found" : "We could not find an account associated with this email.",
             "auth/user-disabled" : "This account is currently disabled.",
+            "unverified-email" : "Please make sure that your email has been verified."
         },
         "password" : {
             "auth/wrong-password" : "Incorrect password.",
@@ -68,7 +69,12 @@ const SignInForm = ({ isLoading }) => {
                 setEmailError(errorCodes["email"][response]);
                 setPassword("");
             }
+        // } else if (response === false) {
+        //     console.log("unverified email");
+        //     setEmailError("Please make sure that your email has been verified.");
+        //     setPassword("");
         } else {
+            console.log("login success");
             navigate('/', { state : response });
             console.log("check!");
         }

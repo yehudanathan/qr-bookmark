@@ -6,6 +6,7 @@ import TemporaryDrawer from "../components/SideBar";
 import CustomSnackBar from "../components/CustomSnackBar";
 import Profile from "../components/Profile";
 import { useLocation } from "react-router-dom";
+import MetaTags from "react-meta-tags";
 
 const Home = () => {
     const location = useLocation();
@@ -20,6 +21,11 @@ const Home = () => {
     console.log("rendering home");
     return (
         <div className="body home">
+            <MetaTags>
+                <title>QR-Bookmark</title>
+                <meta name="description" content="A web app to manage and scan QR bookmarks." />
+                <meta property="og:title" content="QR-Bookmark" />
+            </MetaTags>
             <Stack direction="row" justifyContent="space-between">
                 <TemporaryDrawer/>
                 <Profile/>

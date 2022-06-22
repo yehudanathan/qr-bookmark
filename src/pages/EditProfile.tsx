@@ -1,20 +1,28 @@
-import { Button, IconButton, Input, TextField } from "@mui/material";
+import { Button, Input, TextField } from "@mui/material";
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { getUser, updateUser } from "../firebase/auth/auth_user";
 import EditIcon from '@mui/icons-material/Edit';
+import { uploadFile } from "../firebase/storage/upload_manager";
+import { getDownloadURLFromSnapshot, getUploadPercentageFromSnapshot } from "../firebase/storage/utils";
+import MetaTags from 'react-meta-tags';
 
+// console.log("photoURL:");
+// console.log(getUser()?.photoURL);
 const EditProfile = () => {
   let navigate = useNavigate();
 
-  const user = getUser() || "{}";
-  // const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
-  const defaultURL = "https://firebasestorage.googleapis.com/v0/b/qr-bookmark-36010.appspot.com/o/fukfuk.png?alt=media&token=abc7fb8f-e5b2-49fe-8d93-73dd94558255";
-  const currentName = user === "{}" ? "" : user.displayName;
-  const currentPhotoURL = user === "{}" ? defaultURL : user.photoURL;
+  const user = getUser();
+  const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
+  // const defaultURL = "https://firebasestorage.googleapis.com/v0/b/qr-bookmark-36010.appspot.com/o/fukfuk.png?alt=media&token=abc7fb8f-e5b2-49fe-8d93-73dd94558255";
+  const currentName = user?.displayName;
+  console.log("Current name");
+  console.log(currentName);
+  const currentPhotoURL = user?.photoURL === null || user?.photoURL === undefined ? defaultURL : user?.photoURL;
+  console.log("Current photoURL");
+  console.log(currentPhotoURL);
   const [displayName, setDisplayName] = useState(currentName);
-  const [photoURL, setPhotoURL] = useState(currentPhotoURL);
 
   const handleBack = () => {
     navigate("/config");
@@ -30,14 +38,35 @@ const EditProfile = () => {
     // navigate("/config");
   }
 
-  const handleEditPicture = (e) => {
+  const handleEditPicture = async (e) => {
     e.preventDefault();
-    alert("To be implemented :)");
-  }
+    await uploadFile(e.target.files[0], async (snapshot) => {
+      try {  
+        console.log("Uploading file...");
+        const uploadProgress = getUploadPercentageFromSnapshot(snapshot);
+        console.log(uploadProgress + "% uploaded");
+        if (uploadProgress === 100) {
+          const downloadURL = await getDownloadURLFromSnapshot(snapshot);
+          console.log("URL:");
+          console.log(downloadURL);
+          updateUser({
+            photoURL: downloadURL as string,
+          }, () => {alert("Profile picture updated!"); navigate("/config");});
+        }
+      } catch (error) {
+        console.log(error);
+        alert("Error uploading file");
+      }
+    });
+  };
 
-  console.log(currentPhotoURL);
   return (
     <>
+    <MetaTags>
+      <title>Edit Profile</title>
+      <meta name="description" content="Configure your profile" />
+      <meta property="og:title" content="Configure Your Profile" />
+    </MetaTags>
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Configure Your Profile</h1>
 
@@ -46,15 +75,14 @@ const EditProfile = () => {
         
         <label htmlFor="icon-button-file">
           <Button className="profile-picture-hover" component="span" sx={{borderRadius:"50%"}} >
-            <img className="profile-picture edit" src={defaultURL as string} alt="profile"/>
+            <img className="profile-picture edit" src={currentPhotoURL as string} alt="profile"/>
           </Button>
         </label>
         
           
-        <Input id="icon-button-file" type="file" sx={{display: "none"}} value={photoURL} onChange={handleEditPicture}/>          
+        <Input id="icon-button-file" type="file" sx={{display: "none"}} onChange={handleEditPicture}/>          
         <label htmlFor="icon-button-file">
           <div className="profile-picture-middle">
-            {/* <button style={{background: Edit, width: "30px", height: "30px", backgroundSize: "cover", border: "none", cursor: "pointer"}}></button> */}
             <EditIcon sx={{fontSize: 60, cursor:"pointer"}}/>
           </div>
         </label>

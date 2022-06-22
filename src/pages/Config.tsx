@@ -1,4 +1,4 @@
-import { Button, Card, Box } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { Stack } from "@mui/material";
 // import { authLogout } from "../apis/auth";
 // import geometric from "../static/geometric-4.svg";
@@ -6,6 +6,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { getUser, logOut } from "../firebase/auth/auth_user";
 import { useState } from "react";
 import PictGenerator from "../components/PictGenerator";
+import MetaTags from "react-meta-tags";
 
 const Config = () => {
   // userFetcher dari sessionStorage
@@ -14,18 +15,26 @@ const Config = () => {
   // const email = JSON.parse(user)["email"];
   // const fullName = JSON.parse(user)["name"];
 
-  const user = getUser() || "{}";
-  const email = user === "{}" ? "" : user.email;
-  const fullName = user === "{}" ? "" : user.displayName;
+  const user = getUser();
+  const email = user?.email;
+  const fullName = user?.displayName;
+  const displayPicture = user?.photoURL;
 
   let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const toggleLoading = () => {setIsLoading(false)};
 
   const path = useLocation().pathname;
-  
+  document.title = "Profile";
+
   return (
     <>
+    <MetaTags>
+      <title>Profile</title>
+      <meta name="description" content="Profile page" />
+      <meta property="og:title" content="Profile" />
+    </MetaTags>
+
     <div className="pict-generator-config">
       <PictGenerator onGenerate={toggleLoading} />
     </div>
@@ -39,7 +48,7 @@ const Config = () => {
               <Outlet/> :
              <Stack sx={{padding: 3}} alignItems="center" spacing={1.5}>
                 <h1 className="profile-h1">Your Profile</h1>
-                <img className="profile-picture" src={"https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg"} alt="profile"/>
+                <img className="profile-picture" src={displayPicture as string} alt="profile"/>
                 <h2 className="full-name">{fullName}</h2>
                 <Stack alignItems="center" spacing={0.5}>
                   <span className="config-span">{email}</span>

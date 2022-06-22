@@ -2,8 +2,8 @@ import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { authRegister } from '../apis/auth';
-import { emailSignUp } from '../firebase/auth/auth_email_password';
-import { updateUser } from '../firebase/auth/auth_user';
+import { emailSignUp, sendEmailVerification } from '../firebase/auth/auth_email_password';
+import { logOut, updateUser } from '../firebase/auth/auth_user';
 
 const RegisterForm = ({ isLoading }) => {
     let navigate = useNavigate();
@@ -82,11 +82,15 @@ const RegisterForm = ({ isLoading }) => {
                     setEmailError(errorCodes["email"][response]);
                 }
             } else {
-                updateUser(profile, () => {alert("User registered successfully"); navigate('/');});
-                // alert("User registered successfully");
-                // navigate('/'); 
-                // this will redirect to /signin first, 
-                // asking user to signin again after registering.
+                updateUser(profile, () => {
+                    sendEmailVerification(() => {
+                        // alert("Email verification sent. Please check your email.");
+                        logOut();
+                        navigate('/signin', { state: profile });
+                        // this will redirect to /signin first, 
+                        // asking user to signin again after registering (and have their email verified).
+                    });
+                });
             }
         }
     }

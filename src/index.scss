@@ -37,12 +37,14 @@ p {
       font-size: 30px;
     }
   }
+
   .header-3 {
     font-size: 15px;
     font-family: "Product Sans";
     color: #000000;
     font-weight: normal;
   }
+
   .link {
     font-size: 15px;
     font-family: "Product Sans";
@@ -52,6 +54,16 @@ p {
     &:hover {
       color: #004b3a;
     }
+  }
+}
+
+.header-3 {
+  font-size: 15px;
+  font-family: "Product Sans";
+  color: #000000;
+  font-weight: normal;
+  &.modal {
+    text-align: center;
   }
 }
 
@@ -95,9 +107,17 @@ p {
 }
 
 h1 {
-  font-size: 40px;
+  // font-size: 40px;
   font-family: "Gotham Medium";
-  color: #262254;
+  // color: #262254;
+  font-size: 25px;
+  // font-family: "Product Sans";
+  color: #000000;
+  font-weight: bold;
+  // font-style: italic;
+  &.modal {
+    text-align: center;
+  }
 }
 
 .profile-h1 {
@@ -139,6 +159,12 @@ span {
   font-family: "Montserrat" !important;
   background-color: #398564;
 }
+
+.class {
+  background-color: #b3cbc7;
+}
+
+
 
 .parent-roller {
   position: fixed;
@@ -318,6 +344,7 @@ span {
       &:hover {
         cursor: pointer;
         text-shadow: #ffffff 0.5px 0 5px;
+        transition: 0.3s ease;
       }
     }
   }

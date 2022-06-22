@@ -12,7 +12,7 @@ import About from "./pages/About";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 // import { isSignedIn } from "./firebase/auth/auth_user";
-import EditProfile from "./components/EditProfile";
+import EditProfile from "./pages/EditProfile";
 
 const PrivateRoute = () => {
   const auth = getAuth();
@@ -32,7 +32,7 @@ const PrivateRoute = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged(user => { // TODO masukin firebase api
-      if (user) {
+      if (user?.emailVerified) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
@@ -61,7 +61,7 @@ const SignInRoute = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) {
+      if (user?.emailVerified) {
         setSignedIn(true);
       } else {
         setSignedIn(false);

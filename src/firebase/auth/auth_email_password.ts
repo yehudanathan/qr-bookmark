@@ -26,7 +26,10 @@ export const emailSignIn = async (email, password) => {
   const auth = getAuth(app);
   return signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    return userCredential.user;
+    if (userCredential.user.emailVerified) {
+      return userCredential.user;
+    }
+    return "auth/unverified-email";
   })
   .catch((error) => {
     const errorCode = error.code;

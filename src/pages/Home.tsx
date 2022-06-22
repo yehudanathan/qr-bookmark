@@ -1,12 +1,12 @@
 import AddLink from "../components/AddLink";
 import QRScanner from "../components/QRScanner";
-import { Stack } from "@mui/material";
-import "../index.scss";
 import TemporaryDrawer from "../components/SideBar";
 import CustomSnackBar from "../components/CustomSnackBar";
 import Profile from "../components/Profile";
+import { Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import MetaTags from "react-meta-tags";
+import "../index.scss";
 
 const Home = () => {
     const location = useLocation();
@@ -18,7 +18,7 @@ const Home = () => {
         return false;
     }
 
-    console.log("rendering home");
+    // console.log("rendering home");
     return (
         <div className="body home">
             <MetaTags>

@@ -8,20 +8,17 @@ import { uploadFile } from "../firebase/storage/upload_manager";
 import { getDownloadURLFromSnapshot, getUploadPercentageFromSnapshot } from "../firebase/storage/utils";
 import MetaTags from 'react-meta-tags';
 
-// console.log("photoURL:");
-// console.log(getUser()?.photoURL);
 const EditProfile = () => {
   let navigate = useNavigate();
 
   const user = getUser();
   const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
-  // const defaultURL = "https://firebasestorage.googleapis.com/v0/b/qr-bookmark-36010.appspot.com/o/fukfuk.png?alt=media&token=abc7fb8f-e5b2-49fe-8d93-73dd94558255";
   const currentName = user?.displayName;
-  console.log("Current name");
-  console.log(currentName);
+  // console.log("Current name");
+  // console.log(currentName);
   const currentPhotoURL = user?.photoURL === null || user?.photoURL === undefined ? defaultURL : user?.photoURL;
-  console.log("Current photoURL");
-  console.log(currentPhotoURL);
+  // console.log("Current photoURL");
+  // console.log(currentPhotoURL);
   const [displayName, setDisplayName] = useState(currentName);
 
   const handleBack = () => {
@@ -34,7 +31,11 @@ const EditProfile = () => {
     updateUser({
       displayName: displayName,
       photoURL: undefined,
-    }, () => {navigate("/config"); alert("Profile updated!");});
+    }, () => {
+      navigate("/config"); 
+      alert("Profile updated!");
+    }
+    );
     // navigate("/config");
   }
 
@@ -67,19 +68,16 @@ const EditProfile = () => {
       <meta name="description" content="Configure your profile" />
       <meta property="og:title" content="Configure Your Profile" />
     </MetaTags>
+
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Configure Your Profile</h1>
 
-      <div className="profile-picture-hover">
-        
-        
+      <div className="profile-picture-hover">    
         <label htmlFor="icon-button-file">
           <Button className="profile-picture-hover" component="span" sx={{borderRadius:"50%"}} >
             <img className="profile-picture edit" src={currentPhotoURL as string} alt="profile"/>
           </Button>
         </label>
-        
-          
         <Input id="icon-button-file" type="file" sx={{display: "none"}} onChange={handleEditPicture}/>          
         <label htmlFor="icon-button-file">
           <div className="profile-picture-middle">
@@ -89,14 +87,13 @@ const EditProfile = () => {
       </div>
       
       <form className="edit-profile" onSubmit={handleSubmit}>
-      <TextField label="Name" sx={{m: 1, width: "40ch", backgroundColor: "white", borderTopLeftRadius: "4px", borderTopRightRadius: "4px",}} size="small" value={displayName} onChange={e => setDisplayName(e.target.value)} color="success" inputProps={{style: {fontFamily: "Product Sans"}}}/>
-      <Stack direction="row" justifyContent="center" spacing={2}>
-        <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" type="submit">Save</Button>
-        <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" onClick={handleBack}>Back</Button>
-      </Stack>
+        <TextField label="Name" sx={{m: 1, width: "40ch", backgroundColor: "white", borderTopLeftRadius: "4px", borderTopRightRadius: "4px",}} size="small" value={displayName} onChange={e => setDisplayName(e.target.value)} color="success" inputProps={{style: {fontFamily: "Product Sans"}}}/>
+        <Stack direction="row" justifyContent="center" spacing={2}>
+          <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" type="submit">Save</Button>
+          <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" onClick={handleBack}>Back</Button>
+        </Stack>
       </form>
     </Stack>
-    
     </>
   )
 }

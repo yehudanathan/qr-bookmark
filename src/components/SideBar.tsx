@@ -35,8 +35,8 @@ export default function TemporaryDrawer() {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      onClick={e => toggleDrawer(anchor, false)}
-      onKeyDown={e => toggleDrawer(anchor, false)}
+      onClick={() => toggleDrawer(anchor, false)}
+      onKeyDown={() => toggleDrawer(anchor, false)}
     >
       <List>
         {[
@@ -53,20 +53,6 @@ export default function TemporaryDrawer() {
         ))}
       </List>
       <Divider />
-      {/* <List>
-        {[
-          { text: "Share", path: Share },
-          { text: "Sponsors", path: Sponsor },
-          { text: "About", path: Info },
-        ].map((obj) => (
-          <ListItem button key={obj.text}>
-            <ListItemIcon>
-              <img src={obj.path} alt="logo" width="20" height="20"/>
-            </ListItemIcon>
-            <ListItemText primary={obj.text} />
-          </ListItem>
-        ))}
-      </List> */}
       <List>
         <ListItem button key="About" onClick={() => navigate('/about')}>
           <ListItemIcon>
@@ -92,7 +78,7 @@ export default function TemporaryDrawer() {
         <Drawer
           anchor="left"
           open={state.left}
-          onClose={e => toggleDrawer("left", false)}
+          onClose={() => toggleDrawer("left", false)}
         >
           {list("left")}
         </Drawer>
@@ -100,18 +86,3 @@ export default function TemporaryDrawer() {
     </div>
   );
 }
-
-// require(
-  
-
-  // onToggle={toggleDrawer("Menu", true)}
-  //<Hamburger
-//   onToggle={(toggled) => {
-//     if (toggled) {
-//       toggleDrawer("left", !state.left);
-//     } else {
-//       toggleDrawer("left", !state.left);
-//     }
-//     console.log("blabla")
-//   }}
-// />

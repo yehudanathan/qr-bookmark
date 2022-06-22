@@ -1,16 +1,17 @@
-import { Stack } from "@mui/material";
 import RegisterForm from "../components/RegisterForm";
 import SignInForm from "../components/SignInForm";
+import LoadingPage from "../components/LoadingPage";
 import PictGenerator from "../components/PictGenerator";
+import { Stack } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
-import LoadingPage from "../components/LoadingPage";
 import MetaTags from 'react-meta-tags';
 
 const AuthPage = () => {
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const toggleLoading = () => {setIsLoading(false)};
     const location = useLocation().pathname;
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    
+    const toggleLoading = () => {setIsLoading(false)};
 
     if (location === '/register') {
         return (

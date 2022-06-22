@@ -1,12 +1,13 @@
+import { getUserLinks, getUserFavoriteLinks } from '../apis/link';
+import users from "../data/users.json";
+import { Button } from '@mui/material';
+import React from 'react';
+
 /* 
 NOTE: mock data is currently used in "../data/links.json".
 Code for real data has not yet been set up to get links.
 */
 
-import { getUserLinks, getUserFavoriteLinks } from '../apis/link';
-import users from "../data/users.json";
-import { Button } from '@mui/material';
-import React from 'react';
 
 const Links = () => {
     const user = sessionStorage.getItem("user") || "{}";

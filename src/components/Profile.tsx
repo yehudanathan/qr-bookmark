@@ -7,13 +7,13 @@ const Profile = () => {
   // const user = sessionStorage.getItem("user") || "{}";
   // const email = JSON.parse(user)["email"];
   // const fullName = JSON.parse(user)["name"];
+  
+  let navigate = useNavigate();
 
   const user = getUser();
   const email = user?.email;
   const fullName = user?.displayName;
   const displayPicture = user?.photoURL;
-
-  let navigate = useNavigate();
 
   const handleClick = (e : React.SyntheticEvent) => {
     e.preventDefault();

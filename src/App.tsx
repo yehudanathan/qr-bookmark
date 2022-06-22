@@ -33,7 +33,7 @@ const PrivateRoute = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged(user => { // TODO masukin firebase api
-      if (user) {
+      if (user?.emailVerified) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
@@ -62,7 +62,7 @@ const SignInRoute = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) {
+      if (user?.emailVerified) {
         setSignedIn(true);
       } else {
         setSignedIn(false);

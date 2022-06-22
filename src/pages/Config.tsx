@@ -1,4 +1,4 @@
-import { Button, Card, Box } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { Stack } from "@mui/material";
 // import { authLogout } from "../apis/auth";
 // import geometric from "../static/geometric-4.svg";
@@ -25,7 +25,8 @@ const Config = () => {
   const toggleLoading = () => {setIsLoading(false)};
 
   const path = useLocation().pathname;
-  
+  document.title = "Profile";
+
   return (
     <>
     <MetaTags>

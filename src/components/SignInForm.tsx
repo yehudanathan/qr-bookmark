@@ -1,7 +1,7 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import GoogleButton from 'react-google-button';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import { authLogin } from '../apis/auth';
 // import users from "../data/users.json";
 import { emailSignIn } from '../firebase/auth/auth_email_password';
@@ -78,11 +78,21 @@ const SignInForm = ({ isLoading }) => {
     }
 
     const handleGoogleSignIn = () => {
-        console.log("google sign in");
+        // console.log("google sign in");
         googleSignIn();
     }
 
-    const [openModal, setOpenModal] = useState(false);
+    const location = useLocation();
+    const checkPreviousPage = () => {
+        // console.log("previous page before sign in");
+        // console.log(location.state);
+        if (location.state !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    const [openModal, setOpenModal] = useState(checkPreviousPage());
     const handleCloseModal = () => {
         setOpenModal(false);
       }

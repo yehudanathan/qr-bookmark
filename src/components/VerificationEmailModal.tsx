@@ -1,15 +1,15 @@
 import { Modal, Box } from "@mui/material";
-import { useState } from "react";
 
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 295,
+  width: 315,
   bgcolor: "#deedea",
   border: "0px",
-  borderRadius: "2%",
+  borderRadius: "1%",
+  outline: "none",
   p: 4,
 }
 
@@ -21,8 +21,8 @@ const VerificationEmailModal = ({ openState, handleCloseModal }) => {
         onClose={handleCloseModal}
       >
         <Box sx={style}>
-          <h1 className="modal">Email verification sent!</h1>
-          <h3 className="header-3 modal">Please check your email.</h3>
+          <h1 className="modal">Verification email sent!</h1>
+          <h3 className="header-3 modal">Please check your email and verify your account.</h3>
         </Box>
       </Modal>
     </div>

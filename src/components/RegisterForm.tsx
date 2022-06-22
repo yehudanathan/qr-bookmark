@@ -86,7 +86,7 @@ const RegisterForm = ({ isLoading }) => {
                     sendEmailVerification(() => {
                         // alert("Email verification sent. Please check your email.");
                         logOut();
-                        navigate('/signin');
+                        navigate('/signin', { state: profile });
                         // this will redirect to /signin first, 
                         // asking user to signin again after registering (and have their email verified).
                     });

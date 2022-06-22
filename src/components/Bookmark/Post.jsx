@@ -20,18 +20,12 @@ import React from "react";
 import { getUserLinks } from "../../apis/link";
 import { getCurrentUserId } from "../../apis/session";
 
-// Box for small device
-// const MobileBox = styled(Box)(({ theme }) => ({
-// 	marginBottom: "5px",
-// 	justifyContent: "center",
-// }));
 
 let num = 1;
 
 const MobilePost = () => {
 	// const links = await getUserLinks(getCurrentUserId());
 	return (
-		// <MobileBox>
 		<Container sx={{ py: { xs: 4, md: 8 }, ml:"-16px"}} maxWidth="md">
 			{/* {arrUserLinks.map((userLink) => (
           <Card sx={{ margin: "5px", position:"relative" }}>
@@ -176,16 +170,8 @@ const MobilePost = () => {
 				</CardActions>
 			</Card>
 		</Container>
-		// </MobileBox>
 	);
 };
-
-// // Box for big devices
-// const DesktopBox = styled(Box)(({ theme }) => ({
-// 	flexWrap: "wrap",
-// 	gap: "10px",
-// 	justifyContent: "center",
-// }));
 
 const DesktopPost = ({ arrUserLinks }) => {
 	return (

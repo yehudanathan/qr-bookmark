@@ -175,7 +175,6 @@ const MobilePost = () => {
 
 const DesktopPost = ({ arrUserLinks }) => {
 	return (
-		// <DesktopBox>
 		<Container sx={{ py: { xs: 4, md: 8 } }} maxWidth="md">
 			<Grid container spacing={4}>
 				{/* Actual code below */}
@@ -505,11 +504,8 @@ const DesktopPost = ({ arrUserLinks }) => {
 				</Grid>
 			</Grid>
 		</Container>
-		// </DesktopBox>
 	);
 };
-
-// const arrUserLinks = await getUserLinks(getCurrentUserId());
 
 const Post = (theme) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false

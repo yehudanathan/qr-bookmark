@@ -25,7 +25,9 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getLinks } from "../../firebase/database/links";
+import Links from "../../pages/Links";
 
 const StyledBox = styled(Box)({
 	alignItems: "center",
@@ -56,27 +58,34 @@ const Preferences = () => {
 	const [filterOpen, setFilterOpen] = useState(false);
   const handleFilter = (event) => {
     let dateAndTime = document.getElementById("From").value;
-		console.log(dateAndTime);
+		console.log(dateAndTime); //TODO: error null
     setFilterOpen(false)
 	};
 
 	const [sort, setSort] = useState("");
 	const handleSort = (event) => {
-		setSort(event.target.value);
+    let option = event.target.value;
+		setSort(option);
 	};
 
+  // useEffect(() => {
+  //   sort === "Oldest" ? links.orderByChild
+  // }, [sort]);
+
+  // const [links, setLinks] = useState((async () => {await getLinks()})());
 	const [clear, setClear] = useState("");
 	const handleClear = (event) => {
-		setClear(event.target.value);
+    let option = event.target.value;
+		setClear(option);
 	};
 
 	const [value, setValue] = useState(new Date());
+
 
 	const isDesktop = useMediaQuery((theme) => theme.breakpoints.up("sm"));
 
 	return (
 		<StyledBox>
-			{/* For big devices */}
 			<IconAndText>
 				<Button
 					flex={1}
@@ -186,8 +195,8 @@ const Preferences = () => {
 						{isDesktop ? "Sort by" : "Sort"}
 					</InputLabel>
 					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
+						labelId="select-label"
+						id="select"
 						value={sort}
 						label="Sort by"
 						onChange={handleSort}

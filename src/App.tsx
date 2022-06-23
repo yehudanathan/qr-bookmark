@@ -1,19 +1,20 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getAuth } from "firebase/auth";
 import Home from "./pages/Home";
 import Config from "./pages/Config";
 import Links from "./pages/Links";
+import AuthPage from "./pages/AuthPage";
+import About from "./pages/About";
+import EditProfile from "./pages/EditProfile";
+import ConfigureAccount from "./components/ConfigureAccount";
 // PART FOR MOCK DATA
 // uncomment this part if backend is not available
 // import { isSignedIn } from "./apis/auth";
-import { useEffect, useState } from "react";
-import AuthPage from "./pages/AuthPage";
-import About from "./pages/About";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { getAuth } from "firebase/auth";
 // import { isSignedIn } from "./firebase/auth/auth_user";
-import EditProfile from "./pages/EditProfile";
 
 const PrivateRoute = () => {
   const auth = getAuth();
@@ -87,6 +88,7 @@ function App() {
               <Route path="" element={<Home />} />
               <Route path="config" element={<Config />}> 
                 <Route path="edit-profile" element={<EditProfile />} />
+                <Route path="account" element={<ConfigureAccount />} />
               </Route>
               <Route path="links" element={<Links />} />
               <Route path="about" element={<About />} />

@@ -2,10 +2,11 @@ import RegisterForm from "../components/RegisterForm";
 import SignInForm from "../components/SignInForm";
 import LoadingPage from "../components/LoadingPage";
 import PictGenerator from "../components/PictGenerator";
+import MetaTags from 'react-meta-tags';
 import { Stack } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from 'react-router-dom';
-import MetaTags from 'react-meta-tags';
+import { Helmet } from 'react-helmet';
 
 const AuthPage = () => {
     const location = useLocation().pathname;
@@ -21,6 +22,9 @@ const AuthPage = () => {
                     <meta name="description" content="Register to QR-Bookmark now." />
                     <meta property="og:title" content="Register" />
                 </MetaTags>
+                <Helmet>
+                    <link id="registerIcon" rel="icon" sizes="16x16"/>
+                </Helmet>
                 <Stack direction="row" className="stack">
                     <div className="side-pic">
                         <PictGenerator onGenerate={toggleLoading} />
@@ -37,6 +41,9 @@ const AuthPage = () => {
                     <meta name="description" content="Sign in to QR-Bookmark" />
                     <meta property="og:title" content="Sign In" />
                 </MetaTags>
+                <Helmet>
+                    <link id="signInIcon" rel="icon" sizes="16x16"/>
+                </Helmet>
                 <Stack direction="row" className="stack">
                     <div className="side-pic">
                         <PictGenerator onGenerate={toggleLoading} />

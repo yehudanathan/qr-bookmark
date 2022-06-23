@@ -3,9 +3,10 @@ import { Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { getUser, updateUser } from "../firebase/auth/auth_user";
-import EditIcon from '@mui/icons-material/Edit';
 import { uploadFile } from "../firebase/storage/upload_manager";
 import { getDownloadURLFromSnapshot, getUploadPercentageFromSnapshot } from "../firebase/storage/utils";
+import { Helmet } from 'react-helmet';
+import EditIcon from '@mui/icons-material/Edit';
 import MetaTags from 'react-meta-tags';
 import profilePicture from '../static/profile-picture.png';
 
@@ -63,6 +64,10 @@ const EditProfile = () => {
       <meta name="description" content="Configure your profile" />
       <meta property="og:title" content="Configure Your Profile" />
     </MetaTags>
+
+    <Helmet>
+      <link id="configIcon" rel="icon" sizes="16x16"/>
+    </Helmet>
 
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Configure Your Profile</h1>

@@ -3,9 +3,11 @@ import { Button, Card, Stack } from "@mui/material";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { getUser, logOut } from "../firebase/auth/auth_user";
 import { useState } from "react";
+import { Helmet } from 'react-helmet';
 import PictGenerator from "../components/PictGenerator";
 import MetaTags from "react-meta-tags";
 import profilePicture from '../static/profile-picture.png';
+// import configIcon from "../static/settings-colored.ico";
 
 const Config = () => {
   // for MOCK DATA. uncomment if backend is not available
@@ -36,6 +38,10 @@ const Config = () => {
       <meta name="description" content="Profile page" />
       <meta property="og:title" content="Profile" />
     </MetaTags>
+
+    <Helmet>
+      <link id="configIcon" rel="icon" sizes="16x16"/>
+    </Helmet>
 
     <div className="pict-generator-config">
       <PictGenerator onGenerate={toggleLoading} />

@@ -1,8 +1,8 @@
 import { ArrowBack } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
+import { Helmet } from 'react-helmet';
 import MetaTags from 'react-meta-tags';
-import AboutIcon from "../static/about-2.png";
 
 const About = () => {
   let navigate = useNavigate();
@@ -12,8 +12,11 @@ const About = () => {
         <title>About QR-Bookmark</title>
         <meta name="description" content="About this project" />
         <meta property="og:title" content="About QR-Bookmark" />
-        <meta property="og:image" content={AboutIcon} />
       </MetaTags>
+
+      <Helmet>
+        <link id="aboutIcon" rel="icon" sizes="16x16"/>
+      </Helmet>
 
       <h2 className="about-h2">QR-Bookmark</h2>
       <p>Silahkan tulis disini</p>

@@ -10,7 +10,7 @@
     -moz-osx-font-smoothing: grayscale;
     .title {
       font-size: 40px;
-      font-family: "Gotham Medium";
+      font-family: "Gotham Medium", "Montserrat";
       color: #262254;
     }
   }
@@ -20,7 +20,7 @@
 
 p {
   font-size: 18px;
-  font-family: "Product Sans";
+  font-family: "Product Sans", "Montserrat";
 }
 
 .form-control {
@@ -28,7 +28,7 @@ p {
   padding: 1rem;
   .subtitle {
     font-size: 25px;
-    font-family: "Product Sans";
+    font-family: "Product Sans", "Montserrat";
     color: #000000;
     font-weight: normal;
     font-style: italic;
@@ -40,14 +40,14 @@ p {
 
   .header-3 {
     font-size: 15px;
-    font-family: "Product Sans";
+    font-family: "Product Sans", "Montserrat";
     color: #000000;
     font-weight: normal;
   }
 
   .link {
     font-size: 15px;
-    font-family: "Product Sans";
+    font-family: "Product Sans", "Montserrat";
     color: #000000;
     font-weight: bold;
     text-decoration: none;
@@ -59,7 +59,7 @@ p {
 
 .header-3 {
   font-size: 15px;
-  font-family: "Product Sans";
+  font-family: "Product Sans", "Montserrat";
   color: #000000;
   font-weight: normal;
   &.modal {
@@ -108,7 +108,7 @@ p {
 
 h1 {
   // font-size: 40px;
-  font-family: "Gotham Medium";
+  font-family: "Gotham Medium", "Montserrat";
   // color: #262254;
   font-size: 25px;
   // font-family: "Product Sans";
@@ -139,7 +139,7 @@ h1 {
 
 h2 {
   font-size: 33px;
-  font-family: "Product Sans";
+  font-family: "Product Sans", "Montserrat";
 }
 
 .full-name {
@@ -147,7 +147,7 @@ h2 {
 }
 
 span {
-  font-family: "Product Sans";
+  font-family: "Product Sans", "Montserrat";
   font-size: 18px;
   &.smaller {
     font-size: 15px;
@@ -156,7 +156,7 @@ span {
 
 .MuiButton-root {
   height: 40px;
-  font-family: "Montserrat" !important;
+  font-family: "Montserrat", "Montserrat" !important;
   background-color: #398564;
 }
 
@@ -269,7 +269,7 @@ span {
 }
 
 .MuiFormHelperText-root.Mui-error {
-  font-family: "Product Sans";
+  font-family: "Product Sans", "Montserrat";
   margin-top: 0px;
   font-weight: bold;
   font-size: 11px;
@@ -363,7 +363,7 @@ span {
 }
 
 .about-h2 {
-  font-family: "Gotham Medium";
+  font-family: "Gotham Medium", "Montserrat";
 }
 
 .about-div {

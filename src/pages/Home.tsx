@@ -3,9 +3,10 @@ import QRScanner from "../components/QRScanner";
 import TemporaryDrawer from "../components/SideBar";
 import CustomSnackBar from "../components/CustomSnackBar";
 import Profile from "../components/Profile";
+import MetaTags from "react-meta-tags";
 import { Stack } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import MetaTags from "react-meta-tags";
+import { Helmet } from 'react-helmet';
 import "../index.scss";
 
 const Home = () => {
@@ -26,6 +27,9 @@ const Home = () => {
                 <meta name="description" content="A web app to manage and scan QR bookmarks." />
                 <meta property="og:title" content="QR-Bookmark" />
             </MetaTags>
+            <Helmet>
+                <link id="homeIcon" rel="icon" sizes="16x16"/>
+            </Helmet>
             <Stack direction="row" justifyContent="space-between">
                 <TemporaryDrawer/>
                 <Profile/>

@@ -11,7 +11,7 @@ import "../index.scss";
 const Home = () => {
     const location = useLocation();
     const checkPreviousLocation = () => {
-        console.log(location.state);
+        // console.log(location.state);
         if (location.state !== null) {
             return true;
         }

@@ -5,6 +5,7 @@ import { getUser, logOut } from "../firebase/auth/auth_user";
 import { useState } from "react";
 import PictGenerator from "../components/PictGenerator";
 import MetaTags from "react-meta-tags";
+import profilePicture from '../static/profile-picture.png';
 
 const Config = () => {
   // for MOCK DATA. uncomment if backend is not available
@@ -13,10 +14,15 @@ const Config = () => {
   // const fullName = JSON.parse(user)["name"];
 
   let navigate = useNavigate();
+  const defaultPicture = profilePicture;
   const user = getUser();
   const email = user?.email;
   const fullName = user?.displayName;
-  const displayPicture = user?.photoURL;
+  let displayPicture = user?.photoURL;
+
+  if (displayPicture === null) {
+    displayPicture = defaultPicture;
+  }
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

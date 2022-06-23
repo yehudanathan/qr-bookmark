@@ -7,18 +7,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import { uploadFile } from "../firebase/storage/upload_manager";
 import { getDownloadURLFromSnapshot, getUploadPercentageFromSnapshot } from "../firebase/storage/utils";
 import MetaTags from 'react-meta-tags';
+import profilePicture from '../static/profile-picture.png';
 
 const EditProfile = () => {
   let navigate = useNavigate();
 
+  const defaultPicture = profilePicture;
   const user = getUser();
-  const defaultURL = "https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg";
   const currentName = user?.displayName;
-  // console.log("Current name");
-  // console.log(currentName);
-  const currentPhotoURL = user?.photoURL === null || user?.photoURL === undefined ? defaultURL : user?.photoURL;
-  // console.log("Current photoURL");
-  // console.log(currentPhotoURL);
+  const currentPhotoURL = user?.photoURL === null || user?.photoURL === undefined ? defaultPicture : user?.photoURL;
   const [displayName, setDisplayName] = useState(currentName);
 
   const handleBack = () => {
@@ -34,9 +31,7 @@ const EditProfile = () => {
     }, () => {
       navigate("/config"); 
       alert("Profile updated!");
-    }
-    );
-    // navigate("/config");
+    });
   }
 
   const handleEditPicture = async (e) => {

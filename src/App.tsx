@@ -77,7 +77,7 @@ const SignInRoute = () => {
 }
 
 function App() {
-  console.log("rendering app");
+  // console.log("rendering app");
   return (
     <>
       {
@@ -99,7 +99,6 @@ function App() {
           </Routes>
         </Router>
       }
-      {/* <Links /> */}
     </>
   );
 }

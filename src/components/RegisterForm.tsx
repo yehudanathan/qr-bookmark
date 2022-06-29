@@ -145,7 +145,7 @@ const RegisterForm = ({ isLoading }) => {
                         />
                         <div className="blank"></div>
                         </Stack>
-                            }
+                    }
                     { !passwordError? <TextField
                         required
                         type="password"

@@ -4,7 +4,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  TextField
 } from "@mui/material";
 import { Stack } from "@mui/material";
 import { useNavigate } from "react-router";
@@ -13,6 +14,7 @@ import { getUser } from "../firebase/auth/auth_user";
 import { Helmet } from 'react-helmet';
 import EditIcon from '@mui/icons-material/Edit';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import DoneIcon from '@mui/icons-material/Done';
 import MetaTags from 'react-meta-tags';
 
 const ConfigureAccount = () => {
@@ -20,6 +22,8 @@ const ConfigureAccount = () => {
   const user = getUser();
   const email = user?.email;
   const [openDialog, setOpenDialog] = useState(false);
+  const [emailEditMode, setEmailEditMode] = useState(false);
+  const [currentEmail, setCurrentEmail] = useState(email);
 
   const handleBack = () => {
     navigate("/config");
@@ -32,7 +36,6 @@ const ConfigureAccount = () => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    // openAlertDialog();
     setOpenDialog(true);
   }
 
@@ -47,8 +50,63 @@ const ConfigureAccount = () => {
     return <></>;
   }
 
+  const handleEmail = () => {
+    if (emailEditMode) {
+      return <>
+      <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
+        <Stack>
+          <TextField 
+            label="Input your new email" 
+            sx={{
+              m: 1, 
+              width: "40ch", 
+              backgroundColor: "white", 
+              borderTopLeftRadius: "4px", 
+              borderTopRightRadius: "4px",
+            }} 
+            size="small" 
+            value={currentEmail} 
+            onChange={e => setCurrentEmail(e.target.value)} 
+            color="success" 
+            inputProps={{style: {fontFamily: "Product Sans"}}}
+            FormHelperTextProps={
+              
+            }
+            helperText="You will be signed out and asked for re-verification."
+          />
+          <div className="blank"></div>
+        </Stack>
+        <Button 
+          onClick={handleEditEmail}
+          size="small"
+          sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
+        >
+          <DoneIcon fontSize="small" sx={{color: "#35363a"}}/>
+        </Button>
+      </Stack>
+      </>;
+    }
+    
+    return <>
+      <Stack direction="row" spacing={0.5} alignItems="center" sx={{marginTop:"-3px"}}>
+        {handleVerified()}
+        <span className="config-span">{email}</span>
+        <Button 
+          onClick={handleEditEmail}
+          size="small"
+          sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
+        >
+          <EditIcon fontSize="small" sx={{color: "#35363a"}}/>
+        </Button>
+      </Stack>
+    </>;
+  }
+
   const handleEditEmail = () => {
-    alert("Update your email");
+    if (!emailEditMode) {
+      alert("Update your email");
+    }
+    setEmailEditMode(!emailEditMode);
   }
 
   const handleChangePassword = () => {
@@ -64,22 +122,10 @@ const ConfigureAccount = () => {
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Configure Your Account</h1>
       <form className="edit-profile" onSubmit={handleSubmit}>
-        {/* <TextField label="Name" sx={{m: 1, width: "40ch", backgroundColor: "white", borderTopLeftRadius: "4px", borderTopRightRadius: "4px",}} size="small" value={displayName} onChange={e => setDisplayName(e.target.value)} color="success" inputProps={{style: {fontFamily: "Product Sans"}}}/> */}
-        {/* <Stack justifyContent="flex-start" spacing={0.5} alignItems="center"> */}
         <Stack alignItems="center" spacing={1}>
           <div className="config-profile account-config">
             <span className="config-span"><strong>Email</strong></span>
-            <Stack direction="row" spacing={0.5} alignItems="center" sx={{marginTop:"-3px"}}>
-              {handleVerified()}
-              <span className="config-span">{email}</span>
-              <Button 
-                onClick={handleEditEmail}
-                size="small"
-                sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
-              >
-                <EditIcon fontSize="small" sx={{color: "#35363a"}}/>
-              </Button>
-            </Stack>
+            {handleEmail()}
           </div>
           <div className="config-profile edit">
             <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" onClick={handleChangePassword}>Change Password</Button>
@@ -87,7 +133,6 @@ const ConfigureAccount = () => {
             <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", width: "100%"}} variant="outlined" size="large" onClick={handleBack}>Back</Button>
           </div>  
         </Stack>
-        {/* </Stack> */}
       </form>
     </Stack>
 

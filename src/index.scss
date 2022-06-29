@@ -148,24 +148,25 @@ h2 {
 }
 
 span {
-  font-family: "Product Sans", "Montserrat";
+  font-family: "Montserrat";
   font-size: 18px;
   &.smaller {
     font-size: 15px;
+  }
+  strong {
+    font-size: calc(100% + 2px);
   }
 }
 
 .MuiButton-root {
   height: 40px;
-  font-family: "Montserrat", "Montserrat" !important;
+  font-family: "Montserrat" !important;
   background-color: #398564;
 }
 
 .class {
   background-color: #b3cbc7;
 }
-
-
 
 .parent-roller {
   position: fixed;
@@ -392,11 +393,27 @@ span {
 }
 
 .config-profile {
-  // width: 
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
   row-gap: 10px;
+  &.account-config {
+    grid-template-columns: 1fr 2fr;
+    vertical-align: middle;
+  }
+  &.edit {
+    grid-template-columns: 1fr;
+    width: 230px;
+    margin-top: 20px;
+  }
+}
+
+.edit-profile {
+  align-items: center;
+}
+
+.hi{
+  background-color: #730c0c;
 }
 
 

@@ -1,7 +1,7 @@
-import { Button, Card, Stack } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 // import { authLogout } from "../apis/auth";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { getUser, logOut } from "../firebase/auth/auth_user";
+import { Outlet, useLocation } from "react-router-dom";
+import { getUser } from "../firebase/auth/auth_user";
 import { useState } from "react";
 import { Helmet } from 'react-helmet';
 import PictGenerator from "../components/PictGenerator";
@@ -15,11 +15,8 @@ const Config = () => {
   // const email = JSON.parse(user)["email"];
   // const fullName = JSON.parse(user)["name"];
 
-  let navigate = useNavigate();
   const defaultPicture = profilePicture;
   const user = getUser();
-  const email = user?.email;
-  const fullName = user?.displayName;
   let displayPicture = user?.photoURL;
 
   if (displayPicture === null) {
@@ -27,7 +24,6 @@ const Config = () => {
   }
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const toggleLoading = () => {setIsLoading(false)};
   const path = useLocation().pathname;
 

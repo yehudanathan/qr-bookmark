@@ -33,14 +33,11 @@ const ProfileInConfig = () => {
         <Link to="edit-profile" style={{textDecoration: "none"}}>
           <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" onClick={() => {navigate("/edit-profile");}}>Edit Profile</Button>
         </Link>
-        <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large">Reset Bookmarks</Button>
-        <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large">Delete Account</Button>
         <Link to="account" style={{textDecoration: "none"}}>
           <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" onClick={() => {navigate("/account");}}>Configure Account</Button>
         </Link>
-
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="outlined" size="large" onClick={() =>{logOut(); navigate("/signin");}}>Log out</Button>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564"}} variant="outlined" size="large" onClick={() => navigate("/")}>Back</Button>
+        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() =>{logOut(); navigate("/signin");}}>Log out</Button>
+        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() => navigate("/")}>Back</Button>
       </div>
     </Stack>
   )

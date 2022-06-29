@@ -22,7 +22,7 @@ const PictGenerator = ({ onGenerate }) => {
     }, []);
     
     if (photoError) {
-        return <img className="img" src="https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg" alt="background" />;
+        return <img className="credit img" src="https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg" alt="background" />;
     } else if (photo === null) {
         return <></>; 
         // TODO create error page

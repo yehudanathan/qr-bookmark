@@ -11,37 +11,62 @@ import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
 import EditProfile from "./pages/EditProfile";
 import ConfigureAccount from "./components/ConfigureAccount";
+import { isVerified, callAuthAndThen, getUser } from "./firebase/auth/auth_user";
 // PART FOR MOCK DATA
 // uncomment this part if backend is not available
 // import { isSignedIn } from "./apis/auth";
 // import { isSignedIn } from "./firebase/auth/auth_user";
 
 const PrivateRoute = () => {
+  console.log("rendering private route");
   const auth = getAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, loading, error] = useAuthState(auth);
 
-  // useEffect(() => {
-  //   isSignedIn().then((res) => {
-  //     console.log("before: " + isAuthenticated);
-  //     setIsAuthenticated(res);
-  //     console.log("after: " + isAuthenticated);
-  //     setIsLoading(false);
-  //   });;
-  // }, [isAuthenticated]);
+  // isSignedIn().then((res) => {
+  //   console.log("before: " + isAuthenticated);
+  //   setIsAuthenticated(res);
+  //   console.log("after: " + isAuthenticated);
+  //   setIsLoading(false);
+  // });
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => { // TODO masukin firebase api
-      if (user?.emailVerified) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
-      setIsLoading(false);
-    })
+    if (getUser() && isVerified()) {
+      console.log("setting auth to true");
+      setIsAuthenticated(true);
+    } else {
+      console.log("settign auth to false");
+      setIsAuthenticated(false);
+    }
+    setIsLoading(false);
   }, []);
+
+  // useEffect(() => {
+  //   callAuthAndThen(() => {
+  //     if (isVerified()) {
+  //       console.log("setting signed in to true");
+  //       setIsAuthenticated(true);
+  //       return;
+  //     }
+  //   }, () => {
+  //     console.log("setting signed in to false");
+  //     setIsAuthenticated(false);
+  //     return;
+  //   });
+  // }, [isAuthenticated]);
+
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(user => { // TODO masukin firebase api
+  //     if (user?.emailVerified) {
+  //       setIsAuthenticated(true);
+  //     } else {
+  //       setIsAuthenticated(false);
+  //     }
+  //     setIsLoading(false);
+  //   })
+  // }, []);
   
   return (
     <>
@@ -51,6 +76,7 @@ const PrivateRoute = () => {
 };
 
 const SignInRoute = () => {
+  console.log('rendering signin route');
   const [signedIn, setSignedIn] = useState(false);
   const auth = getAuth();
 
@@ -61,13 +87,51 @@ const SignInRoute = () => {
   //   });
   // }, [signedIn]);
 
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((user) => {
+  //     if (user?.emailVerified) {
+  //       setSignedIn(true);
+  //     } else {
+  //       setSignedIn(false);
+  //     }});
+  // }, []);
+
+  // useEffect(() => {
+  //   callAuthAndThen(() => {
+  //     if (isVerified()) {
+  //       console.log("setting signed in to true");
+  //       setSignedIn(true);
+  //       return;
+  //     }
+  //   }, () => {
+  //     console.log("setting signed in to false");
+  //     setSignedIn(false);
+  //     return;
+  //   });
+  // }, [signedIn]);
+
+  // useEffect(() => {
+  //   callAuthAndThen(() => {
+  //     if (isVerified()) {
+  //       console.log("setting signed in to true");
+  //       setSignedIn(true);
+  //       return;
+  //     }
+  //   }, () => {
+  //     console.log("setting signed in to false");
+  //     setSignedIn(false);
+  //     return;
+  //   });
+  // }, []);
+
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user?.emailVerified) {
-        setSignedIn(true);
-      } else {
-        setSignedIn(false);
-      }});
+    if (getUser() && isVerified()) {
+      console.log("setting auth to true");
+      setSignedIn(true);
+    } else {
+      console.log("settign auth to false");
+      setSignedIn(false);
+    }
   }, []);
 
   if (signedIn) {
@@ -78,7 +142,7 @@ const SignInRoute = () => {
 }
 
 function App() {
-  // console.log("rendering app");
+  console.log("rendering app");
   return (
     <>
       {

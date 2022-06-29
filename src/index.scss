@@ -91,6 +91,9 @@ p {
   object-fit: cover;
   width: calc(100vw + 8px);
   height: calc(100vh + 0.5rem);
+  &.credit {
+    margin-bottom: -8px;
+  }
 }
 
 .stack {

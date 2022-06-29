@@ -12,6 +12,7 @@ import { useState } from "react";
 import { getUser } from "../firebase/auth/auth_user";
 import { Helmet } from 'react-helmet';
 import EditIcon from '@mui/icons-material/Edit';
+import VerifiedIcon from '@mui/icons-material/Verified';
 import MetaTags from 'react-meta-tags';
 
 const ConfigureAccount = () => {
@@ -39,6 +40,21 @@ const ConfigureAccount = () => {
     setOpenDialog(false);
   }
 
+  const handleVerified = () => {
+    if (user?.emailVerified) { // to be restructured in auth_user api
+      return <VerifiedIcon sx={{color: "#1179f2"}}/>;
+    }
+    return <></>;
+  }
+
+  const handleEditEmail = () => {
+    alert("Update your email");
+  }
+
+  const handleChangePassword = () => {
+    alert("Changing password");
+  }
+
   const style = {
     backgroundColor: "#ffffff",
   }
@@ -53,13 +69,21 @@ const ConfigureAccount = () => {
         <Stack alignItems="center" spacing={1}>
           <div className="config-profile account-config">
             <span className="config-span"><strong>Email</strong></span>
-            <span className="config-span">{email}</span>
-            <span className="config-span"><strong>Password</strong></span>
-            <span className="config-span">{email}</span>
+            <Stack direction="row" spacing={0.5} alignItems="center" sx={{marginTop:"-3px"}}>
+              {handleVerified()}
+              <span className="config-span">{email}</span>
+              <Button 
+                onClick={handleEditEmail}
+                size="small"
+                sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
+              >
+                <EditIcon fontSize="small" sx={{color: "#35363a"}}/>
+              </Button>
+            </Stack>
           </div>
           <div className="config-profile edit">
+            <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" onClick={handleChangePassword}>Change Password</Button>
             <Button style={{height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" color="error" onClick={handleDelete}>Delete Account</Button>
-            {/* <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" type="submit">Save</Button> */}
             <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", width: "100%"}} variant="outlined" size="large" onClick={handleBack}>Back</Button>
           </div>  
         </Stack>

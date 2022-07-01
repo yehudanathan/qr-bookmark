@@ -22,6 +22,7 @@ export const emailSignUp = async (email, password) => {
     return errorCode;
   });
 }
+
 export const emailSignIn = async (email, password) => {
   const auth = getAuth(app);
   return signInWithEmailAndPassword(auth, email, password)
@@ -50,3 +51,4 @@ export const resetPassword = (email: string, callback: VoidFunction) => {
   const auth = getAuth(app);
   sendPasswordResetEmail(auth, email).then(callback);
 }
+

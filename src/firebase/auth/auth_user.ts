@@ -7,6 +7,8 @@ import {
   User,
   updateEmail as setEmail,
   updatePassword as setPassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider
 } from "firebase/auth";
 
 export const getUser = (): User | null => {
@@ -56,3 +58,20 @@ export const logOut = () => {
       });
   }
 };
+
+export const reAuthenticate = (email, password) => {
+  const auth = getAuth(app);
+  const user = auth.currentUser;
+  const credential = EmailAuthProvider.credential(
+    email, password
+  );
+
+  if (user) {
+    reauthenticateWithCredential(user, credential).then(() => {
+      // User re-authenticated.
+    }).catch((error) => {
+      // An error ocurred
+      console.log(error);
+    });
+  }
+}

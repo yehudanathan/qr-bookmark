@@ -11,12 +11,14 @@ import {
 import { makeStyles, createStyles } from "@mui/styles";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { getUser } from "../firebase/auth/auth_user";
+import { getUser, reAuthenticate } from "../firebase/auth/auth_user";
 import { Helmet } from 'react-helmet';
 import EditIcon from '@mui/icons-material/Edit';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import DoneIcon from '@mui/icons-material/Done';
 import MetaTags from 'react-meta-tags';
+import DeleteAccountDialog from "./DeleteAccountDialog";
+import ReauthDialog from "./ReauthDialog";
 
 const ConfigureAccount = () => {
   let navigate = useNavigate();
@@ -72,12 +74,11 @@ const ConfigureAccount = () => {
             onChange={e => setCurrentEmail(e.target.value)} 
             color="success" 
             inputProps={{style: {fontFamily: "Product Sans"}}}
-            helperText="You will be signed out and asked for re-verification."
+            helperText="You will be asked for re-verification and signed out."
           />
-          <div className="blank"></div>
         </Stack>
         <Button 
-          onClick={handleEditEmail}
+          onClick={handleUpdateEmail}
           size="small"
           sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
         >
@@ -109,12 +110,19 @@ const ConfigureAccount = () => {
     setEmailEditMode(!emailEditMode);
   }
 
-  const handleChangePassword = () => {
-    alert("Changing password");
+  const handleUpdateEmail = (e) => {
+    e.preventDefault();
+    // setFieldError("");
+    if (currentEmail === email) {
+      alert("Please enter a different email.") // TODO bikin email error dibawah textfield
+    } else {
+      // prompt to re-provide credential
+      // reAuthenticate(email, password);
+    }
   }
 
-  const style = {
-    backgroundColor: "#ffffff",
+  const handleChangePassword = () => {
+    alert("Changing password");
   }
 
   return (
@@ -136,32 +144,8 @@ const ConfigureAccount = () => {
       </form>
     </Stack>
 
-    <Dialog 
-      open={openDialog}
-      onClose={handleCloseDialog}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      PaperProps={{style}}
-    >
-      <DialogTitle 
-        id="alert-dialog-title"
-        sx={{fontFamily: "Gotham Medium", fontWeight: "bold", fontSize: "28px", color: "#730c0c"}}
-      >
-        {"Delete your account?"}
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText 
-          id="alert-dialog-description"
-          sx={{fontFamily: "Product Sans", fontSize: "17px", color: "#000000"}}
-        >
-          This action cannot be undone and your bookmarks will be permanently deleted.
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#bd2222", width: "100px"}} onClick={() => alert("Delete in progress")}>Delete</Button>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#bd2222", width: "100px"}} onClick={handleCloseDialog}>Cancel</Button>
-      </DialogActions>
-    </Dialog>
+    <DeleteAccountDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} />
+    <ReauthDialog openDialog={true} handleCloseDialog={handleCloseDialog} />
     </>
   )
 }

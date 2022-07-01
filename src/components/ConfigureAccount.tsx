@@ -5,9 +5,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  TextField
+  TextField,
+  Stack
 } from "@mui/material";
-import { Stack } from "@mui/material";
+import { makeStyles, createStyles } from "@mui/styles";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { getUser } from "../firebase/auth/auth_user";
@@ -56,6 +57,7 @@ const ConfigureAccount = () => {
       <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
         <Stack>
           <TextField 
+            className="error-text-field"
             label="Input your new email" 
             sx={{
               m: 1, 
@@ -63,15 +65,13 @@ const ConfigureAccount = () => {
               backgroundColor: "white", 
               borderTopLeftRadius: "4px", 
               borderTopRightRadius: "4px",
+              display: "flex"
             }} 
             size="small" 
             value={currentEmail} 
             onChange={e => setCurrentEmail(e.target.value)} 
             color="success" 
             inputProps={{style: {fontFamily: "Product Sans"}}}
-            FormHelperTextProps={
-              
-            }
             helperText="You will be signed out and asked for re-verification."
           />
           <div className="blank"></div>

@@ -40,5 +40,5 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
-          GITHUB_WORKPLACE: /
+          GITHUB_WORKSPACE: /
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Super Linting
+name: Super Lintinger
 
 # Controls when the workflow will run
 on:
@@ -10,9 +10,6 @@ on:
   pull_request:
     branches: [master, main]
   workflow_dispatch:
-  
-env:
-  GITHUB_WORKSPACE: /
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,6 +39,5 @@ jobs:
         uses: github/super-linter/slim@v4.9.4
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_WORKSPACE: /
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

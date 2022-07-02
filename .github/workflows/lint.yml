@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Super Lint
+name: Super Linting
 
 # Controls when the workflow will run
 on:
@@ -10,6 +10,9 @@ on:
   pull_request:
     branches: [master, main]
   workflow_dispatch:
+  
+env:
+  GITHUB_WORKSPACE: /
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

@@ -31,10 +31,10 @@ jobs:
       run: echo "Hello ${{ github.event.inputs.name }}"
       
     - name: Install ESLint
-      run: npm install eslint
+      run: npm -f install eslint
       
     - name: Run ESLint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      run: eslint . --ext .js,.jsx,.ts,.tsx
       
     - name: Send Goodbye
       run: echo "Lint finished"

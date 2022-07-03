@@ -28,3 +28,12 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
+      
+    - name: Install ESLint
+      run: yarn add eslint
+      
+    - name: Run ESLint
+      run: eslint . --ext .js,.jsx,.ts,.tsx
+      
+    - name: Send Goodbye
+      run: echo "Lint finished"

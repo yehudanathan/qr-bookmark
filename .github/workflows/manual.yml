@@ -34,7 +34,7 @@ jobs:
       run: npm -f install eslint
       
     - name: Run ESLint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint . --max-warnings=0 --ext .js,.jsx,.ts,.tsx
       
     - name: Send Goodbye
       run: echo "Lint finished"

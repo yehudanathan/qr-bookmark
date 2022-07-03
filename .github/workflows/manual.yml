@@ -30,7 +30,7 @@ jobs:
       run: echo "Hello ${{ github.event.inputs.name }}"
       
     - name: Install ESLint
-      run: yarn add eslint
+      run: npm install eslint
       
     - name: Run ESLint
       run: eslint . --ext .js,.jsx,.ts,.tsx

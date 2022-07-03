@@ -1,4 +1,4 @@
-[![Eslint check](https://github.com/yehudanathan/qr-bookmark/actions/workflows/manual.yml/badge.svg)](https://github.com/yehudanathan/qr-bookmark/actions/workflows/manual.yml)
+[![ESLint Check](https://github.com/yehudanathan/qr-bookmark/actions/workflows/eslint.yml/badge.svg)](https://github.com/yehudanathan/qr-bookmark/actions/workflows/eslint.yml)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

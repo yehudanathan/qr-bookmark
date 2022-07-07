@@ -54,33 +54,39 @@ const StyledModal = styled(Modal)({
 	justifyContent: "center",
 });
 
-const Preferences = () => {
+const Preferences = ({
+	from,
+	to,
+	isFav,
+	sort,
+	clear,
+	onFromChange,
+	onToChange,
+	onIsFavChange,
+	onFilterChange,
+	onSortChange,
+	onClearChange,
+}) => {
 	const [filterOpen, setFilterOpen] = useState(false);
-  const handleFilter = (event) => {
-    let dateAndTime = document.getElementById("From").value;
-		console.log(dateAndTime); //TODO: error null
-    setFilterOpen(false)
-	};
 
-	const [sort, setSort] = useState("");
-	const handleSort = (event) => {
-    let option = event.target.value;
-		setSort(option);
-	};
+	// const [links, setLinks] = useState((async () => {await getLinks()})());
+	// const [isSelected, setIsSelected] = useState(links.map())
 
-  // useEffect(() => {
-  //   sort === "Oldest" ? links.orderByChild
-  // }, [sort]);
+	// const handleFilter = (event) => {
+	//   let dateAndTime = value;
+	// 	console.log(dateAndTime); //TODO: error null
+	//   setFilterOpen(false)
+	// };
 
-  // const [links, setLinks] = useState((async () => {await getLinks()})());
-	const [clear, setClear] = useState("");
-	const handleClear = (event) => {
-    let option = event.target.value;
-		setClear(option);
-	};
+	// useEffect(() => {
+	//   sort === "Oldest" ? links.orderByChild
+	// }, [sort]);
 
-	const [value, setValue] = useState(new Date());
-
+	// const handleClear = (event) => {
+	//   let option = event.target.value;
+	// 	setClear(option);
+	//   console.log("a");
+	// };
 
 	const isDesktop = useMediaQuery((theme) => theme.breakpoints.up("sm"));
 
@@ -101,7 +107,7 @@ const Preferences = () => {
 					onClick={(e) => setFilterOpen(true)}
 					endIcon={<KeyboardArrowDown />}
 				>
-					<Typography sx={{}}>Filter</Typography>
+					<Typography>Filter</Typography>
 				</Button>
 				<StyledModal
 					open={filterOpen}
@@ -132,11 +138,11 @@ const Preferences = () => {
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DateTimePicker
 										renderInput={(props) => <TextField {...props} />}
-                    id="From"
+										id="From"
 										label="From"
-										value={value}
-										onChange={(newValue) => {
-											setValue(newValue);
+										value={from}
+										onChange={(newFrom) => {
+											onFromChange(newFrom);
 										}}
 									/>
 								</LocalizationProvider>
@@ -146,11 +152,11 @@ const Preferences = () => {
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DateTimePicker
 										renderInput={(props) => <TextField {...props} />}
-                    id="To"
+										id="To"
 										label="To"
-										value={value}
-										onChange={(newValue) => {
-											setValue(newValue);
+										value={to}
+										onChange={(newTo) => {
+											onToChange(newTo);
 										}}
 									/>
 								</LocalizationProvider>
@@ -165,7 +171,7 @@ const Preferences = () => {
 								right: "25px",
 							}}
 						>
-							<Checkbox />
+							<Checkbox onChange={onIsFavChange(!isFav)} />
 							<Typography fontWeight={500}>Favourites Only</Typography>
 						</Box>
 						<Button
@@ -177,7 +183,7 @@ const Preferences = () => {
 								bottom: "15px",
 								fontSize: "16px",
 							}}
-              onClick={handleFilter}
+							onClick={onFilterChange}
 						>
 							Confirm
 						</Button>
@@ -199,7 +205,10 @@ const Preferences = () => {
 						id="select"
 						value={sort}
 						label="Sort by"
-						onChange={handleSort}
+						onChange={(e) => {
+							// console.log(e.target.value);
+							onSortChange();
+						}}
 					>
 						<MenuItem value={"Oldest"}>Oldest</MenuItem>
 						<MenuItem value={"Newest"}>Newest</MenuItem>
@@ -214,7 +223,7 @@ const Preferences = () => {
 						id="demo-simple-select"
 						value={clear}
 						label="Clear"
-						onChange={handleClear}
+						onChange={onClearChange}
 					>
 						<MenuItem value={"Select"}>Select</MenuItem>
 						<MenuItem value={"Select all"}>Select all</MenuItem>

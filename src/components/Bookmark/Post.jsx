@@ -15,19 +15,18 @@ import {
 	Typography,
 	useMediaQuery,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { getUserLinks } from "../../apis/link";
 import { getCurrentUserId } from "../../apis/session";
-
 
 let num = 1;
 
 const MobilePost = () => {
 	// const links = await getUserLinks(getCurrentUserId());
 	return (
-		<Container sx={{ py: { xs: 4, md: 8 }, ml:"-16px"}} maxWidth="md">
-			{/* {arrUserLinks.map((userLink) => (
+		<Container sx={{ py: { xs: 4, md: 8 }, ml: "-16px" }} maxWidth="md">
+			{/* {links.map((userLink) => (
           <Card sx={{ margin: "5px", position:"relative" }}>
             <CardMedia
               component="img"
@@ -66,6 +65,22 @@ const MobilePost = () => {
 					position: "relative",
 				}}
 			>
+				<Box
+					sx={{
+						position: "fixed",
+						display: "block",
+						width: "100%",
+						height: "100%",
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						backgroundColor: "black",
+						zIndex: 10000,
+					}}
+				>
+					anwafawjflaflaf
+				</Box>
 				<CardMedia
 					component="img"
 					height="65%"
@@ -173,12 +188,23 @@ const MobilePost = () => {
 	);
 };
 
-const DesktopPost = ({ arrUserLinks }) => {
+const DesktopPost = ({ links, sort, onSortChange }) => {
+	// const cards = linksWithIndex.map(el => {
+	// 	return (
+	// 		<Card>
+	// 			{el.url}
+	// 			{el.title}
+	// 			{el.isSelected}
+	// 			<button onClick={() => handleSelect(el)} />
+	// 		</Card>
+	// 	)
+	// })
+
 	return (
 		<Container sx={{ py: { xs: 4, md: 8 } }} maxWidth="md">
 			<Grid container spacing={4}>
 				{/* Actual code below */}
-				{/* {arrUserLinks.map((userLink) => (
+				{/* {links.map((userLink) => (
           <Grid
 					item
 					key={userLink}
@@ -234,6 +260,35 @@ const DesktopPost = ({ arrUserLinks }) => {
 							position: "relative",
 						}}
 					>
+						<Box
+							sx={{
+								position: "absolute",
+								display: "block",
+								width: "100%",
+								height: "100%",
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0,
+								backgroundColor: "rgba(0,0,0,0.15)",
+								zIndex: 2,
+							}}
+						>
+							<input
+								type="checkbox"
+								className="checkbox"
+								id="check1"
+								check="false"
+								style={{
+									position: "absolute",
+									display: sort === "Select" ? "block" : "none",
+									top: "5px",
+									right: "5px",
+									width: "20px",
+									height: "20px",
+								}}
+							/>
+						</Box>
 						<CardMedia
 							component="img"
 							height="65%"
@@ -514,12 +569,12 @@ const Post = (theme) => {
 		<>
 			{/* <button onClick={console.log(links)}>Press me for links</button> */}
 			{/* {isDesktop === true ? (
-				<DesktopPost arrUserLinks={arrUserLinks} />
+				<DesktopPost links={links} />
 			) : (
-				<MobilePost arrUserLinks={arrUserLinks} />
+				<MobilePost links={links} />
 			)} */}
-			<DesktopPost arrUserLinks={{ alex: "hello" }} />
-			{/* <MobilePost arrUserLinks={{ alex: "hello" }} /> */}
+			<DesktopPost links={{ alex: "hello" }} />
+			{/* <MobilePost links={{ alex: "hello" }} /> */}
 		</>
 	);
 };

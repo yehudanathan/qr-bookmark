@@ -1,9 +1,7 @@
-import { Button, Card, Stack } from "@mui/material";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Button, Stack } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser, logOut } from "../firebase/auth/auth_user";
-import { useState } from "react";
 import { Helmet } from 'react-helmet';
-import PictGenerator from "../components/PictGenerator";
 import MetaTags from "react-meta-tags";
 import profilePicture from '../static/profile-picture.png';
 

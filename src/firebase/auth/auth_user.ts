@@ -32,13 +32,21 @@ export const updateEmail = (email: string, callback: () => void) => {
 
 export const updatePassword = (password: string, callback: () => void) => {
     const auth = getAuth(app);
-    if (auth.currentUser) setPassword(auth.currentUser, password).then(callback);
-}
+    if (auth.currentUser) setPassword(auth.currentUser, password).then(callback)
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export const deleteUser = (callback: () => void) => {
     const auth = getAuth(app);
-    if (auth.currentUser) auth.currentUser.delete().then(callback);
-}
+    if (auth.currentUser) { 
+      auth.currentUser.delete().then(callback)
+      .catch((error) => {
+        console.log(error);
+      });
+    };
+};
 
 export const isLoggedIn = () => {
   const user = getUser();
@@ -59,7 +67,7 @@ export const logOut = () => {
   }
 };
 
-export const reAuthenticate = (email, password) => {
+export const reAuthenticate = async (email, password) => {
   const auth = getAuth(app);
   const user = auth.currentUser;
   const credential = EmailAuthProvider.credential(
@@ -67,11 +75,17 @@ export const reAuthenticate = (email, password) => {
   );
 
   if (user) {
-    reauthenticateWithCredential(user, credential).then(() => {
+    return reauthenticateWithCredential(user, credential).then(() => {
       // User re-authenticated.
+      console.log("reauthenticated");
+      return "reauthenticated";
     }).catch((error) => {
       // An error ocurred
-      console.log(error);
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log({ errorCode, errorMessage });
+      // alert(errorCode);
+      return errorCode;
     });
   }
-}
+};

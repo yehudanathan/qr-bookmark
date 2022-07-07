@@ -7,22 +7,17 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { getUser, reAuthenticate } from "../firebase/auth/auth_user";
+import { useNavigate } from "react-router";
+import { updatePassword } from "../firebase/auth/auth_user";
 
-const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
+const ChangePassword = ({ openDialog, handleCloseDialog }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfPassword] = useState("");
   const [fieldError, setFieldError] = useState("");
-  const user = getUser();
-  const currentEmail = user?.email;
+  let navigate = useNavigate();
 
   const style = {
     backgroundColor: "#d9efff",
-  }
-
-  const errorCodes = {
-    "auth/wrong-password" : "Incorrect password.",
-    "auth/invalid-credential" : "The credential you provided is invalid. Please sign out and sign in again.",
   }
 
   const handleCheckPassword = async (e) => {
@@ -30,18 +25,13 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
     if (password !== confirmPassword) {
       alert("Passwords do not match");
     } else {
-      const response = await reAuthenticate(currentEmail, password);
-
-      if (response === "reauthenticated") {
+      await updatePassword(password, () => {
         handleCloseDialog();
-      } else if (response in errorCodes) {
-        // set errors.
-        setFieldError(errorCodes[response]);
-      } else {
-        alert(response);
-      }
+        alert("Password successfully changed");
+        navigate('/config');
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -56,7 +46,7 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
         id="alert-dialog-title"
         sx={{fontFamily: "Product Sans, Montserrat", fontWeight: "bold", fontSize: "20px", color: "#000032", textAlign: "center"}}
       >
-        {"Please enter your password."}
+        {"Please enter your new password."}
       </DialogTitle>
       <DialogContent>
         <form onSubmit={handleCheckPassword} id="password-form">
@@ -128,6 +118,6 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
     </Dialog>
     </>
   )
-}
+};
 
-export default ReauthDialog;
+export default ChangePassword;

@@ -6,10 +6,17 @@ import {
   DialogContentText,
   DialogActions,
 } from "@mui/material";
+import { deleteUser } from "../firebase/auth/auth_user";
 
 const DeleteAccountDialog = ({ openDialog, handleCloseDialog }) => {
   const style = {
     backgroundColor: "#ffffff",
+  }
+
+  const handleDeleteAccount = (e) => {
+    e.preventDefault();
+    deleteUser(() => {});
+    // todo: prompt for reauthentication 
   }
 
   return (
@@ -36,7 +43,7 @@ const DeleteAccountDialog = ({ openDialog, handleCloseDialog }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#bd2222", width: "100px"}} onClick={() => alert("Delete in progress")}>Delete</Button>
+        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#bd2222", width: "100px"}} onClick={handleDeleteAccount}>Delete</Button>
         <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#bd2222", width: "100px"}} onClick={handleCloseDialog}>Cancel</Button>
       </DialogActions>
     </Dialog>

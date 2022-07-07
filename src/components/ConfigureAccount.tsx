@@ -1,17 +1,11 @@
 import { 
   Button, 
-  Dialog, 
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
   TextField,
   Stack
 } from "@mui/material";
-import { makeStyles, createStyles } from "@mui/styles";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { getUser, reAuthenticate } from "../firebase/auth/auth_user";
+import { getUser, updatePassword } from "../firebase/auth/auth_user";
 import { Helmet } from 'react-helmet';
 import EditIcon from '@mui/icons-material/Edit';
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -19,31 +13,41 @@ import DoneIcon from '@mui/icons-material/Done';
 import MetaTags from 'react-meta-tags';
 import DeleteAccountDialog from "./DeleteAccountDialog";
 import ReauthDialog from "./ReauthDialog";
+import ChangePassword from "./ChangePassword";
 
 const ConfigureAccount = () => {
   let navigate = useNavigate();
   const user = getUser();
   const email = user?.email;
   const [openDialog, setOpenDialog] = useState(false);
+  const [openReauthDialog, setOpenReauthDialog] = useState(false);
+  const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
   const [emailEditMode, setEmailEditMode] = useState(false);
   const [currentEmail, setCurrentEmail] = useState(email);
+  const [isReauthenticated, setIsReauthenticated] = useState(false);
 
   const handleBack = () => {
     navigate("/config");
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("In progress");
-  }
-
   const handleDelete = (e) => {
     e.preventDefault();
     setOpenDialog(true);
+    if (emailEditMode) {
+      toggleEditEmail();
+    }
   }
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
+  }
+
+  const handleCloseReauthDialog = () => {
+    setOpenReauthDialog(false);
+  }
+
+  const handleCloseChangePasswordDialog = () => {
+    setOpenChangePasswordDialog(false);
   }
 
   const handleVerified = () => {
@@ -56,35 +60,38 @@ const ConfigureAccount = () => {
   const handleEmail = () => {
     if (emailEditMode) {
       return <>
-      <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
-        <Stack>
-          <TextField 
-            className="error-text-field"
-            label="Input your new email" 
-            sx={{
-              m: 1, 
-              width: "40ch", 
-              backgroundColor: "white", 
-              borderTopLeftRadius: "4px", 
-              borderTopRightRadius: "4px",
-              display: "flex"
-            }} 
-            size="small" 
-            value={currentEmail} 
-            onChange={e => setCurrentEmail(e.target.value)} 
-            color="success" 
-            inputProps={{style: {fontFamily: "Product Sans"}}}
-            helperText="You will be asked for re-verification and signed out."
-          />
-        </Stack>
-        <Button 
-          onClick={handleUpdateEmail}
-          size="small"
-          sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
-        >
-          <DoneIcon fontSize="small" sx={{color: "#35363a"}}/>
-        </Button>
-      </Stack>
+        {/* <form onSubmit={handleUpdateEmail}> */}
+          <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
+            <Stack>
+              <TextField 
+                className="error-text-field"
+                label="Input your new email" 
+                sx={{
+                  m: 1, 
+                  width: "40ch", 
+                  backgroundColor: "white", 
+                  borderTopLeftRadius: "4px", 
+                  borderTopRightRadius: "4px",
+                  display: "flex"
+                }} 
+                size="small" 
+                value={currentEmail} 
+                onChange={e => setCurrentEmail(e.target.value)} 
+                color="success" 
+                inputProps={{style: {fontFamily: "Product Sans"}}}
+                helperText="You will be asked for re-authentication."
+              />
+            </Stack>
+            <Button 
+              size="small"
+              type="submit"
+              onClick={handleUpdateEmail}
+              sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
+            >
+              <DoneIcon fontSize="small" sx={{color: "#35363a"}}/>
+            </Button>
+          </Stack>
+        {/* </form> */}
       </>;
     }
     
@@ -93,7 +100,7 @@ const ConfigureAccount = () => {
         {handleVerified()}
         <span className="config-span">{email}</span>
         <Button 
-          onClick={handleEditEmail}
+          onClick={toggleEditEmail}
           size="small"
           sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
         >
@@ -103,7 +110,7 @@ const ConfigureAccount = () => {
     </>;
   }
 
-  const handleEditEmail = () => {
+  const toggleEditEmail = () => {
     if (!emailEditMode) {
       alert("Update your email");
     }
@@ -115,21 +122,26 @@ const ConfigureAccount = () => {
     // setFieldError("");
     if (currentEmail === email) {
       alert("Please enter a different email.") // TODO bikin email error dibawah textfield
-    } else {
+    } else if (!isReauthenticated) {
       // prompt to re-provide credential
-      // reAuthenticate(email, password);
+      setOpenReauthDialog(true);
+    } else {
+      // any other potential errors with the email.
     }
   }
 
   const handleChangePassword = () => {
-    alert("Changing password");
+    if (emailEditMode) {
+      toggleEditEmail();
+    }
+    setOpenChangePasswordDialog(true);
   }
 
   return (
     <>
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Configure Your Account</h1>
-      <form className="edit-profile" onSubmit={handleSubmit}>
+      <form className="edit-profile" onSubmit={handleUpdateEmail}>
         <Stack alignItems="center" spacing={1}>
           <div className="config-profile account-config">
             <span className="config-span"><strong>Email</strong></span>
@@ -145,7 +157,8 @@ const ConfigureAccount = () => {
     </Stack>
 
     <DeleteAccountDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} />
-    <ReauthDialog openDialog={true} handleCloseDialog={handleCloseDialog} />
+    <ReauthDialog openDialog={openReauthDialog} handleCloseDialog={handleCloseReauthDialog} />
+    <ChangePassword openDialog={openChangePasswordDialog} handleCloseDialog={handleCloseChangePasswordDialog} />
     </>
   )
 }

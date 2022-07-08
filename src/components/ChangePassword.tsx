@@ -8,28 +8,45 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { updatePassword } from "../firebase/auth/auth_user";
+import { getUser, reAuthenticate, updatePassword } from "../firebase/auth/auth_user";
+import ReauthDialog from "./ReauthDialog";
 
 const ChangePassword = ({ openDialog, handleCloseDialog }) => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfNewPassword] = useState("");
   const [fieldError, setFieldError] = useState("");
+  const user = getUser();
+  const currentEmail = user?.email;
   let navigate = useNavigate();
 
   const style = {
     backgroundColor: "#d9efff",
   }
 
+  const errorCodes = {
+    "auth/wrong-password" : "Incorrect password.",
+    "auth/invalid-credential" : "The credential you provided is invalid. Please sign out and sign in again.",
+  }
+
   const handleCheckPassword = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
+    const response = await reAuthenticate(currentEmail, oldPassword);
+
+    if (response === "reauthenticated") {
+      if (newPassword === confirmNewPassword) {
+        updatePassword(newPassword, () => {
+          alert("Password updated");
+          handleCloseDialog();
+          navigate("/config");
+        });
+      } else {
+        alert("New passwords do not match");
+      }
+    } else if (response in errorCodes) {
+      setFieldError(errorCodes[response]);
     } else {
-      await updatePassword(password, () => {
-        handleCloseDialog();
-        alert("Password successfully changed");
-        navigate('/config');
-      });
+      alert(response);
     }
   };
 
@@ -46,7 +63,7 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
         id="alert-dialog-title"
         sx={{fontFamily: "Product Sans, Montserrat", fontWeight: "bold", fontSize: "20px", color: "#000032", textAlign: "center"}}
       >
-        {"Please enter your new password."}
+        {"Please enter your password."}
       </DialogTitle>
       <DialogContent>
         <form onSubmit={handleCheckPassword} id="password-form">
@@ -54,7 +71,7 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
             required
             type="password"
             className="error-text-field"
-            label="Password"
+            label="Old Password"
             sx={{
               m: 1, 
               width: "40ch", 
@@ -64,15 +81,15 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
               display: "flex"
             }}
             size="small"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            value={oldPassword}
+            onChange={e => setOldPassword(e.target.value)}
             inputProps={{style: {fontFamily: "Product Sans"}}}
           />
           <TextField
             required
             type="password"
             className="error-text-field"
-            label="Confirm Password"
+            label="New Password"
             sx={{
               m: 1, 
               width: "40ch", 
@@ -82,8 +99,26 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
               display: "flex"
             }}
             size="small"
-            value={confirmPassword}
-            onChange={e => setConfPassword(e.target.value)}
+            value={newPassword}
+            onChange={e => setNewPassword(e.target.value)}
+            inputProps={{style: {fontFamily: "Product Sans"}}}
+          />
+          <TextField
+            required
+            type="password"
+            className="error-text-field"
+            label="Confirm New Password"
+            sx={{
+              m: 1, 
+              width: "40ch", 
+              backgroundColor: "white", 
+              borderTopLeftRadius: "4px", 
+              borderTopRightRadius: "4px",
+              display: "flex"
+            }}
+            size="small"
+            value={confirmNewPassword}
+            onChange={e => setConfNewPassword(e.target.value)}
             inputProps={{style: {fontFamily: "Product Sans"}}}
           />
         </form>

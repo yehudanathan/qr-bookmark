@@ -6,7 +6,6 @@ import {
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { getUser, updatePassword } from "../firebase/auth/auth_user";
-import { Helmet } from 'react-helmet';
 import EditIcon from '@mui/icons-material/Edit';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import DoneIcon from '@mui/icons-material/Done';
@@ -19,12 +18,11 @@ const ConfigureAccount = () => {
   let navigate = useNavigate();
   const user = getUser();
   const email = user?.email;
-  const [openDialog, setOpenDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openReauthDialog, setOpenReauthDialog] = useState(false);
   const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
   const [emailEditMode, setEmailEditMode] = useState(false);
   const [currentEmail, setCurrentEmail] = useState(email);
-  const [isReauthenticated, setIsReauthenticated] = useState(false);
 
   const handleBack = () => {
     navigate("/config");
@@ -32,14 +30,14 @@ const ConfigureAccount = () => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    setOpenDialog(true);
+    setOpenDeleteDialog(true);
     if (emailEditMode) {
       toggleEditEmail();
     }
   }
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
   }
 
   const handleCloseReauthDialog = () => {
@@ -122,11 +120,8 @@ const ConfigureAccount = () => {
     // setFieldError("");
     if (currentEmail === email) {
       alert("Please enter a different email.") // TODO bikin email error dibawah textfield
-    } else if (!isReauthenticated) {
-      // prompt to re-provide credential
-      setOpenReauthDialog(true);
     } else {
-      // any other potential errors with the email.
+      setOpenReauthDialog(true);
     }
   }
 
@@ -156,7 +151,7 @@ const ConfigureAccount = () => {
       </form>
     </Stack>
 
-    <DeleteAccountDialog openDialog={openDialog} handleCloseDialog={handleCloseDialog} />
+    <DeleteAccountDialog openDialog={openDeleteDialog} handleCloseDialog={handleCloseDeleteDialog} />
     <ReauthDialog openDialog={openReauthDialog} handleCloseDialog={handleCloseReauthDialog} />
     <ChangePassword openDialog={openChangePasswordDialog} handleCloseDialog={handleCloseChangePasswordDialog} />
     </>

@@ -18,14 +18,19 @@ const ConfigureAccount = () => {
   let navigate = useNavigate();
   const user = getUser();
   const currentEmail = user?.email;
+  const currentProvider = user?.providerData[0]["providerId"];
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openReauthDialog, setOpenReauthDialog] = useState(false);
   const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
   const [emailEditMode, setEmailEditMode] = useState(false);
   const [email, setEmail] = useState(currentEmail);
 
-  console.log("emaileditmode");
-  console.log(emailEditMode);
+  // console.log("emaileditmode");
+  // console.log(emailEditMode);
+  // console.log("provider id:");
+  // console.log(currentProvider);
+  // console.log("provider data:");
+  // console.log(user?.providerData);
 
   const handleBack = () => {
     navigate("/config");
@@ -136,6 +141,13 @@ const ConfigureAccount = () => {
     setOpenChangePasswordDialog(true);
   }
 
+  const handleDisableButton = () => {
+    if (currentProvider === 'google.com') {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <>
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
@@ -147,7 +159,7 @@ const ConfigureAccount = () => {
             {handleEmail()}
           </div>
           <div className="config-profile edit">
-            <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" onClick={handleChangePassword}>Change Password</Button>
+            <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat"}} variant="contained" size="large" onClick={handleChangePassword} disabled={handleDisableButton()}>Change Password</Button>
             <Button style={{height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" color="error" onClick={handleDelete}>Delete Account</Button>
             <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", width: "100%"}} variant="outlined" size="large" onClick={handleBack}>Back</Button>
           </div>  

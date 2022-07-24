@@ -11,7 +11,7 @@ export const emailSignUp = async (email, password) => {
   const auth = getAuth(app);
   return createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    console.log(userCredential.user);
+    // console.log(userCredential.user);
     return userCredential.user;
   })
   .catch((error) => {

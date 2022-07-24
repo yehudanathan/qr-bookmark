@@ -73,8 +73,7 @@ const ConfigureAccount = () => {
 
   const handleEmail = () => {
     if (emailEditMode) {
-      return 
-      <>
+      return <>
         <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
           <Stack>
             <TextField 

@@ -13,36 +13,30 @@ import { orderByTime } from "../firebase/database/links";
 const Bookmark = () => {
 	const [mode, setMode] = useState("light");
 	const [links, setLinks] = useState([]);
-  const [from, setFrom] = useState(new Date());
-  const [to, setTo] = useState(new Date());
-  const [isFav, setIsFav] = useState(false);
+	const [from, setFrom] = useState(new Date());
+	const [to, setTo] = useState(new Date());
+	const [isFav, setIsFav] = useState(false);
 	const [sort, setSort] = useState("");
-  const [clear, setClear] = useState("")
+	const [clear, setClear] = useState("");
 
 	useEffect(() => {
 		async function fetchData() {
 			// initialize by fetching links
 			const links = await getLinks();
-      if (links === null) {return}
+			if (links === null) {
+				console.log("links is null bruh");
+				return;
+			}
 			const linksWithSelected = links.map((link, index) => ({
 				...link,
-        index: index,
+				index: index,
 				isSelected: false,
-        display: true,
+				display: true,
 			}));
 			setLinks(linksWithSelected);
 		}
 		fetchData();
 	}, []);
-
-	// alvin
-  // useEffect(async () => {
-	// 	// initialize states component
-	// 	// set the links
-	// 	const links = await getLinks();
-	// 	const newLinks = links.map((link) => ({ ...link, isSelected: false }));
-	// 	setLinks(newLinks);
-	// }, []);
 
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
 	// // link = {url:..., title:..., index:....}
@@ -59,24 +53,17 @@ const Bookmark = () => {
 		// setLinks(links);
 	};
 
-  const handleFrom = (from) => {setFrom(from)}
-  const handleTo = (to) => {setTo(to)}
-  const handleIsFav = (newIsFav) => {setIsFav(newIsFav)}
 
-  const handleFilter = () => {};
-
-  const handleSort = () => {
-		// const newLinks = await getLinks(orderByTime);
-		// setLinks(newLinks);
-	};
-
-  // alvin
-	// const handleSort = async () => {
+	// const setSort = () => {
 	// 	const newLinks = await getLinks(orderByTime);
 	// 	setLinks(newLinks);
 	// };
 
-  const handleClear = () => {};
+	// alvin
+	// const setSort = async () => {
+	// 	const newLinks = await getLinks(orderByTime);
+	// 	setLinks(newLinks);
+	// };
 
 	const dualTheme = createTheme({
 		palette: {
@@ -84,10 +71,10 @@ const Bookmark = () => {
 		},
 	});
 
-	// const handleSort = (event) => {
+	// const setSort = (event) => {
 	// 	setSort(event.target.value);
 	// };
-  
+
 	return (
 		<ThemeProvider theme={dualTheme}>
 			<Box
@@ -96,10 +83,23 @@ const Bookmark = () => {
 				sx={{ m: "-12px" }}
 			>
 				<Navbar />
-				<Preferences from={from} to={to} isFav={isFav} sort={sort} clear={clear} onFromChange={handleFrom} onToChange={handleTo} onIsFavChange={handleIsFav} onFilterChange={handleFilter} onSortChange={handleSort} onClearChange={handleClear}/>
+				<Preferences
+          links={links}
+					from={from}
+					to={to}
+					isFav={isFav}
+					sort={sort}
+					clear={clear}
+          setLinks={setLinks}
+					setFrom={setFrom}
+					setTo={setTo}
+					setIsFav={setIsFav}
+					setSort={setSort}
+					setClear={setClear}
+				/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
 					<LeftBar />
-					<Post links={links} sort={sort} onSortChange={handleSort} />
+					<Post links={links} sort={sort} clear={clear} setSort={setSort} />
 					<RightBar />
 				</Stack>
 			</Box>

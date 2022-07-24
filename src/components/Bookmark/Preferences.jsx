@@ -55,17 +55,19 @@ const StyledModal = styled(Modal)({
 });
 
 const Preferences = ({
+	links,
 	from,
 	to,
 	isFav,
 	sort,
 	clear,
-	onFromChange,
-	onToChange,
-	onIsFavChange,
-	onFilterChange,
-	onSortChange,
-	onClearChange,
+	setLinks,
+	setFrom,
+	setTo,
+	setIsFav,
+	handleFilter,
+	setSort,
+	setClear,
 }) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 
@@ -82,7 +84,7 @@ const Preferences = ({
 	//   sort === "Oldest" ? links.orderByChild
 	// }, [sort]);
 
-	// const handleClear = (event) => {
+	// const setClear = (event) => {
 	//   let option = event.target.value;
 	// 	setClear(option);
 	//   console.log("a");
@@ -142,7 +144,7 @@ const Preferences = ({
 										label="From"
 										value={from}
 										onChange={(newFrom) => {
-											onFromChange(newFrom);
+											setFrom(newFrom);
 										}}
 									/>
 								</LocalizationProvider>
@@ -156,7 +158,7 @@ const Preferences = ({
 										label="To"
 										value={to}
 										onChange={(newTo) => {
-											onToChange(newTo);
+											setTo(newTo);
 										}}
 									/>
 								</LocalizationProvider>
@@ -171,7 +173,7 @@ const Preferences = ({
 								right: "25px",
 							}}
 						>
-							<Checkbox onChange={onIsFavChange(!isFav)} />
+							<Checkbox onChange={() => setIsFav(!isFav)} />
 							<Typography fontWeight={500}>Favourites Only</Typography>
 						</Box>
 						<Button
@@ -183,7 +185,7 @@ const Preferences = ({
 								bottom: "15px",
 								fontSize: "16px",
 							}}
-							onClick={onFilterChange}
+							onClick={() => setLinks(links)}
 						>
 							Confirm
 						</Button>
@@ -206,8 +208,19 @@ const Preferences = ({
 						value={sort}
 						label="Sort by"
 						onChange={(e) => {
-							// console.log(e.target.value);
-							onSortChange();
+							const sortBy = e.target.value;
+							const oldLinks = links;
+							setSort(sortBy);
+							if (sortBy === "Oldest") {
+								oldLinks.sort((a, b) =>
+									a.time < b.time ? 1 : b.time < a.time ? -1 : 0
+								);
+							} else {
+								oldLinks.sort((a, b) =>
+									a.time > b.time ? 1 : b.time > a.time ? -1 : 0
+								);
+							}
+							setLinks(links);
 						}}
 					>
 						<MenuItem value={"Oldest"}>Oldest</MenuItem>
@@ -223,7 +236,7 @@ const Preferences = ({
 						id="demo-simple-select"
 						value={clear}
 						label="Clear"
-						onChange={onClearChange}
+						onChange={(e) => setClear(e.target.value)}
 					>
 						<MenuItem value={"Select"}>Select</MenuItem>
 						<MenuItem value={"Select all"}>Select all</MenuItem>

@@ -27,7 +27,10 @@ export const updateUser = (
 
 export const updateEmail = (email: string, callback: () => void) => {
   const auth = getAuth(app);
-  if (auth.currentUser) setEmail(auth.currentUser, email).then(callback);
+  if (auth.currentUser) setEmail(auth.currentUser, email).then(callback)
+  .catch((error) => {
+    console.log(error);
+  });
 };
 
 export const updatePassword = (password: string, callback: () => void) => {

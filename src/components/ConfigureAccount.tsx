@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useState } from "react";
-import { getUser, updatePassword } from "../firebase/auth/auth_user";
+import { getUser, updateEmail } from "../firebase/auth/auth_user";
 import EditIcon from '@mui/icons-material/Edit';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import DoneIcon from '@mui/icons-material/Done';
@@ -17,12 +17,15 @@ import ChangePassword from "./ChangePassword";
 const ConfigureAccount = () => {
   let navigate = useNavigate();
   const user = getUser();
-  const email = user?.email;
+  const currentEmail = user?.email;
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openReauthDialog, setOpenReauthDialog] = useState(false);
   const [openChangePasswordDialog, setOpenChangePasswordDialog] = useState(false);
   const [emailEditMode, setEmailEditMode] = useState(false);
-  const [currentEmail, setCurrentEmail] = useState(email);
+  const [email, setEmail] = useState(currentEmail);
+
+  console.log("emaileditmode");
+  console.log(emailEditMode);
 
   const handleBack = () => {
     navigate("/config");
@@ -41,6 +44,14 @@ const ConfigureAccount = () => {
   }
 
   const handleCloseReauthDialog = () => {
+    if (currentEmail === email) {
+      alert("Please enter a different email.") // TODO bikin email error dibawah textfield
+    } else {
+      updateEmail(email as string, () => {
+        alert("Email updated successfully");
+        navigate("/config");
+      });
+    }
     setOpenReauthDialog(false);
   }
 
@@ -57,42 +68,40 @@ const ConfigureAccount = () => {
 
   const handleEmail = () => {
     if (emailEditMode) {
-      return <>
-        {/* <form onSubmit={handleUpdateEmail}> */}
-          <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
-            <Stack>
-              <TextField 
-                className="error-text-field"
-                label="Input your new email" 
-                sx={{
-                  m: 1, 
-                  width: "40ch", 
-                  backgroundColor: "white", 
-                  borderTopLeftRadius: "4px", 
-                  borderTopRightRadius: "4px",
-                  display: "flex"
-                }} 
-                size="small" 
-                value={currentEmail} 
-                onChange={e => setCurrentEmail(e.target.value)} 
-                color="success" 
-                inputProps={{style: {fontFamily: "Product Sans"}}}
-                helperText="You will be asked for re-authentication."
-              />
-            </Stack>
-            <Button 
-              size="small"
-              type="submit"
-              onClick={handleUpdateEmail}
-              sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
-            >
-              <DoneIcon fontSize="small" sx={{color: "#35363a"}}/>
-            </Button>
+      return 
+      <>
+        <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{marginTop:"-13px"}}>
+          <Stack>
+            <TextField 
+              className="error-text-field"
+              label="Input your new email" 
+              sx={{
+                m: 1, 
+                width: "40ch", 
+                backgroundColor: "white", 
+                borderTopLeftRadius: "4px", 
+                borderTopRightRadius: "4px",
+                display: "flex"
+              }} 
+              size="small" 
+              value={email} 
+              onChange={e => setEmail(e.target.value)} 
+              color="success" 
+              inputProps={{style: {fontFamily: "Product Sans"}}}
+              helperText="You will be asked for re-authentication."
+            />
           </Stack>
-        {/* </form> */}
+          <Button 
+            size="small"
+            type="submit"
+            onClick={handleUpdateEmail}
+            sx={{minWidth: "15px", height: "28px", borderRadius: "50%"}}
+          >
+            <DoneIcon fontSize="small" sx={{color: "#35363a"}}/>
+          </Button>
+        </Stack>
       </>;
     }
-    
     return <>
       <Stack direction="row" spacing={0.5} alignItems="center" sx={{marginTop:"-3px"}}>
         {handleVerified()}
@@ -117,12 +126,7 @@ const ConfigureAccount = () => {
 
   const handleUpdateEmail = (e) => {
     e.preventDefault();
-    // setFieldError("");
-    if (currentEmail === email) {
-      alert("Please enter a different email.") // TODO bikin email error dibawah textfield
-    } else {
-      setOpenReauthDialog(true);
-    }
+    setOpenReauthDialog(true);
   }
 
   const handleChangePassword = () => {

@@ -150,6 +150,12 @@ const ConfigureAccount = () => {
 
   return (
     <>
+    <MetaTags>
+      <title>Configure Account</title>
+      <meta name="description" content="Configure your account" />
+      <meta property="og:title" content="Account" />
+    </MetaTags>
+
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Configure Your Account</h1>
       <form className="edit-profile" onSubmit={handleUpdateEmail}>

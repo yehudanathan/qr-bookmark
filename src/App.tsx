@@ -9,7 +9,6 @@ import Config from "./pages/Config";
 import { useEffect, useState } from "react";
 import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 // import { isSignedIn } from "./firebase/auth/auth_user";
 import EditProfile from "./pages/EditProfile";
@@ -68,6 +67,7 @@ const SignInRoute = () => {
       } else {
         setSignedIn(false);
       }});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (signedIn) {

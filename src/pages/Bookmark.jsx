@@ -1,16 +1,14 @@
-import { RoomPreferences } from "@mui/icons-material";
 import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Feed from "../components/Bookmark/Feed";
 import Navbar from "../components/Bookmark/Navbar";
 import Post from "../components/Bookmark/Post";
 import Preferences from "../components/Bookmark/Preferences";
 import LeftBar from "../components/Bookmark/LeftBar";
 import RightBar from "../components/Bookmark/RightBar";
 import { getLinks } from "../firebase/database/links";
-import { orderByTime } from "../firebase/database/links";
 
 const Bookmark = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [mode, setMode] = useState("light");
 	const [links, setLinks] = useState([]);
 	const [from, setFrom] = useState(new Date());
@@ -41,17 +39,17 @@ const Bookmark = () => {
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
 	// // link = {url:..., title:..., index:....}
 
-	const handleSelect = (el) => {
-		const newIsSelected = !el.isSelected;
-		const indexToReplace = el.index;
-		// 1
-		const filteredLinks = links.filter((el, i) => i !== indexToReplace); // links without link yg pny index itu
-		const newLinks = [...filteredLinks, { ...el, isSelected: newIsSelected }];
-		setLinks(newLinks);
-		// // 2
-		// links[indexToReplace] = { ...el, isSelected: newIsSelected };
-		// setLinks(links);
-	};
+	// const handleSelect = (el) => {
+	// 	const newIsSelected = !el.isSelected;
+	// 	const indexToReplace = el.index;
+	// 	// 1
+	// 	const filteredLinks = links.filter((el, i) => i !== indexToReplace); // links without link yg pny index itu
+	// 	const newLinks = [...filteredLinks, { ...el, isSelected: newIsSelected }];
+	// 	setLinks(newLinks);
+	// 	// // 2
+	// 	// links[indexToReplace] = { ...el, isSelected: newIsSelected };
+	// 	// setLinks(links);
+	// };
 
 
 	// const setSort = () => {

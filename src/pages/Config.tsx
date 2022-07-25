@@ -21,6 +21,7 @@ const Config = () => {
   const displayPicture = user?.photoURL;
 
   let navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const toggleLoading = () => {setIsLoading(false)};
 

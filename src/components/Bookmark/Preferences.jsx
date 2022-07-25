@@ -1,9 +1,6 @@
 import {
-	Delete,
 	FilterList,
 	KeyboardArrowDown,
-	Settings,
-	Sort,
 } from "@mui/icons-material";
 import {
 	Box,
@@ -11,9 +8,7 @@ import {
 	Checkbox,
 	Divider,
 	FormControl,
-	IconButton,
 	InputLabel,
-	Menu,
 	MenuItem,
 	Modal,
 	Select,
@@ -25,9 +20,7 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import React, { useEffect, useState } from "react";
-import { getLinks } from "../../firebase/database/links";
-import Links from "../../pages/Links";
+import React, { useState } from "react";
 
 const StyledBox = styled(Box)({
 	alignItems: "center",

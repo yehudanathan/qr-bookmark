@@ -1,198 +1,22 @@
-import { Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
+import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
 import {
-	Avatar,
 	Box,
 	Card,
 	CardActions,
 	CardContent,
-	CardHeader,
 	CardMedia,
 	Checkbox,
 	Container,
 	Grid,
 	IconButton,
-	styled,
 	Typography,
-	useMediaQuery,
 } from "@mui/material";
 import { faker } from '@faker-js/faker';
-import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
-import moment from "moment";
+// import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
+// import moment from "moment";
 
-
-import React, { useEffect, useState } from "react";
-
-import { getUserLinks } from "../../apis/link";
-import { getCurrentUserId } from "../../apis/session";
-
-
-let num = 1;
-
-const MobilePost = () => {
-	// const links = await getUserLinks(getCurrentUserId());
-	return (
-		<Container sx={{ py: { xs: 4, md: 8 }, ml: "-16px" }} maxWidth="md">
-			{/* {links.map((userLink) => (
-          <Card sx={{ margin: "5px", position:"relative" }}>
-            <CardMedia
-              component="img"
-              height="5%"
-              image="https://images.pexels.com/photos/11943236/pexels-photo-11943236.jpeg?cs=srgb&dl=pexels-stephen-tam-11943236.jpg&fm=jpg"
-              alt={userLink.title}
-            />
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {`Link: ${userLink.URL}`}
-                {`Visited on ${userLink.dateTime}`}
-              </Typography>
-            </CardContent>
-            <CardActions
-              disableSpacing
-              sx={{ position: "absolute", bottom: "10px", right: "10px" }}
-            >
-              <IconButton aria-label="add to favorites">
-                <Checkbox
-                  icon={<FavoriteBorder />}
-                  checkedIcon={<Favorite sx={{ color: "red" }} />}
-                />
-              </IconButton>
-              <IconButton aria-label="share">
-                <Share />
-              </IconButton>
-            </CardActions>
-          </Card>
-        ))} */}
-			{/* working dummy below */}
-			<Card
-				sx={{
-					height: "450px",
-					mx: "5px",
-					mb: "15px",
-					position: "relative",
-				}}
-			>
-				<Box
-					sx={{
-						position: "fixed",
-						display: "block",
-						width: "100%",
-						height: "100%",
-						top: 0,
-						left: 0,
-						right: 0,
-						bottom: 0,
-						backgroundColor: "black",
-						zIndex: 10000,
-					}}
-				>
-					anwafawjflaflaf
-				</Box>
-				<CardMedia
-					component="img"
-					height="65%"
-					image="https://images.pexels.com/photos/11943236/pexels-photo-11943236.jpeg?cs=srgb&dl=pexels-stephen-tam-11943236.jpg&fm=jpg"
-					alt="Some alt text"
-				/>
-				<CardContent>
-					<Typography color="text.secondary" sx={{ fontSize: 18, mb: "10px" }}>
-						Link: -------
-					</Typography>
-					<Typography color="text.secondary" sx={{ fontSize: 18 }}>
-						Visited on -------
-					</Typography>
-				</CardContent>
-				<CardActions
-					disableSpacing
-					sx={{ position: "absolute", bottom: "0px", right: "5px", p: "0px" }}
-				>
-					<IconButton aria-label="add to favorites">
-						<Checkbox
-							icon={<FavoriteBorder />}
-							checkedIcon={<Favorite sx={{ color: "red" }} />}
-						/>
-					</IconButton>
-					<IconButton aria-label="share">
-						<Share />
-					</IconButton>
-				</CardActions>
-			</Card>
-			<Card
-				sx={{
-					height: "450px",
-					mx: "5px",
-					mb: "15px",
-					position: "relative",
-				}}
-			>
-				<CardMedia
-					component="img"
-					height="65%"
-					image="https://images.pexels.com/photos/11943236/pexels-photo-11943236.jpeg?cs=srgb&dl=pexels-stephen-tam-11943236.jpg&fm=jpg"
-					alt="Some alt text"
-				/>
-				<CardContent>
-					<Typography color="text.secondary" sx={{ fontSize: 18, mb: "10px" }}>
-						Link: -------
-					</Typography>
-					<Typography color="text.secondary" sx={{ fontSize: 18 }}>
-						Visited on -------
-					</Typography>
-				</CardContent>
-				<CardActions
-					disableSpacing
-					sx={{ position: "absolute", bottom: "0px", right: "5px", p: "0px" }}
-				>
-					<IconButton aria-label="add to favorites">
-						<Checkbox
-							icon={<FavoriteBorder />}
-							checkedIcon={<Favorite sx={{ color: "red" }} />}
-						/>
-					</IconButton>
-					<IconButton aria-label="share">
-						<Share />
-					</IconButton>
-				</CardActions>
-			</Card>
-			<Card
-				sx={{
-					height: "450px",
-					mx: "5px",
-					mb: "15px",
-					position: "relative",
-				}}
-			>
-				<CardMedia
-					component="img"
-					height="65%"
-					image="https://images.pexels.com/photos/11943236/pexels-photo-11943236.jpeg?cs=srgb&dl=pexels-stephen-tam-11943236.jpg&fm=jpg"
-					alt="Some alt text"
-				/>
-				<CardContent>
-					<Typography color="text.secondary" sx={{ fontSize: 18, mb: "10px" }}>
-						Link: -------
-					</Typography>
-					<Typography color="text.secondary" sx={{ fontSize: 18 }}>
-						Visited on -------
-					</Typography>
-				</CardContent>
-				<CardActions
-					disableSpacing
-					sx={{ position: "absolute", bottom: "0px", right: "5px", p: "0px" }}
-				>
-					<IconButton aria-label="add to favorites">
-						<Checkbox
-							icon={<FavoriteBorder />}
-							checkedIcon={<Favorite sx={{ color: "red" }} />}
-						/>
-					</IconButton>
-					<IconButton aria-label="share">
-						<Share />
-					</IconButton>
-				</CardActions>
-			</Card>
-		</Container>
-	);
-};
+// import { getUserLinks } from "../../apis/link";
+// import { getCurrentUserId } from "../../apis/session";
 
 const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 	// const cards = linksWithIndex.map(el => {

@@ -1,9 +1,7 @@
-import { CropFree, Mail, Notifications } from "@mui/icons-material";
+import { CropFree } from "@mui/icons-material";
 import {
 	alpha,
 	AppBar,
-	Avatar,
-	Badge,
 	Box,
 	InputBase,
 	Menu,

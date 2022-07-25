@@ -20,7 +20,7 @@ const PrivateRoute = () => {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, loading, error] = useAuthState(auth);
+  // const [user, loading, error] = useAuthState(auth);
 
   // useEffect(() => {
   //   isSignedIn().then((res) => {
@@ -40,6 +40,7 @@ const PrivateRoute = () => {
       }
       setIsLoading(false);
     })
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (

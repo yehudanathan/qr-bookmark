@@ -1,6 +1,5 @@
 import {
   UploadTaskSnapshot,
-  UploadTask,
   getDownloadURL,
 } from "firebase/storage";
 

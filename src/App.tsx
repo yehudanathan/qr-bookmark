@@ -3,24 +3,23 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Navigate, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Config from "./pages/Config";
-import Links from "./pages/Links";
 // PART FOR MOCK DATA
 // uncomment this part if backend is not available
 // import { isSignedIn } from "./apis/auth";
 import { useEffect, useState } from "react";
 import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 // import { isSignedIn } from "./firebase/auth/auth_user";
 import EditProfile from "./pages/EditProfile";
+import Bookmark from "./pages/Bookmark";
 
 const PrivateRoute = () => {
   const auth = getAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, loading, error] = useAuthState(auth);
+  // const [user, loading, error] = useAuthState(auth);
 
   // useEffect(() => {
   //   isSignedIn().then((res) => {
@@ -40,6 +39,7 @@ const PrivateRoute = () => {
       }
       setIsLoading(false);
     })
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
@@ -67,6 +67,7 @@ const SignInRoute = () => {
       } else {
         setSignedIn(false);
       }});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (signedIn) {
@@ -88,7 +89,7 @@ function App() {
               <Route path="config" element={<Config />}> 
                 <Route path="edit-profile" element={<EditProfile />} />
               </Route>
-              <Route path="links" element={<Links />} />
+              <Route path="links" element={<Bookmark />} />
               <Route path="about" element={<About />} />
             </Route>
             <Route path="/signin" element={<SignInRoute />}>
@@ -99,7 +100,6 @@ function App() {
           </Routes>
         </Router>
       }
-      {/* <Links /> */}
     </>
   );
 }

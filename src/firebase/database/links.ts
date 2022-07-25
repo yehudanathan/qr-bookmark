@@ -21,6 +21,11 @@ export const orderByTitle = orderByChild('title');
 export const orderByUrl = orderByChild('url');
 export const filterByFavorite = equalTo(true, 'favorite');
 
+// getLinks() sort by default
+// getLinks(orderByTime) sort by time
+// getLinks(filterByFavorite) filtered by favorite
+// getLinks(orderByTime, filterByFavorite) sort then filter
+
 export const pushLink = (link: Link) => {
     const user = getUser();
     if (user) {

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import LoadingPage from "./LoadingPage";
 
 const PictGenerator = ({ onGenerate }) => {
     const baseUnsplashURL = "https://api.unsplash.com/photos/random?client_id=CNqJperIJlMcgWD2L7jzmRD7VfA5_QcVMXpv3ELsZ-Y&orientation=landscape";
@@ -21,6 +20,7 @@ const PictGenerator = ({ onGenerate }) => {
 
     useEffect(() => {
         setPhoto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     if (photoError) {
@@ -33,7 +33,7 @@ const PictGenerator = ({ onGenerate }) => {
             <a
                 className="credit"
                 target="_blank"
-                href={`https://unsplash.com/@${photo.data.user.username}`}
+                href={`https://unsplash.com/@${photo.data.user.username}`} rel="noreferrer"
             >
                 <img className="img" src={photo.data.urls.regular} alt="background"/>
             </a>

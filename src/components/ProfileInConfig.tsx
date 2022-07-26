@@ -1,8 +1,6 @@
 import { Button, Stack } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser, logOut } from "../firebase/auth/auth_user";
-import { Helmet } from 'react-helmet';
-import MetaTags from "react-meta-tags";
 import profilePicture from '../static/profile-picture.png';
 
 const ProfileInConfig = () => {

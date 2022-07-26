@@ -9,12 +9,13 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { getUser, reAuthenticate, updatePassword } from "../firebase/auth/auth_user";
-import ReauthDialog from "./ReauthDialog";
 
 const ChangePassword = ({ openDialog, handleCloseDialog }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfNewPassword] = useState("");
+
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   const [fieldError, setFieldError] = useState("");
   const user = getUser();
   const currentEmail = user?.email;

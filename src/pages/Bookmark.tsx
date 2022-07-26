@@ -1,4 +1,4 @@
-import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
+import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Bookmark/Navbar";
 import Post from "../components/Bookmark/Post";
@@ -25,7 +25,7 @@ const Bookmark = () => {
 				console.log("links is null bruh");
 				return;
 			}
-			const linksWithSelected = links.map((link, index) => ({
+			const linksWithSelected : any = links.map((link, index) => ({
 				...link,
 				index: index,
 				isSelected: false,
@@ -65,7 +65,7 @@ const Bookmark = () => {
 
 	const dualTheme = createTheme({
 		palette: {
-			mode: mode,
+			mode: mode as PaletteMode,
 		},
 	});
 
@@ -94,11 +94,12 @@ const Bookmark = () => {
 					setIsFav={setIsFav}
 					setSort={setSort}
 					setClear={setClear}
+					handleFilter={() => {console.log("handle filter");}}
 					/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
 					<LeftBar />
 					{/* <IconButton /> */}
-					<Post links={links} sort={sort} clear={clear} setSort={setSort} />
+					<Post links={links} sort={sort} clear={clear} setSort={setSort} theme={() => {console.log("theme");}}/>
 					<RightBar />
 				</Stack>
 			</Box>

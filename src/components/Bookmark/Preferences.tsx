@@ -83,13 +83,14 @@ const Preferences = ({
 	//   console.log("a");
 	// };
 
-	const isDesktop = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+	// TODO find out theme type
+	const isDesktop = useMediaQuery((theme : any) => theme.breakpoints.up("sm"));
 
 	return (
 		<StyledBox>
 			<IconAndText>
 				<Button
-					flex={1}
+					// flex={1}
 					variant="outlined"
 					startIcon={isDesktop ? <FilterList /> : <></>}
 					sx={{
@@ -99,7 +100,7 @@ const Preferences = ({
 						flexGrow: 1,
 						p: { xs: 0, sm: 0 },
 					}}
-					onClick={(e) => setFilterOpen(true)}
+					onClick={() => setFilterOpen(true)}
 					endIcon={<KeyboardArrowDown />}
 				>
 					<Typography>Filter</Typography>
@@ -133,7 +134,7 @@ const Preferences = ({
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DateTimePicker
 										renderInput={(props) => <TextField {...props} />}
-										id="From"
+										// id="From"
 										label="From"
 										value={from}
 										onChange={(newFrom) => {
@@ -147,7 +148,7 @@ const Preferences = ({
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<DateTimePicker
 										renderInput={(props) => <TextField {...props} />}
-										id="To"
+										// id="To"
 										label="To"
 										value={to}
 										onChange={(newTo) => {

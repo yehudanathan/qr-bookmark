@@ -43,10 +43,8 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
     };
   }
 
-  const mockLinks = [];
-  Array.from({ length: 10 }).forEach((v, index) => {
-    mockLinks.push(createRandomLinks(index));
-  });
+  const mockLinks : any = [];
+  Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
 
 	return (
 		<Container sx={{ py: { xs: 4, md: 8 } }} maxWidth="md">
@@ -406,7 +404,7 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 					</Card>
 				</Grid> */}
         {/* working testing below */}
-        {mockLinks.map((link) => (<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
+        {mockLinks.map((link : any) => (<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
 					<Card
 						sx={{
 							height: "100%",

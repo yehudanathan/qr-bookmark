@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Search as SearchIcon } from "@mui/icons-material";
-import SideBar from "../SideBar";
+import TemporaryDrawer from "../SideBar";
 
 const StyledToolbar = styled(Toolbar)({
 	display: "flex",
@@ -71,7 +71,7 @@ const Navbar = () => {
 		<AppBar sx={{position:"sticky", margin: "0px"}}>
 			<StyledToolbar sx={{marginTop: "-5px"}}>
 				<div className="bookmark-sidebar">
-					<SideBar />
+					<TemporaryDrawer />
 				</div>
 				<div className="bookmark-navbar">
 					<TitleBox className="navbar-titlebox">

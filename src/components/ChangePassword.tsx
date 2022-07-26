@@ -15,8 +15,7 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfNewPassword] = useState("");
 
-  //eslint-disable-next-line react-hooks/exhaustive-deps
-  const [fieldError, setFieldError] = useState("");
+  // const [fieldError, setFieldError] = useState("");
   const user = getUser();
   const currentEmail = user?.email;
   let navigate = useNavigate();
@@ -45,7 +44,8 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
         alert("New passwords do not match");
       }
     } else if (response in errorCodes) {
-      setFieldError(errorCodes[response]);
+      // TODO
+      // setFieldError(errorCodes[response]);
     } else {
       alert(response);
     }

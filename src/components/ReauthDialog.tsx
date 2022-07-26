@@ -12,8 +12,7 @@ import { getUser, reAuthenticate } from "../firebase/auth/auth_user";
 const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfPassword] = useState("");
-  //esline-disable-next-line react-hooks/exhaustive-deps
-  const [fieldError, setFieldError] = useState("");
+  // const [fieldError, setFieldError] = useState("");
   const user = getUser();
   const currentEmail = user?.email;
 
@@ -36,8 +35,8 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
       if (response === "reauthenticated") {
         handleCloseDialog();
       } else if (response in errorCodes) {
-        // set errors.
-        setFieldError(errorCodes[response]);
+        // set errors. TODO
+        // setFieldError(errorCodes[response]);
       } else {
         alert(response);
       }

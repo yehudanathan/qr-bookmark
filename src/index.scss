@@ -436,15 +436,17 @@ span {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  transform: translate(150px, -11px);
+  transform: translate(150px);
 }
 
 .bookmark-sidebar {
-  transform: translate(-485px, 34px);
+  position: fixed;
+  top: 30px;
+  left: 30px;
 }
 
 .navbar-titlebox {
-  transform: translateX(38px);
+  transform: translateX(42px);
 }
 
 

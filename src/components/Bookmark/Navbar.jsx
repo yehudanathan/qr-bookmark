@@ -69,7 +69,7 @@ const Navbar = () => {
 
 	return (
 		<AppBar sx={{position:"sticky", margin: "0px"}}>
-			<StyledToolbar sx={{marginTop: "-5px"}}>
+			<StyledToolbar >
 				<div className="bookmark-sidebar">
 					<TemporaryDrawer />
 				</div>

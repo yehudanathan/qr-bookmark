@@ -12,7 +12,7 @@ const QRScanner = () => {
         width: 400,
     }
 
-    const handleScan = (e: any) => {
+    const handleScan = (e) => {
         const text: string = e === null ? 'No result' : e.text;
         if (validator.isURL(text)) {
             setResult(text);
@@ -20,27 +20,28 @@ const QRScanner = () => {
         }
     }
 
-    const handleError = (e: Error) => {
+    const handleError = (e) => {
         console.error(e);
     }
 
     return (
         <>
-            <Button
-                style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
-                variant = "contained"
-                size= "large"
-                sx={{height:"48px", fontFamily: "Montserrat",}}
-                onClick={() => setShowQrReader(!showQrReader)}
-                type="submit"
-                >
-                {showQrReader ? "Close" : "Open Camera"}
-            </Button>
-            {showQrReader && <QrReader
-                style={previewStyle}
-                onScan={handleScan}
-                onError={handleError}
-            />}  
+        <Button
+            style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
+            variant = "contained"
+            size= "large"
+            sx={{height:"48px", fontFamily: "Montserrat",}}
+            onClick={() => setShowQrReader(!showQrReader)}
+            type="submit"
+            >
+            {showQrReader ? "Close" : "Open Camera"}
+        </Button>
+        
+        {showQrReader && <QrReader
+            style={previewStyle}
+            onScan={handleScan}
+            onError={handleError}
+        />}  
         </>
     )
 }

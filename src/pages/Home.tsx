@@ -1,24 +1,25 @@
 import AddLink from "../components/AddLink";
 import QRScanner from "../components/QRScanner";
-import { Stack } from "@mui/material";
-import "../index.scss";
 import TemporaryDrawer from "../components/SideBar";
 import CustomSnackBar from "../components/CustomSnackBar";
 import Profile from "../components/Profile";
-import { useLocation } from "react-router-dom";
 import MetaTags from "react-meta-tags";
+import { Stack } from "@mui/material";
+import { useLocation } from "react-router-dom";
+import { Helmet } from 'react-helmet';
+import "../index.scss";
 
 const Home = () => {
     const location = useLocation();
     const checkPreviousLocation = () => {
-        console.log(location.state);
+        // console.log(location.state);
         if (location.state !== null) {
             return true;
         }
         return false;
     }
 
-    console.log("rendering home");
+    // console.log("rendering home");
     return (
         <div className="body home">
             <MetaTags>
@@ -26,6 +27,9 @@ const Home = () => {
                 <meta name="description" content="A web app to manage and scan QR bookmarks." />
                 <meta property="og:title" content="QR-Bookmark" />
             </MetaTags>
+            <Helmet>
+                <link id="homeIcon" rel="icon" sizes="16x16"/>
+            </Helmet>
             <Stack direction="row" justifyContent="space-between">
                 <TemporaryDrawer/>
                 <Profile/>

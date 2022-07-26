@@ -11,8 +11,7 @@ const PictGenerator = ({ onGenerate }) => {
             const result = await axios.get(baseUnsplashURL);
             setPhotoAs(result);
             onGenerate();
-        }
-        catch (error) {
+        } catch (error) {
             setPhotoError(true);
             onGenerate();
         }

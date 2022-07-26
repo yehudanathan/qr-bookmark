@@ -414,7 +414,7 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 							position: "relative",
 						}}
 					>
-						<Box
+						{/* <Box
 							sx={{
 								position: "absolute",
 								display: "block",
@@ -427,8 +427,8 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 								backgroundColor: "rgba(0,0,0,0.15)",
 								zIndex: 2,
 							}}
-						>
-							<input
+						> */}
+							{/* <input
 								type="checkbox"
 								className="checkbox"
 								id="check1"
@@ -442,7 +442,7 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 									height: "20px",
 								}}
 							/>
-						</Box>
+						</Box> */}
 						<CardMedia
 							component="img"
 							height="65%"
@@ -450,12 +450,9 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 							alt="Some alt text"
 						/>
 						<CardContent>
-							<Typography
-								color="text.secondary"
-								sx={{ fontSize: 18, mb: "10px" }}
-							>
-								Link: {link.URL}
-							</Typography>
+							{/* <h3>
+								{link.URL}
+							</h3> */}
 							<Typography color="text.secondary" sx={{ fontSize: 18 }}>
 								Visited on {moment(link.dateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}
 							</Typography>

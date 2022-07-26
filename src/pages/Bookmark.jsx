@@ -73,13 +73,13 @@ const Bookmark = () => {
 	// 	setSort(event.target.value);
 	// };
 
-	return (
+	return (<>
 		<ThemeProvider theme={dualTheme}>
 			<Box
 				bgcolor={"background.default"}
 				color={"text.primary"}
 				sx={{ m: "-12px" }}
-			>
+				>
 				<Navbar />
 				<Preferences
           links={links}
@@ -94,14 +94,16 @@ const Bookmark = () => {
 					setIsFav={setIsFav}
 					setSort={setSort}
 					setClear={setClear}
-				/>
+					/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
 					<LeftBar />
+					{/* <IconButton /> */}
 					<Post links={links} sort={sort} clear={clear} setSort={setSort} />
 					<RightBar />
 				</Stack>
 			</Box>
 		</ThemeProvider>
+		</>
 	);
 };
 

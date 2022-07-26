@@ -448,12 +448,12 @@ const DesktopPost = ({links ,sort ,clear ,setSort}) => {
 							alt="Some alt text"
 						/>
 						<CardContent>
-							{/* <h3>
+							<h3 className="text-truncate">
 								{link.URL}
-							</h3> */}
-							<Typography color="text.secondary" sx={{ fontSize: 18 }}>
-								Visited on {moment(link.dateTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}
-							</Typography>
+							</h3>
+							<p className="datetime-post">
+								visited {moment(link.dateTime).fromNow()}
+							</p>
 						</CardContent>
 						<CardActions
 							disableSpacing

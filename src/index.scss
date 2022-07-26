@@ -21,6 +21,31 @@
 p {
   font-size: 18px;
   font-family: "Product Sans", "Montserrat";
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+}
+
+h3 {
+  font-size: 20px;
+  font-family: "Product Sans", "Montserrat" !important;
+  color: #000000;
+  font-weight: normal;
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+}
+
+.text-truncate {
+  display: inline-block;
+  max-width: 225px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.datetime-post {
+  font-style: italic;
+  font-size: 15px !important;
+  color: gray;
 }
 
 .form-control {
@@ -39,13 +64,6 @@ p {
   }
 
   .header-3 {
-    font-size: 15px;
-    font-family: "Product Sans", "Montserrat";
-    color: #000000;
-    font-weight: normal;
-  }
-
-  h3 {
     font-size: 15px;
     font-family: "Product Sans", "Montserrat";
     color: #000000;

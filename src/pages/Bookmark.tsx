@@ -1,4 +1,4 @@
-import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
+import { Box, createTheme, Fab, PaletteMode, Stack, ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Bookmark/Navbar";
 import Post from "../components/Bookmark/Post";
@@ -6,6 +6,7 @@ import Preferences from "../components/Bookmark/Preferences";
 import LeftBar from "../components/Bookmark/LeftBar";
 import RightBar from "../components/Bookmark/RightBar";
 import { getLinks } from "../firebase/database/links";
+import AddIcon from '@mui/icons-material/Add';
 
 const Bookmark = () => {
 	// eslint-disable-next-line no-unused-vars
@@ -78,7 +79,7 @@ const Bookmark = () => {
 			<Box
 				bgcolor={"background.default"}
 				color={"text.primary"}
-				sx={{ m: "-12px" }}
+				sx={{ m: "-12px", marginRight: "auto" }}
 				>
 				<Navbar />
 				<Preferences
@@ -98,12 +99,26 @@ const Bookmark = () => {
 					/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
 					<LeftBar />
-					{/* <IconButton /> */}
 					<Post links={links} sort={sort} clear={clear} setSort={setSort} theme={() => {console.log("theme");}}/>
 					<RightBar />
 				</Stack>
 			</Box>
 		</ThemeProvider>
+		<Fab 
+			color="primary"
+			sx={{
+				minWidth: "70px",
+				minHeight: "70px",
+				margin: "0px",
+				top: "auto",
+				right: "20px",
+				bottom: "20px",
+				left: "auto",
+				position: "fixed",
+			}}
+		>
+			<AddIcon sx={{fontSize: "30px"}} />
+		</Fab>
 		</>
 	);
 };

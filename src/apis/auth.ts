@@ -39,7 +39,12 @@ export const authLogin = async (user: AuthUser) => {
   console.log(emails);
   if (user.email === emails.find(u => u === user.email)) {
     console.log("email found in mock data");
-    const passwords = Object.values(users["registered-users"]).map(us => {if (us.email === user.email) {return us.password;}});
+    const passwords = Object.values(users["registered-users"]).map(us => {
+      if (us.email === user.email) {
+        return us.password; 
+      }
+      return null;
+      });
     console.log(passwords);
     if (user.password === passwords.find(p => p === user.password)) {
       console.log("password correct");

@@ -1,5 +1,4 @@
 import { Card, Stack } from "@mui/material";
-// import { authLogout } from "../apis/auth";
 import { Outlet, useLocation } from "react-router-dom";
 import { getUser } from "../firebase/auth/auth_user";
 import { useState } from "react";
@@ -8,6 +7,7 @@ import PictGenerator from "../components/PictGenerator";
 import MetaTags from "react-meta-tags";
 import profilePicture from '../static/profile-picture.png';
 import ProfileInConfig from "../components/ProfileInConfig";
+// import { authLogout } from "../apis/auth";
 
 const Config = () => {
   // for MOCK DATA. uncomment if backend is not available
@@ -23,6 +23,7 @@ const Config = () => {
     displayPicture = defaultPicture;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const toggleLoading = () => {setIsLoading(false)};
   const path = useLocation().pathname;

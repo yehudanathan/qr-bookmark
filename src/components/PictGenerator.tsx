@@ -19,6 +19,7 @@ const PictGenerator = ({ onGenerate }) => {
 
     useEffect(() => {
         setPhoto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     if (photoError) {
@@ -31,7 +32,7 @@ const PictGenerator = ({ onGenerate }) => {
             <a
                 className="credit"
                 target="_blank"
-                href={`https://unsplash.com/@${photo.data.user.username}`}
+                href={`https://unsplash.com/@${photo.data.user.username}`} rel="noreferrer"
             >
                 <img className="img" src={photo.data.urls.regular} alt="background"/>
             </a>

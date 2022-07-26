@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Search as SearchIcon } from "@mui/icons-material";
+import SideBar from "../SideBar";
 
 const StyledToolbar = styled(Toolbar)({
 	display: "flex",
@@ -68,20 +69,25 @@ const Navbar = () => {
 
 	return (
 		<AppBar sx={{position:"sticky", margin: "0px"}}>
-			<StyledToolbar>
-				<TitleBox>
-					<CropFree sx={{ fontSize: "40px" }} />
-					<Typography variant="h4">QR-Bookmark</Typography>
-				</TitleBox>
-				<Search>
-					<SearchIconWrapper>
-						<SearchIcon />
-					</SearchIconWrapper>
-					<StyledInputBase
-						placeholder="Search…"
-						inputProps={{ "aria-label": "search" }}
-					/>
-				</Search>
+			<StyledToolbar sx={{marginTop: "-5px"}}>
+				<div className="bookmark-sidebar">
+					<SideBar />
+				</div>
+				<div className="bookmark-navbar">
+					<TitleBox className="navbar-titlebox">
+						<CropFree sx={{ fontSize: "40px" }} />
+						<Typography variant="h4">QR-Bookmark</Typography>
+					</TitleBox>
+					<Search>
+						<SearchIconWrapper>
+							<SearchIcon />
+						</SearchIconWrapper>
+						<StyledInputBase
+							placeholder="Search…"
+							inputProps={{ "aria-label": "search" }}
+						/>
+					</Search>
+				</div>
 			</StyledToolbar>
 			<Menu
 				id="demo-positioned-menu"

@@ -1,5 +1,5 @@
 import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Bookmark/Navbar";
 import Post from "../components/Bookmark/Post";
 import Preferences from "../components/Bookmark/Preferences";

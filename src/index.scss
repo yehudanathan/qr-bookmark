@@ -12,10 +12,17 @@
       font-size: 40px;
       font-family: "Gotham Medium", "Montserrat";
       color: #262254;
+      margin-block-end: 1px !important;
+      text-align: left;
     }
   }
   margin: -8px;
   height: 100vh;
+}
+
+h1 {
+  margin-block-start: 3px;
+  margin-block-end: 3px;
 }
 
 p {
@@ -473,5 +480,39 @@ span {
 .navbar-titlebox {
   transform: translateX(42px);
 }
+
+.link-checkbox {
+  opacity: 0.0;
+  transition: .3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.active-checkbox {
+  opacity: 1;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-hover {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  cursor: pointer;
+}
+
+.checkbox-hover:hover .link-checkbox {
+  opacity: 1;
+  cursor: pointer;
+}
+
 
 

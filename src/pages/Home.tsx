@@ -35,7 +35,7 @@ const Home = () => {
                 <Profile/>
             </Stack>
             <Stack direction="column" spacing={1} alignItems="center">
-                <h1 className="title">Bookmark your link now.</h1>
+                <h1 className="title">Quick add bookmarks...</h1>
                 <AddLink/>
                 <QRScanner/>
             </Stack>

@@ -500,6 +500,9 @@ span {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  &.select-all {
+    position: static;
+  }
 }
 
 .checkbox-hover {

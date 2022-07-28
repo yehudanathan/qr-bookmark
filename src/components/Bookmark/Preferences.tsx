@@ -12,6 +12,7 @@ import {
 	MenuItem,
 	Modal,
 	Select,
+	Stack,
 	styled,
 	TextField,
 	Typography,
@@ -61,6 +62,7 @@ const Preferences = ({
 	handleFilter,
 	setSort,
 	setClear,
+	handleSelectAll
 }) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 
@@ -89,153 +91,181 @@ const Preferences = ({
 	return (
 		<StyledBox>
 			<IconAndText>
-				<Button
-					// flex={1}
-					variant="outlined"
-					startIcon={isDesktop ? <FilterList /> : <></>}
+				<Stack
+					direction="row"
+					justifyContent="flex-end"
+					spacing={2}
 					sx={{
-						textTransform: "none",
-						display: "flex",
-						height: "55px",
-						flexGrow: 1,
-						p: { xs: 0, sm: 0 },
+						marginTop: "15px",
+						minWidth: "calc(100vw - 30px)",
+						marginRight: "10px",
+						height: "40px"
 					}}
-					onClick={() => setFilterOpen(true)}
-					endIcon={<KeyboardArrowDown />}
 				>
-					<Typography>Filter</Typography>
-				</Button>
-				<StyledModal
-					open={filterOpen}
-					onClose={(e) => setFilterOpen(false)}
-					aria-labelledby="modal-modal-title"
-					aria-describedby="modal-modal-description"
-				>
-					<Box
-						width={550}
-						height={200}
-						bgcolor={"background.default"}
-						color={"text.primary"}
-						p={3}
-						borderRadius={5}
-						sx={{ position: "relative" }}
-					>
-						<Typography variant="h6" color="gray" textAlign="center" mb="15px">
-							Filter Settings
-						</Typography>
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "space-between",
-								mb: "15px",
-							}}
-						>
-							<div>
-								<LocalizationProvider dateAdapter={AdapterDateFns}>
-									<DateTimePicker
-										renderInput={(props) => <TextField {...props} />}
-										// id="From"
-										label="From"
-										value={from}
-										onChange={(newFrom) => {
-											setFrom(newFrom);
-										}}
-									/>
-								</LocalizationProvider>
-							</div>
-							<Divider orientation="vertical" flexItem />
-							<div>
-								<LocalizationProvider dateAdapter={AdapterDateFns}>
-									<DateTimePicker
-										renderInput={(props) => <TextField {...props} />}
-										// id="To"
-										label="To"
-										value={to}
-										onChange={(newTo) => {
-											setTo(newTo);
-										}}
-									/>
-								</LocalizationProvider>
-							</div>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								gap: "5px",
-								alignItems: "center",
-								position: "absolute",
-								right: "25px",
-							}}
-						>
-							<Checkbox onChange={() => setIsFav(!isFav)} />
-							<Typography fontWeight={500}>Favourites Only</Typography>
-						</Box>
-						<Button
-							variant="contained"
-							sx={{
-								textTransform: "none",
-								position: "absolute",
-								right: "25px",
-								bottom: "15px",
-								fontSize: "16px",
-							}}
-							onClick={() => setLinks(links)}
-						>
-							Confirm
-						</Button>
-					</Box>
-				</StyledModal>
-				<FormControl sx={{ flexGrow: 1 }}>
-					<InputLabel
-						id="demo-simple-select-label"
+					<Button
+						// flex={1}
+						variant="outlined"
+						startIcon={isDesktop ? <FilterList /> : <></>}
 						sx={{
-							fontSize: { isDesktop: true ? "17px" : "10px" },
-							alignItems: "center",
-							justifyContent: "center",
+							textTransform: "none",
+							display: "flex",
+							minHeight: "56.8px",
+							maxWidth: "160px",
+							flexGrow: 1,
+							p: { xs: 0, sm: 0 },
+						}}
+						onClick={() => setFilterOpen(true)}
+						endIcon={<KeyboardArrowDown />}
+					>
+						<Typography>Filter</Typography>
+					</Button>
+					<StyledModal
+						open={filterOpen}
+						onClose={(e) => setFilterOpen(false)}
+						aria-labelledby="modal-modal-title"
+						aria-describedby="modal-modal-description"
+					>
+						<Box
+							width={550}
+							height={200}
+							bgcolor={"background.default"}
+							color={"text.primary"}
+							p={3}
+							borderRadius={5}
+							sx={{ position: "relative" }}
+						>
+							<Typography variant="h6" color="gray" textAlign="center" mb="15px">
+								Filter Settings
+							</Typography>
+							<Box
+								sx={{
+									mb: "15px",
+									display: "flex",
+									justifyContent: "space-between",
+								}}
+							>
+								<div>
+									<LocalizationProvider dateAdapter={AdapterDateFns}>
+										<DateTimePicker
+											renderInput={(props) => <TextField {...props} />}
+											// id="From"
+											label="From"
+											value={from}
+											onChange={(newFrom) => {
+												setFrom(newFrom);
+											}}
+										/>
+									</LocalizationProvider>
+								</div>
+								<Divider orientation="vertical" flexItem />
+								<div>
+									<LocalizationProvider dateAdapter={AdapterDateFns}>
+										<DateTimePicker
+											renderInput={(props) => <TextField {...props} />}
+											// id="To"
+											label="To"
+											value={to}
+											onChange={(newTo) => {
+												setTo(newTo);
+											}}
+										/>
+									</LocalizationProvider>
+								</div>
+							</Box>
+							<Box
+								sx={{
+									display: "flex",
+									gap: "5px",
+									alignItems: "center",
+									position: "absolute",
+									right: "25px",
+								}}
+							>
+								<Checkbox onChange={() => setIsFav(!isFav)} />
+								<Typography fontWeight={500}>Favourites Only</Typography>
+							</Box>
+							<Button
+								variant="contained"
+								sx={{
+									textTransform: "none",
+									position: "absolute",
+									right: "25px",
+									bottom: "15px",
+									fontSize: "16px",
+								}}
+								onClick={() => setLinks(links)}
+							>
+								Confirm
+							</Button>
+						</Box>
+					</StyledModal>
+
+					<FormControl 
+						sx={{ 
+							flexGrow: 1,
+							display: "flex",
+							maxHeight: "40px",
+							maxWidth: "160px",
 						}}
 					>
-						{isDesktop ? "Sort by" : "Sort"}
-					</InputLabel>
-					<Select
-						labelId="select-label"
-						id="select"
-						value={sort}
-						label="Sort by"
-						onChange={(e) => {
-							const sortBy = e.target.value;
-							const oldLinks = links;
-							setSort(sortBy);
-							if (sortBy === "Oldest") {
-								oldLinks.sort((a, b) =>
-									a.time < b.time ? 1 : b.time < a.time ? -1 : 0
-								);
-							} else {
-								oldLinks.sort((a, b) =>
-									a.time > b.time ? 1 : b.time > a.time ? -1 : 0
-								);
-							}
-							setLinks(links);
+						<InputLabel
+							id="demo-simple-select-label"
+							sx={{
+								fontSize: { isDesktop: true ? "17px" : "10px" },
+								alignItems: "center",
+								justifyContent: "center",
+								maxHeight: "40px",
+							}}
+						>
+							{isDesktop ? "Sort by" : "Sort"}
+						</InputLabel>
+						<Select
+							labelId="select-label"
+							id="select"
+							value={sort}
+							label="Sort by"
+							onChange={(e) => {
+								const sortBy = e.target.value;
+								const oldLinks = links;
+								setSort(sortBy);
+								if (sortBy === "Oldest") {
+									oldLinks.sort((a, b) =>
+										a.time < b.time ? 1 : b.time < a.time ? -1 : 0
+									);
+								} else {
+									oldLinks.sort((a, b) =>
+										a.time > b.time ? 1 : b.time > a.time ? -1 : 0
+									);
+								}
+								setLinks(links);
+							}}
+						>
+							<MenuItem value={"Oldest"}>Oldest</MenuItem>
+							<MenuItem value={"Newest"}>Newest</MenuItem>
+						</Select>
+					</FormControl>
+					<Stack 
+						direction="row" 
+						spacing={1}
+						sx={{
+							transform: "translate(-5px, 18px)"
 						}}
 					>
-						<MenuItem value={"Oldest"}>Oldest</MenuItem>
-						<MenuItem value={"Newest"}>Newest</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl sx={{ flexGrow: 1 }}>
-					<InputLabel id="demo-simple-select-label" sx={{ fontSize: "17px" }}>
-						Clear
-					</InputLabel>
-					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
-						value={clear}
-						label="Clear"
-						onChange={(e) => setClear(e.target.value)}
-					>
-						<MenuItem value={"Select"}>Select</MenuItem>
-						<MenuItem value={"Select all"}>Select all</MenuItem>
-					</Select>
-				</FormControl>
+						<input
+							type="checkbox"
+							className="active-checkbox select-all"
+							onClick={handleSelectAll}
+						/>
+						<Typography 
+							fontWeight={500}
+							sx={{
+								transform: "translate(-5px, 1px)"
+							}}
+						>
+							Select all
+						</Typography>
+					</Stack>
+				</Stack>
 			</IconAndText>
 		</StyledBox>
 	);

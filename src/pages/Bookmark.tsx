@@ -95,7 +95,8 @@ const Bookmark = () => {
 					setSort={setSort}
 					setClear={setClear}
 					handleFilter={() => {console.log("handle filter");}}
-					/>
+					handleSelectAll={() => {alert("Select all in progress")}}
+				/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
 					<LeftBar />
 					<Post links={links} sort={sort} clear={clear} setSort={setSort} theme={() => {console.log("theme");}}/>

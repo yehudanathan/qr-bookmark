@@ -15,6 +15,7 @@ import moment from "moment";
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CustomFab from "../CustomFab";
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
 // import { getUserLinks } from "../../apis/link";
@@ -66,10 +67,35 @@ const Post = ({links ,sort ,clear ,setSort, theme}) => {
 	const handleFab = () => {
 		if (selectionMode) {
 			return (<>
+				<CustomFab
+					color="" // TODO...
+					iconComponent={<DeleteIcon sx={{ fontSize: "30px" }} />}
+					onClick={() => {alert("Delete bookmarks in progress")}}
+					style={{
+						minWidth: "70px",
+						minHeight: "70px",
+						margin: "0px",
+						top: "auto",
+						right: "110px",
+						bottom: "20px",
+						left: "auto",
+						position: "fixed",
+					}}
+				/>
 				<CustomFab 
 					color="primary" 
 					iconComponent={<CloseIcon sx={{ fontSize: "30px" }} />} 
 					onClick={() => {deactivateSelectionMode(); clearAllSelection();}} 
+					style={{
+						minWidth: "70px",
+						minHeight: "70px",
+						margin: "0px",
+						top: "auto",
+						right: "20px",
+						bottom: "20px",
+						left: "auto",
+						position: "fixed",
+					}}
 				/>
 			</>);
 		}
@@ -78,6 +104,16 @@ const Post = ({links ,sort ,clear ,setSort, theme}) => {
 				color="primary" 
 				iconComponent={<AddIcon sx={{ fontSize: "30px" }}/>} 
 				onClick={() => {alert("Addition in progress! :)")}}
+				style={{
+					minWidth: "70px",
+					minHeight: "70px",
+					margin: "0px",
+					top: "auto",
+					right: "20px",
+					bottom: "20px",
+					left: "auto",
+					position: "fixed",
+				}}
 			/>
 		</>);
 	}

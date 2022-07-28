@@ -1,7 +1,7 @@
 import { getDatabase, ref, query, equalTo, get, push, orderByChild, QueryConstraint } from 'firebase/database';
 import firebaseApp from '../index';
 import { getUser } from '../auth/auth_user';
-import { Link } from '../../models/Link';
+import { Link } from '../models/Link';
 
 const database = getDatabase(firebaseApp);
 const basePath = 'links';

@@ -10,62 +10,59 @@ import {
 	IconButton,
 } from "@mui/material";
 import { faker } from '@faker-js/faker';
-import { useState } from "react";
+import { Link } from "../../firebase/models/Link";
 import moment from "moment";
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CustomFab from "../CustomFab";
-// import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
+// for MOCK DATA below
 // import { getUserLinks } from "../../apis/link";
 // import { getCurrentUserId } from "../../apis/session";
 
-const Post = ({links ,sort ,clear ,setSort, theme}) => {
-// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
-	const [selectionMode, setSelectionMode] = useState(false);
+const Post = ({ 
+	links,
+	sort, 
+	clear, 
+	setSort, 
+	theme, 
+	selectMode,
+	activateSelectMode,
+	deactivateSelectMode,
+	clearSelection
+}) => {
+	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
 
-// const cards = linksWithIndex.map(el => {
-// 	return (
-// 		<Card>
-// 			{el.url}
-// 			{el.title}
-// 			{el.isSelected}
-// 			<button onClick={() => handleSelect(el)} />
-// 		</Card>
-// 	)
-// })
-
-	const activateSelectionMode = () => {
-		setSelectionMode(true);
-	}
-
-	const deactivateSelectionMode = () => {
-		setSelectionMode(false);
-	}
-
-	const clearAllSelection = () => {
-		// TODO
-	}
+	// const cards = linksWithIndex.map(el => {
+	// 	return (
+	// 		<Card>
+	// 			{el.url}
+	// 			{el.title}
+	// 			{el.isSelected}
+	// 			<button onClick={() => handleSelect(el)} />
+	// 		</Card>
+	// 	)
+	// })
 	
-	function createRandomLinks(index) {
-		return {
-			title: faker.word.adjective()	,
-			URL: faker.internet.domainName(),
-			dateTime:faker.date.past(),
-			favorite:false,
-			userID:index,
-			index: index,
-			isSelected: false,
-			display: true
-		};
-	}
+	// function createRandomLinks(index) {
+	// 	return {
+	// 		title: faker.word.adjective()	,
+	// 		URL: faker.internet.domainName(),
+	// 		dateTime:faker.date.past(),
+	// 		favorite:false,
+	// 		userID:index,
+	// 		index: index,
+	// 		isSelected: false,
+	// 		display: true
+	// 	};
+	// }
 
-	const mockLinks : any = [];
-	Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
+	// const mockLinks : any = [];
+	// Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
 	
 	const handleFab = () => {
-		if (selectionMode) {
+		if (selectMode) {
 			return (<>
 				<CustomFab
 					color="" // TODO...
@@ -85,7 +82,7 @@ const Post = ({links ,sort ,clear ,setSort, theme}) => {
 				<CustomFab 
 					color="primary" 
 					iconComponent={<CloseIcon sx={{ fontSize: "30px" }} />} 
-					onClick={() => {deactivateSelectionMode(); clearAllSelection();}} 
+					onClick={() => {deactivateSelectMode(); clearSelection();}} 
 					style={{
 						minWidth: "70px",
 						minHeight: "70px",
@@ -124,7 +121,7 @@ const Post = ({links ,sort ,clear ,setSort, theme}) => {
 
 		<Container sx={{ py: { xs: 4, md: 8 } }} maxWidth="md">
 			<Grid container spacing={4}>
-				{mockLinks.map((link : any) => (
+				{links.map((link : any) => (
 					<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
 					<Card
 						sx={{
@@ -133,17 +130,18 @@ const Post = ({links ,sort ,clear ,setSort, theme}) => {
 							position: "relative",
 						}}
 					>
-						<div className="checkbox-hover">
-							{/* TODO checks whether select mode is enabled, if yes will display all the checkboxes */}
-							{/* inspired by outlook */}
-							{selectionMode ? 
+						<div className="checkbox-hover">							{/* inspired by outlook */}
+							{selectMode ? 
 								<input
 									type="checkbox"
 									className="active-checkbox"
+									value={link.isSelected}
+									onClick={() => {link.isSelected = !link.isSelected;}}
 								/> : <input
 									type="checkbox"
 									className="link-checkbox"
-									onClick={activateSelectionMode}
+									onClick={() => {activateSelectMode(); link.isSelected = !link.isSelected;}}
+									value={link.isSelected}
 								/>
 							}
 						</div>
@@ -157,10 +155,10 @@ const Post = ({links ,sort ,clear ,setSort, theme}) => {
 						</a>
 							<CardContent>
 							<h3 className="text-truncate">
-								{link.URL}
+								{link.title}
 							</h3>
 							<p className="datetime-post">
-								visited {moment(link.dateTime).fromNow()}
+								saved {moment(link.dateTime).fromNow()}
 							</p>
 						</CardContent>
 						<CardActions

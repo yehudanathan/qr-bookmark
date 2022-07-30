@@ -25,16 +25,6 @@ const InfoDialog = ({
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      {/* <DialogTitle
-        sx={{
-          fontFamily: "Gotham Medium", 
-          fontWeight: "bold", 
-          fontSize: "28px", 
-          color: "#730c0c"
-        }}
-      >
-        Details
-      </DialogTitle> */}
       <DialogTitle
         sx={{
           fontFamily: "Gotham Medium", 

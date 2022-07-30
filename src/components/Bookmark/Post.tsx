@@ -209,7 +209,7 @@ const Post = ({
 					</Card>
 				</Grid>
 				<InfoDialog
-					displayDialog={true}
+					displayDialog={false}
 					handleCloseDialog={() => {alert("inprogress")}}
 					title={link.title}
 					URL={link.URL}

@@ -30,7 +30,9 @@ const Post = ({
 	selectMode,
 	activateSelectMode,
 	deactivateSelectMode,
-	clearSelection
+	clearSelection,
+	handleSelectAll,
+	allSelected
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
 
@@ -130,17 +132,32 @@ const Post = ({
 							position: "relative",
 						}}
 					>
-						<div className="checkbox-hover">							{/* inspired by outlook */}
+						<div className="checkbox-hover">
 							{selectMode ? 
 								<input
 									type="checkbox"
 									className="active-checkbox"
 									value={link.isSelected}
-									onClick={() => {link.isSelected = !link.isSelected;}}
+									onClick={() => {
+										link.isSelected = !link.isSelected;
+										if (allSelected()) {
+											handleSelectAll();
+										} else {
+											clearSelection();
+										}
+									}}
 								/> : <input
 									type="checkbox"
 									className="link-checkbox"
-									onClick={() => {activateSelectMode(); link.isSelected = !link.isSelected;}}
+									onClick={() => {
+										activateSelectMode(); 
+										link.isSelected = !link.isSelected;
+										if (allSelected()) {
+											handleSelectAll();
+										} else {
+											clearSelection();
+										}
+									}}
 									value={link.isSelected}
 								/>
 							}

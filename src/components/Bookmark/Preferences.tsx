@@ -62,7 +62,12 @@ const Preferences = ({
 	handleFilter,
 	setSort,
 	setClear,
-	handleSelectAll
+	handleSelectAll,
+	allSelected,
+	clearSelection,
+	selectionMode,
+	activateSelectionMode,
+	deactivateSelectionMode
 }) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 
@@ -254,7 +259,18 @@ const Preferences = ({
 						<input
 							type="checkbox"
 							className="active-checkbox select-all"
-							onClick={handleSelectAll}
+							onClick={() => {
+								if (!selectionMode) {
+									activateSelectionMode();
+								} else {
+									deactivateSelectionMode();
+								}
+								if (!allSelected()) {
+									handleSelectAll();
+								} else {
+									clearSelection();
+								}
+							}}
 						/>
 						<Typography 
 							fontWeight={500}

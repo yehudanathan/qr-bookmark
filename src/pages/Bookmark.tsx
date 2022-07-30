@@ -19,6 +19,7 @@ const Bookmark = () => {
 	const [sort, setSort] = useState("");
 	const [clear, setClear] = useState("");
 	const [selectionMode, setSelectionMode] = useState(false);
+	const [selectAll, setSelectAll] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -54,21 +55,31 @@ const Bookmark = () => {
 		setSelectionMode(false);
 	}
 
+	const allSelected = () => {
+		// links.forEach((link : any) => {
+		// 	if (!link.isSelected) return false;
+		// });
+		// return true;
+		return selectAll;
+	}
+
 	const clearAllSelection = () => {
 		links.forEach((link : any) => {
 			link.isSelected = false;
 		});
+		setSelectAll(false);
 	}
 
 	const handleSelectAll = () => {
-		if (!selectionMode) {
-			activateSelectionMode();
-			links.forEach((link: any) => {
-				link.isSelected = true;
-			});
-		} else {
-			deactivateSelectionMode();
-		}
+		// if (!selectionMode) {
+		// 	activateSelectionMode();
+		// } else {
+		// 	deactivateSelectionMode();
+		// }
+		links.forEach((link: any) => {
+			link.isSelected = true;
+		});
+		setSelectAll(true);
 	}
 
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
@@ -131,6 +142,11 @@ const Bookmark = () => {
 					setClear={setClear}
 					handleFilter={() => {console.log("handle filter");}}
 					handleSelectAll={handleSelectAll}
+					allSelected={allSelected}
+					clearSelection={clearAllSelection}
+					selectionMode={selectionMode}
+					activateSelectionMode={activateSelectionMode}
+					deactivateSelectionMode={deactivateSelectionMode}
 				/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
 					<LeftBar />
@@ -144,6 +160,8 @@ const Bookmark = () => {
 						activateSelectMode={activateSelectionMode}
 						deactivateSelectMode={deactivateSelectionMode}
 						clearSelection={clearAllSelection}
+						handleSelectAll={handleSelectAll}
+						allSelected={allSelected}
 					/>
 					<RightBar />
 				</Stack>

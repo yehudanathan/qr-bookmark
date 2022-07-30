@@ -517,5 +517,16 @@ span {
   cursor: pointer;
 }
 
+.disable-text-decor {
+  text-decoration: none;
+}
+
+.URL {
+  font-style: italic;
+  &:hover {
+    color: #42a5f5;
+  }
+}
+
 
 

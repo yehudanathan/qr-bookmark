@@ -17,6 +17,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CustomFab from "../CustomFab";
+import InfoDialog from "./InfoDialog";
 // for MOCK DATA below
 // import { getUserLinks } from "../../apis/link";
 // import { getCurrentUserId } from "../../apis/session";
@@ -123,7 +124,7 @@ const Post = ({
 
 		<Container sx={{ py: { xs: 4, md: 8 } }} maxWidth="md">
 			<Grid container spacing={4}>
-				{links.map((link : any) => (
+				{links.map((link : any) => (<>
 					<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
 					<Card
 						sx={{
@@ -187,7 +188,12 @@ const Post = ({
 								p: "0px",
 							}}
 						>
-						<IconButton aria-label="details" >
+						<IconButton 
+							aria-label="details" 
+							onClick={() => {
+								// handle open and close dialog
+							}}
+						>
 							<InfoIcon />
 						</IconButton>
 							<IconButton aria-label="add to favorites">
@@ -201,7 +207,15 @@ const Post = ({
 							</IconButton>
 						</CardActions>
 					</Card>
-				</Grid>))}
+				</Grid>
+				<InfoDialog
+					displayDialog={true}
+					handleCloseDialog={() => {alert("inprogress")}}
+					title={link.title}
+					URL={link.URL}
+					dateTime={link.dateTime}
+				/>
+				</>))}
 			</Grid>
 		</Container>
 		{handleFab()}

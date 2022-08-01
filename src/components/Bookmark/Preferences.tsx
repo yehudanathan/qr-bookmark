@@ -260,16 +260,7 @@ const Preferences = ({
 							type="checkbox"
 							className="active-checkbox select-all"
 							onClick={() => {
-								if (!selectionMode) {
-									activateSelectionMode();
-								} else {
-									deactivateSelectionMode();
-								}
-								if (!allSelected()) {
-									handleSelectAll();
-								} else {
-									clearSelection();
-								}
+								handleSelectAll();
 							}}
 						/>
 						<Typography 

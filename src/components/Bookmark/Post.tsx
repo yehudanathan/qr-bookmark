@@ -33,7 +33,8 @@ const Post = ({
 	deactivateSelectMode,
 	clearSelection,
 	handleSelectAll,
-	allSelected
+	allSelected,
+	setSelect,
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
 
@@ -117,105 +118,99 @@ const Post = ({
 			/>
 		</>);
 	}
-
+	
 	return (<>
 		{/* {isDesktop ? <DesktopPost links={links} /> :	<MobilePost links={links} />} */}
 		{/* <MobilePost links={{ alex: "hello" }} /> */}
 
-		<Container sx={{ py: { xs: 4, md: 8 } }} maxWidth="md">
-			<Grid container spacing={4}>
-				{links.map((link : any) => (<>
-					<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
-					<Card
-						sx={{
-							height: "100%",
-							margin: "5px",
-							position: "relative",
-						}}
-					>
-						<div className="checkbox-hover">
-							{selectMode ? 
-								<input
-									type="checkbox"
-									className="active-checkbox"
-									value={link.isSelected}
-									onClick={() => {
-										link.isSelected = !link.isSelected;
-										if (allSelected()) {
-											handleSelectAll();
-										} else {
-											clearSelection();
-										}
-									}}
-								/> : <input
-									type="checkbox"
-									className="link-checkbox"
-									onClick={() => {
-										activateSelectMode(); 
-										link.isSelected = !link.isSelected;
-										if (allSelected()) {
-											handleSelectAll();
-										} else {
-											clearSelection();
-										}
-									}}
-									value={link.isSelected}
-								/>
-							}
-						</div>
-						<a href={'https://' + link.URL}>
-							<CardMedia
-								component="img"
-								height="65%"
-								image="https://boardinggate.com.sg/wp-content/uploads/2016/08/dummy-prod-1.jpg"
-								alt="Some alt text"
-								/>
-						</a>
-							<CardContent>
-							<h3 className="text-truncate">
-								{link.title}
-							</h3>
-							<p className="datetime-post">
-								saved {moment(link.dateTime).fromNow()}
-							</p>
-						</CardContent>
-						<CardActions
-							disableSpacing
+		<Container sx={{ paddingTop: "30px" }} maxWidth="md" >
+			<Grid container spacing={4} >
+				{links.map((link) => {
+					// const content = dataArray[index];
+          // console.log("🚀 ~ file: Post.tsx ~ line 128 ~ {dataArray.map ~ content", content);
+					return (<>
+						<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
+						<Card
 							sx={{
-								position: "absolute",
-								bottom: "0px",
-								right: "5px",
-								p: "0px",
+								height: "100%",
+								margin: "5px",
+								position: "relative",
 							}}
 						>
-						<IconButton 
-							aria-label="details" 
-							onClick={() => {
-								// handle open and close dialog
-							}}
-						>
-							<InfoIcon />
-						</IconButton>
-							<IconButton aria-label="add to favorites">
-								<Checkbox
-									icon={<FavoriteBorder />}
-									checkedIcon={<Favorite sx={{ color: "red" }} />}
-								/>
+							<div className="checkbox-hover">
+								{selectMode ? 
+									<input
+										type="checkbox"
+										className="active-checkbox"
+										value={link.isSelected}
+										onClick={() => {
+											setSelect(link.index);
+										}}
+									/> : <input
+										type="checkbox"
+										className="link-checkbox"
+										value={link.isSelected}
+										onClick={() => {
+											activateSelectMode(); 
+											setSelect(link.index);
+										}}
+									/>
+								}
+							</div>
+							<a href={'https://' + link.URL}>
+								<CardMedia
+									component="img"
+									height="65%"
+									image="https://boardinggate.com.sg/wp-content/uploads/2016/08/dummy-prod-1.jpg"
+									alt="Some alt text"
+									/>
+							</a>
+								<CardContent>
+								<h3 className="text-truncate">
+									{link.title}
+								</h3>
+								<p className="datetime-post">
+									saved {moment(link.dateTime).fromNow()}
+								</p>
+							</CardContent>
+							<CardActions
+								disableSpacing
+								sx={{
+									position: "absolute",
+									bottom: "0px",
+									right: "5px",
+									p: "0px",
+								}}
+							>
+							<IconButton 
+								aria-label="details" 
+								onClick={() => {
+									// handle open and close dialog
+								}}
+							>
+								<InfoIcon />
 							</IconButton>
-							<IconButton aria-label="share">
-								<Share />
-							</IconButton>
-						</CardActions>
-					</Card>
-				</Grid>
-				<InfoDialog
-					displayDialog={false}
-					handleCloseDialog={() => {alert("inprogress")}}
-					title={link.title}
-					URL={link.URL}
-					dateTime={link.dateTime}
-				/>
-				</>))}
+								<IconButton aria-label="add to favorites">
+									<Checkbox
+										icon={<FavoriteBorder />}
+										checkedIcon={<Favorite sx={{ color: "red" }} />}
+									/>
+								</IconButton>
+								<IconButton aria-label="share">
+									<Share />
+								</IconButton>
+							</CardActions>
+						</Card>
+					</Grid>
+					<InfoDialog
+						displayDialog={false}
+						handleCloseDialog={() => {alert("inprogress")}}
+						title={link.title}
+						URL={link.URL}
+						dateTime={link.dateTime}
+					/>
+					</>)
+				})}
 			</Grid>
 		</Container>
 		{handleFab()}

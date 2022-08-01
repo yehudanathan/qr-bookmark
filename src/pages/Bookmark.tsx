@@ -1,18 +1,19 @@
 import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
 import { getLinks } from "../firebase/database/links";
 import { useEffect, useState } from "react";
-import { Link } from '../firebase/models/Link';
+// import { Link } from '../firebase/models/Link';
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
 import Navbar from "../components/Bookmark/Navbar";
 import Post from "../components/Bookmark/Post";
 import Preferences from "../components/Bookmark/Preferences";
 import LeftBar from "../components/Bookmark/LeftBar";
 import RightBar from "../components/Bookmark/RightBar";
+// import update from 'react-addons-update';
 
 const Bookmark = () => {
 	// eslint-disable-next-line no-unused-vars
 	const [mode, setMode] = useState("light");
-	const [links, setLinks] = useState<Link[]>([]);
+	const [links, setLinks] = useState<any[]>([]);
 	const [from, setFrom] = useState(new Date());
 	const [to, setTo] = useState(new Date());
 	const [isFav, setIsFav] = useState(false);
@@ -20,7 +21,11 @@ const Bookmark = () => {
 	const [clear, setClear] = useState("");
 	const [selectionMode, setSelectionMode] = useState(false);
 	const [selectAll, setSelectAll] = useState(false);
-
+	console.log(" ");
+  console.log("🚀 ~ file: Bookmark.tsx ~ line 23 ~ Bookmark ~ selectionMode", selectionMode)
+	console.log("🚀 ~ file: Bookmark.tsx ~ line 17 ~ Bookmark ~ links", links)
+	
+	
 	useEffect(() => {
 		async function fetchData() {
 			// initialize by fetching links
@@ -29,20 +34,16 @@ const Bookmark = () => {
 				console.log("links is null bruh");
 				return;
 			}
-			links.forEach(async (link) => {
-				// CORS error. need to find another package to fetch URL preview
-				// await getLinkPreview('https://' + link.URL).then((data) => {
-				// 	console.log(data);
-				// });
-			});
-			const linksWithSelected : any = links.map((link, index) => ({
-				...link,
-				index: index,
-				isSelected: false,
-				display: true,
-				// preview: "",
-			}));
-			setLinks(linksWithSelected);
+			const newData : any = links.map((link, index) => (
+				{
+					...link,
+					index: index,
+					isSelected: false,
+				}
+			));
+			setLinks(newData);
+			// setDataArray(newData);
+			// console.log(dataArray);
 		}
 		fetchData();
 	}, []);
@@ -63,23 +64,68 @@ const Bookmark = () => {
 		return selectAll;
 	}
 
+	const setSelect = (index) => {
+		// if (dataArray) {
+		// 	const newData : any = dataArray;
+		// 	const currentSelect = dataArray[index]["isSelected"];
+		// 	newData[index]["isSelected"] = !currentSelect;
+		// 	setDataArray(newData);
+		// }
+		const currentState = links.filter((link) => link.index === index).map((link) => link.isSelected)[0];	
+		const newLink = links.filter((link) => link.index === index).map((link) =>
+			({
+				...link,
+				isSelected: !currentState,
+			})
+		);
+
+		const remainingLinks = links.filter((link) => link.index !== index);
+		const updatedLinks = [...remainingLinks.slice(0, index), newLink[0], ...remainingLinks.slice(index)];
+    // console.log("🚀 ~ file: Bookmark.tsx ~ line 79 ~ setSelect ~ updatedLinks", updatedLinks)
+		setLinks(updatedLinks);
+	}
+
 	const clearAllSelection = () => {
-		links.forEach((link : any) => {
-			link.isSelected = false;
+		// const newLinks = [];
+		// links.forEach((link) =>
+		// 	newLinks.concat({
+		// 		...link,
+		// 		isSelected: false,
+		// 	})
+		// );
+
+		const newLinks = links.map((link) => {
+			if (link.isSelected === true) {
+				return ({
+				...link,
+				isSelected: false
+				})
+			}
+			return link;
 		});
-		setSelectAll(false);
+		
+		// const newLinks : any[] = [];
+		// links.forEach((link) => {
+		// 	newLinks.push({
+		// 		...link,
+		// 		isSelected: false,
+		// 	})
+		// });
+		setLinks(newLinks);
 	}
 
 	const handleSelectAll = () => {
-		// if (!selectionMode) {
-		// 	activateSelectionMode();
-		// } else {
-		// 	deactivateSelectionMode();
-		// }
-		links.forEach((link: any) => {
-			link.isSelected = true;
-		});
-		setSelectAll(true);
+		if (!selectionMode) {
+			activateSelectionMode();
+			const theLink = links.map((link) => Object.assign({}, link));
+			theLink.forEach((link) => link.isSelected = true);
+			
+			setLinks(theLink);
+		} else {
+			deactivateSelectionMode();
+			clearAllSelection();
+		}
+		
 	}
 
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
@@ -162,6 +208,7 @@ const Bookmark = () => {
 						clearSelection={clearAllSelection}
 						handleSelectAll={handleSelectAll}
 						allSelected={allSelected}
+						setSelect={setSelect}
 					/>
 					<RightBar />
 				</Stack>

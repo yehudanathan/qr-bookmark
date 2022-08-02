@@ -24,6 +24,7 @@ import InfoDialog from "./InfoDialog";
 
 const Post = ({ 
 	links,
+	favorite,
 	sort, 
 	clear, 
 	setSort, 
@@ -32,9 +33,11 @@ const Post = ({
 	activateSelectMode,
 	deactivateSelectMode,
 	clearSelection,
-	handleSelectAll,
 	allSelected,
+	handleSelectAll,
+	setSelectAll,
 	setSelect,
+	selected
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
 
@@ -64,7 +67,7 @@ const Post = ({
 
 	// const mockLinks : any = [];
 	// Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
-	
+
 	const handleFab = () => {
 		if (selectMode) {
 			return (<>
@@ -86,7 +89,7 @@ const Post = ({
 				<CustomFab 
 					color="primary" 
 					iconComponent={<CloseIcon sx={{ fontSize: "30px" }} />} 
-					onClick={() => {deactivateSelectMode(); clearSelection();}} 
+					onClick={() => {deactivateSelectMode(); clearSelection(); setSelectAll(false)}} 
 					style={{
 						minWidth: "70px",
 						minHeight: "70px",
@@ -142,17 +145,25 @@ const Post = ({
 									<input
 										type="checkbox"
 										className="active-checkbox"
-										value={link.isSelected}
+										checked={selected[link.index] ?? false}
 										onClick={() => {
 											setSelect(link.index);
+											// if (checkSelectAll) { // TODO :D
+											// 	console.log("test");
+											// 	setSelectAll(true);
+											// }
 										}}
 									/> : <input
 										type="checkbox"
 										className="link-checkbox"
-										value={link.isSelected}
+										checked={selected[link.index] ?? false}
 										onClick={() => {
 											activateSelectMode(); 
 											setSelect(link.index);
+											// console.log("🚀 ~ file: Post.tsx ~ line 163 ~ {links.map ~ allSelected", allSelected)
+											// if (allSelected) {
+											// 	setSelectAll(true);
+											// }
 										}}
 									/>
 								}
@@ -194,6 +205,8 @@ const Post = ({
 									<Checkbox
 										icon={<FavoriteBorder />}
 										checkedIcon={<Favorite sx={{ color: "red" }} />}
+										checked={favorite[link.index] ?? false}
+										onClick={() => alert("favorite feature IP")}
 									/>
 								</IconButton>
 								<IconButton aria-label="share">

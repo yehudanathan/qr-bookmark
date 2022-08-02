@@ -30,6 +30,14 @@ p {
   font-family: "Product Sans", "Montserrat";
   margin-block-start: 3px;
   margin-block-end: 3px;
+  &.title-url {
+    font-size: 16px;
+    text-align: center;
+    margin-block-start: 0px;
+  }
+  &.favorite-title-dialog {
+    font-size: 17px;
+  }
 }
 
 h3 {
@@ -39,6 +47,10 @@ h3 {
   font-weight: normal;
   margin-block-start: 3px;
   margin-block-end: 3px;
+  &.title-dialog {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+  }
 }
 
 .text-truncate {

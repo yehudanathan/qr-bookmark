@@ -52,24 +52,30 @@ const Preferences = ({
 	links,
 	from,
 	to,
-	isFav,
+	favorite,
+	selected,
 	sort,
 	clear,
 	setLinks,
 	setFrom,
 	setTo,
-	setIsFav,
+	setFavorite,
 	handleFilter,
 	setSort,
 	setClear,
-	handleSelectAll,
 	allSelected,
+	setSelectAll,
+	handleSelectAll,
 	clearSelection,
 	selectionMode,
 	activateSelectionMode,
-	deactivateSelectionMode
+	deactivateSelectionMode,
 }) => {
 	const [filterOpen, setFilterOpen] = useState(false);
+	// TODO find out theme type
+	const isDesktop = useMediaQuery((theme : any) => theme.breakpoints.up("sm"));
+	const checkSelectAll = selected.every((value) => value === true) && selected.length !== 0;
+  console.log("🚀 ~ file: Preferences.tsx ~ line 78 ~ checkSelectAll", checkSelectAll)
 
 	// const [links, setLinks] = useState((async () => {await getLinks()})());
 	// const [isSelected, setIsSelected] = useState(links.map())
@@ -89,9 +95,6 @@ const Preferences = ({
 	// 	setClear(option);
 	//   console.log("a");
 	// };
-
-	// TODO find out theme type
-	const isDesktop = useMediaQuery((theme : any) => theme.breakpoints.up("sm"));
 
 	return (
 		<StyledBox>
@@ -186,7 +189,7 @@ const Preferences = ({
 									right: "25px",
 								}}
 							>
-								<Checkbox onChange={() => setIsFav(!isFav)} />
+								<Checkbox onChange={() => alert("IP")} />
 								<Typography fontWeight={500}>Favourites Only</Typography>
 							</Box>
 							<Button
@@ -259,8 +262,16 @@ const Preferences = ({
 						<input
 							type="checkbox"
 							className="active-checkbox select-all"
+							checked={allSelected || checkSelectAll}
 							onClick={() => {
-								handleSelectAll();
+								if (!allSelected) {
+									handleSelectAll();
+									setSelectAll(true);
+								} else {
+									clearSelection();
+									setSelectAll(false);
+									deactivateSelectionMode();
+								}
 							}}
 						/>
 						<Typography 

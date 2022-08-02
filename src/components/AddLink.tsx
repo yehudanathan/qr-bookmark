@@ -1,21 +1,24 @@
 import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import validator from "validator";
+import TitleDialog from "./TitleDialog";
 
 const AddLink = () => {
     const [url, setURL] = useState('');
+    const [showTitleDialog, setShowTitleDialog] = useState(false);
 
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (validator.isURL(url)) {
-            // authLogout();
-            alert("URL: " + url);
+            setShowTitleDialog(true);   
         } else {
             alert("Please enter a valid URL");
+            // TODO fielderror
         }
     }
 
-    return (
+    return (<>
+        <TitleDialog open={showTitleDialog} URL={url} handleClose={() => {setShowTitleDialog(false)}}/>
         <form onSubmit={handleSubmit}>
             <Stack direction="row" spacing = {0} alignItems = "center">
                 <TextField
@@ -45,7 +48,7 @@ const AddLink = () => {
                 </Button>
             </Stack>
         </form>
-        
+    </>
     )
 }
 

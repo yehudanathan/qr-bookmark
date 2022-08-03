@@ -6,65 +6,75 @@ import {
   DialogActions,
   Stack, 
   TextField,
-  DialogContentText,
   Checkbox,
   FormGroup,
   FormControlLabel
 } from "@mui/material";
 import { useState } from "react";
-import { pushLink } from "../firebase/database/links";
-import { Link } from '../firebase/models/Link';
-import LinkIcon from '@mui/icons-material/Link';
+import { pushLink } from "../../firebase/database/links";
+import { Link } from '../../firebase/models/Link';
+import { useNavigate } from "react-router";
+import validator from "validator";
 import moment from "moment";
-import { useLocation, useNavigate } from "react-router";
 
-const TitleDialog = ({open, handleClose, URL}) => {
-  const location = useLocation().pathname;
+const AddLinkDialog = ({open, handleClose}) => {
+  const [url, setURL] = useState("");
   const [title, setTitle] = useState("");
   const [favorite, setFavorite] = useState(false);
   let navigate = useNavigate();
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const link : Link = {
-      dateTime: moment(new Date()).toISOString(),
-      favorite: favorite,
-      isDeleted: false,
-      title: title,
-      URL: URL
-    }
-    pushLink(link);
-    alert("Link saved successfully");
-    handleClose();
-    if (location === '/links') {
+    if (validator.isURL(url)) {
+      const link : Link = {
+        dateTime: moment(new Date()).toISOString(),
+        favorite: favorite,
+        isDeleted: false,
+        title: title,
+        URL: url,
+      }
+      pushLink(link);
+      alert("Link saved successfully");
+      handleClose();
       window.location.reload();
     } else {
-      navigate("/links");
+      alert("Please enter a valid URL.");
+      // TODO
     }
   };
 
   return (<>
-      <Dialog 
-        open={open} 
-        onClose={handleClose}
-        >
-        <Stack justifyContent="center">
+    <Dialog
+      open={open}
+      onClose={handleClose}
+    >
+      <Stack >
           <DialogTitle
             sx={{
               paddingBottom: "0px",
               textAlign: "center"
             }}
           >
-            <h3 className="title-dialog">Please insert a title for this bookmark:</h3>
+            <h1>Create new bookmark</h1>
           </DialogTitle>
           <DialogContent sx={{paddingBottom: "3px"}}>
-            <Stack alignItems="center" direction="row" justifyContent="center" spacing={0.5}>
-              <LinkIcon sx={{fontSize: "16px"}}/>
-              <DialogContentText>
-                <p className="title-url">{URL}</p>
-              </DialogContentText>
-            </Stack>
               <form onSubmit={handleSubmit} id="title-form">
+                <TextField
+                  label="URL"
+                  sx={{
+                    m: 1, 
+                    width: "40ch", 
+                    backgroundColor: "white", 
+                    display: "flex"
+                  }}
+                  size="medium"
+                  value={url}
+                  onChange={e => setURL(e.target.value)}
+                  color="primary"
+                  required
+                  inputProps={{style: {fontFamily: "Product Sans"}}}
+                  variant="standard"
+                />
                 <TextField
                   sx={{
                     m: 1, 
@@ -73,12 +83,11 @@ const TitleDialog = ({open, handleClose, URL}) => {
                     display: "flex"
                   }}
                   required
-                  autoFocus
                   label="Title"
                   variant="standard"
                   value={title}
                   size="medium"
-                  color="secondary"
+                  color="primary"
                   inputProps={{style: {fontFamily: "Product Sans"}}}
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -86,7 +95,7 @@ const TitleDialog = ({open, handleClose, URL}) => {
                   <FormGroup>
                     <FormControlLabel 
                       control={<Checkbox
-                        color="secondary"
+                        color="primary"
                         checked={favorite}
                         onChange={() => setFavorite(!favorite)}
                       />}
@@ -128,8 +137,8 @@ const TitleDialog = ({open, handleClose, URL}) => {
             </DialogActions>
           </Stack>
         </Stack>
-      </Dialog>
+    </Dialog>
   </>);
 }
 
-export default TitleDialog;
+export default AddLinkDialog;

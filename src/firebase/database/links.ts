@@ -11,7 +11,7 @@ export const getLinks = (options: QueryConstraint[] = []) => {
     if (user) {
         const userPath = `${basePath}/${user.uid}`;
         const dbRef = ref(database, userPath);
-        return get(query(dbRef, ...options)).then(snapshot => snapshot.val() as Link[]) as Promise<Link[]>;
+        return get(query(dbRef, ...options)).then(snapshot => snapshot.val() as {[id: string]: Link}) as Promise<{[id: string]: Link}>;
     }
     return null;
 }

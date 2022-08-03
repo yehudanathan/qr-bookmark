@@ -1,22 +1,33 @@
 import { useState } from "react";
 import QrReader from "react-qr-scanner";
 import validator from "validator";
-import { Button } from "@mui/material";
+import { 
+    Button, 
+    Dialog, 
+    DialogActions, 
+    DialogContent,
+    DialogTitle,
+    Stack
+} from "@mui/material";
+import TitleDialog from "./TitleDialog";
 
-const QRScanner = () => {
+const QRScanner = ({open, setOpen}) => {
     const [result, setResult] = useState('No result');
-    const [showQrReader, setShowQrReader] = useState(false);
+    const [showTitleDialog, setShowTitleDialog] = useState(false);
 
     const previewStyle = {
-        height: 400,
-        width: 400,
+        height: "300px",
+        width: "400px",
+        borderRadius: "5px",
     }
 
     const handleScan = (e) => {
         const text: string = e === null ? 'No result' : e.text;
         if (validator.isURL(text)) {
             setResult(text);
-            alert("Scanner result: " + result);
+            alert("Scanner result: " + text);
+            setOpen(false);
+            setShowTitleDialog(true);
         }
     }
 
@@ -24,24 +35,44 @@ const QRScanner = () => {
         console.error(e);
     }
 
+    const handleOpenReader = () => {
+        return (<>
+        <Dialog
+            open={open}
+            onClose={() => {setOpen(false);}}
+        >
+            <Stack alignItems="center" sx={{paddingBottom: "16px"}}>
+                <DialogTitle>
+                    <h1>Scan QR Code</h1>
+                </DialogTitle>
+                <DialogContent sx={{paddingBottom: "3px"}}>
+                    <QrReader
+                        style={previewStyle}
+                        onScan={handleScan}
+                        onError={handleError}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
+                        variant = "contained"
+                        size= "large"
+                        sx={{height:"48px", fontFamily: "Montserrat",}}
+                        onClick={() => setOpen(false)}
+                        type="submit"
+                    >
+                        Close
+                    </Button>
+                </DialogActions>
+            </Stack>
+        </Dialog>
+        </>);
+    }
+
     return (
         <>
-        <Button
-            style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
-            variant = "contained"
-            size= "large"
-            sx={{height:"48px", fontFamily: "Montserrat",}}
-            onClick={() => setShowQrReader(!showQrReader)}
-            type="submit"
-            >
-            {showQrReader ? "Close" : "Open Camera"}
-        </Button>
-        
-        {showQrReader && <QrReader
-            style={previewStyle}
-            onScan={handleScan}
-            onError={handleError}
-        />}  
+        <TitleDialog open={showTitleDialog} handleClose={() => setShowTitleDialog(false)} URL={result} />
+        {handleOpenReader()}
         </>
     )
 }

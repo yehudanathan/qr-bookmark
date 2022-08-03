@@ -22,19 +22,20 @@ const Bookmark = () => {
 	const [clear, setClear] = useState("");
 	const [selectionMode, setSelectionMode] = useState(selected.includes(true));
 	const [selectAll, setSelectAll] = useState(selected.every((value) => value === true) && selected.length !== 0);
-	
+	const [openAddLinkDialog, setOpenAddLinkDialog] = useState(false);
+	const [openQrReader, setOpenQrReader] = useState(false);
+
 	useEffect(() => {
 		async function fetchData() {
 			// initialize by fetching links
 			const links = await getLinks();
-      console.log("🚀 ~ file: Bookmark.tsx ~ line 30 ~ fetchData ~ links", links)
 			
 			if (links === null) {
 				console.log("links is null bruh");
 				return;
 			}
-
-			const newData : any = Array.from(links).map((link, index) => (
+			
+			const newData : any = Object.values(links).map((link, index) => (
 				{
 					...link,
 					index: index,
@@ -181,6 +182,7 @@ const Bookmark = () => {
 	// };
 
 	return (<>
+		
 		<ThemeProvider theme={dualTheme}>
 			<Box
 				bgcolor={"background.default"}
@@ -229,6 +231,10 @@ const Bookmark = () => {
 						setSelectAll={setSelectAll}
 						setSelect={setSelect}
 						selected={selected}
+						openAddLinkDialog={openAddLinkDialog}
+						setOpenAddLinkDialog={setOpenAddLinkDialog}
+						openQrReader={openQrReader}
+						setOpenQrReader={setOpenQrReader}
 					/>
 					<RightBar />
 				</Stack>

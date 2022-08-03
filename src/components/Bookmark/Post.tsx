@@ -11,13 +11,16 @@ import {
 } from "@mui/material";
 import { faker } from '@faker-js/faker';
 import { Link } from "../../firebase/models/Link";
-import moment from "moment";
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import CustomFab from "../CustomFab";
 import InfoDialog from "./InfoDialog";
+import AddLinkDialog from "./AddLinkDialog";
+import moment from "moment";
+import QRScanner from "../QRScanner";
 // for MOCK DATA below
 // import { getUserLinks } from "../../apis/link";
 // import { getCurrentUserId } from "../../apis/session";
@@ -37,10 +40,14 @@ const Post = ({
 	handleSelectAll,
 	setSelectAll,
 	setSelect,
-	selected
+	selected,
+	openAddLinkDialog,
+	setOpenAddLinkDialog,
+	openQrReader,
+	setOpenQrReader
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
-
+	
 	// const cards = linksWithIndex.map(el => {
 	// 	return (
 	// 		<Card>
@@ -67,6 +74,13 @@ const Post = ({
 
 	// const mockLinks : any = [];
 	// Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
+
+	const redirectLink = (url) => {
+		if (url.startsWith("http")) {
+			return url;
+		}
+		return "https://" + url;
+	}
 
 	const handleFab = () => {
 		if (selectMode) {
@@ -105,9 +119,24 @@ const Post = ({
 		}
 		return (<>
 			<CustomFab 
+				color="" // TODO
+				iconComponent={<AddAPhotoIcon sx={{ fontSize: "30px" }}/>} 
+				onClick={() => {setOpenQrReader(true);}}
+				style={{
+					minWidth: "70px",
+					minHeight: "70px",
+					margin: "0px",
+					top: "auto",
+					right: "110px",
+					bottom: "20px",
+					left: "auto",
+					position: "fixed",
+				}}
+			/>
+			<CustomFab 
 				color="primary" 
 				iconComponent={<AddIcon sx={{ fontSize: "30px" }}/>} 
-				onClick={() => {alert("Addition in progress! :)")}}
+				onClick={() => {setOpenAddLinkDialog(true);}}
 				style={{
 					minWidth: "70px",
 					minHeight: "70px",
@@ -126,8 +155,10 @@ const Post = ({
 		{/* {isDesktop ? <DesktopPost links={links} /> :	<MobilePost links={links} />} */}
 		{/* <MobilePost links={{ alex: "hello" }} /> */}
 
+		<QRScanner open={openQrReader} setOpen={setOpenQrReader}/>
+		<AddLinkDialog open={openAddLinkDialog} handleClose={() => {setOpenAddLinkDialog(false);}} />
 		<Container sx={{ paddingTop: "30px" }} maxWidth="md" >
-			<Grid container spacing={4} >
+			<Grid container spacing={4} sx={{paddingBottom: "50px"}} >
 				{links.map((link) => {
 					// const content = dataArray[index];
           // console.log("🚀 ~ file: Post.tsx ~ line 128 ~ {dataArray.map ~ content", content);
@@ -148,10 +179,6 @@ const Post = ({
 										checked={selected[link.index] ?? false}
 										onClick={() => {
 											setSelect(link.index);
-											// if (checkSelectAll) { // TODO :D
-											// 	console.log("test");
-											// 	setSelectAll(true);
-											// }
 										}}
 									/> : <input
 										type="checkbox"
@@ -160,15 +187,11 @@ const Post = ({
 										onClick={() => {
 											activateSelectMode(); 
 											setSelect(link.index);
-											// console.log("🚀 ~ file: Post.tsx ~ line 163 ~ {links.map ~ allSelected", allSelected)
-											// if (allSelected) {
-											// 	setSelectAll(true);
-											// }
 										}}
 									/>
 								}
 							</div>
-							<a href={'https://' + link.URL}>
+							<a href={redirectLink(link.URL)}>
 								<CardMedia
 									component="img"
 									height="65%"

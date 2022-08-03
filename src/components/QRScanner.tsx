@@ -10,8 +10,10 @@ import {
     Stack
 } from "@mui/material";
 import TitleDialog from "./TitleDialog";
+import { useLocation } from "react-router";
 
 const QRScanner = ({open, setOpen}) => {
+    const location = useLocation();
     const [result, setResult] = useState('No result');
     const [showTitleDialog, setShowTitleDialog] = useState(false);
 
@@ -54,12 +56,12 @@ const QRScanner = ({open, setOpen}) => {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
                         variant = "contained"
                         size= "large"
                         sx={{height:"48px", fontFamily: "Montserrat",}}
                         onClick={() => setOpen(false)}
                         type="submit"
+                        color={location.pathname === '/links' ? 'primary' : "secondary"}
                     >
                         Close
                     </Button>

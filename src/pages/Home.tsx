@@ -45,7 +45,7 @@ const Home = () => {
                     variant = "contained"
                     size= "large"
                     sx={{height:"48px", fontFamily: "Montserrat",}}
-                    onClick={() => {alert("IP")}}
+                    onClick={() => {setOpenQrReader(true)}}
                     type="submit"
                     >
                     {"Open Camera"}

@@ -44,7 +44,8 @@ const Post = ({
 	openAddLinkDialog,
 	setOpenAddLinkDialog,
 	openQrReader,
-	setOpenQrReader
+	setOpenQrReader,
+	deleteLink
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
 	
@@ -82,13 +83,24 @@ const Post = ({
 		return "https://" + url;
 	}
 
+	const handleDeleteLink = async () => {
+		const indexToDelete : number[] = [];
+		selected.map((value, index) => {
+			if (value === true) {
+				indexToDelete.push(index);
+			}
+		});
+
+		deleteLink(indexToDelete);
+	}
+
 	const handleFab = () => {
 		if (selectMode) {
 			return (<>
 				<CustomFab
 					color="" // TODO...
 					iconComponent={<DeleteIcon sx={{ fontSize: "30px" }} />}
-					onClick={() => {alert("Delete bookmarks in progress")}}
+					onClick={handleDeleteLink}
 					style={{
 						minWidth: "70px",
 						minHeight: "70px",
@@ -159,7 +171,7 @@ const Post = ({
 		<AddLinkDialog open={openAddLinkDialog} handleClose={() => {setOpenAddLinkDialog(false);}} />
 		<Container sx={{ paddingTop: "30px" }} maxWidth="md" >
 			<Grid container spacing={4} sx={{paddingBottom: "50px"}} >
-				{links.map((link) => {
+				{links.filter((link) => link.isDeleted !== true).map((link) => {
 					// const content = dataArray[index];
           // console.log("🚀 ~ file: Post.tsx ~ line 128 ~ {dataArray.map ~ content", content);
 					return (<>

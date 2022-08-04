@@ -75,7 +75,6 @@ const Preferences = ({
 	// TODO find out theme type
 	const isDesktop = useMediaQuery((theme : any) => theme.breakpoints.up("sm"));
 	const checkSelectAll = selected.every((value) => value === true) && selected.length !== 0;
-  console.log("🚀 ~ file: Preferences.tsx ~ line 78 ~ checkSelectAll", checkSelectAll)
 
 	// const [links, setLinks] = useState((async () => {await getLinks()})());
 	// const [isSelected, setIsSelected] = useState(links.map())

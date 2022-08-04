@@ -1,5 +1,5 @@
 import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
-import { getLinks } from "../firebase/database/links";
+import { deleteLinks, getLinks } from "../firebase/database/links";
 import { useEffect, useState } from "react";
 // import { Link } from '../firebase/models/Link';
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
@@ -144,6 +144,34 @@ const Bookmark = () => {
 		
 	}
 
+	const deleteLink = async (linkIndex) => {
+		const linkToDelete = links.filter((link) => linkIndex.includes(link.index)).map((link) => ({
+			...link,
+			isDeleted: true,
+		}));
+				
+		const newLinks = links.filter((link) => !linkIndex.includes(link.index));
+		newLinks.concat(linkToDelete);
+
+		const newFavorite = newLinks.map((link) => link.favorite);
+		const newSelected : boolean[] = [];
+		newLinks.forEach((link) => {
+			newSelected.splice(link.index, 1, false);
+		});
+		
+		const response = await deleteLinks(linkToDelete);
+		
+		if (response === true) {
+			setLinks(newLinks);
+			setSelected(newSelected);
+			setFavorite(newFavorite);
+			alert("Deletion complete");
+		} else {
+			alert("Deletion error");
+		}
+
+	}
+
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
 	// // link = {url:..., title:..., index:....}
 
@@ -235,6 +263,7 @@ const Bookmark = () => {
 						setOpenAddLinkDialog={setOpenAddLinkDialog}
 						openQrReader={openQrReader}
 						setOpenQrReader={setOpenQrReader}
+						deleteLink={deleteLink}
 					/>
 					<RightBar />
 				</Stack>

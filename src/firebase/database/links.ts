@@ -42,23 +42,16 @@ export const getLinkID = async (link) => {
         const userPath = `${basePath}/${user.uid}`;
         const dbRef = ref(database, userPath);
         const links = await get(query(dbRef)).then(snapshot => snapshot.val() as {[id: string]: Link});
-        // console.log("🚀 ~ file: links.ts ~ line 45 ~ getLinkID ~ links", links)
-
         const idList = Object.keys(links);
-        // console.log("🚀 ~ file: links.ts ~ line 48 ~ getLinkID ~ idList", idList)
         const linkList = Object.values(links);
-        // console.log("🚀 ~ file: links.ts ~ line 50 ~ getLinkID ~ linkList", linkList)
         let linkIndex = 0;
+
         const result = linkList.map((value, index) => { 
-            // console.log("🚀 ~ file: links.ts ~ line 54 ~ result ~ JSON.stringify(value)", JSON.stringify(value))
-            // console.log("🚀 ~ file: links.ts ~ line 55 ~ result ~ JSON.stringify(link)", JSON.stringify(link))
             if (value.URL === link.URL) {
-                // console.log("gotcha!")
                 linkIndex = index;
                 return idList[index];
             }
         })[linkIndex];
-        // console.log("🚀 ~ file: links.ts ~ line 57 ~ result ~ result", result)
         return result;
     }
 }
@@ -70,9 +63,7 @@ export const deleteLinks = async (linkArray: any[]) => {
         const dbRef = ref(database, userPath);
 
         linkArray.forEach(async (link) => {
-            // console.log("🚀 ~ file: links.ts ~ line 68 ~ linkArray.forEach ~ link", link)
             const id : any = await getLinkID(link);
-            console.log("🚀 ~ file: links.ts ~ line 65 ~ linkArray.forEach ~ id", id)
             const newLink = {[id] : link};
             update(dbRef, newLink);
         });

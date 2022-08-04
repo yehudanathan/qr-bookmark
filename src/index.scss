@@ -23,6 +23,17 @@
 h1 {
   margin-block-start: 3px;
   margin-block-end: 3px;
+  font-size: 25px;
+  font-family: "Gotham Medium", "Montserrat";
+  font-weight: bold;
+  color: black;
+  &.bookmark-title {
+    color: white;
+    font-size: 30px;
+  }
+  &.modal {
+    text-align: center;
+  }
 }
 
 p {
@@ -40,6 +51,18 @@ p {
   }
 }
 
+h2 {
+  font-size: 33px;
+  font-family: "Product Sans", "Montserrat";
+  &.filter-settings-preferences {
+    font-size: 25px;
+    color: gray;
+    margin-block-start: 0px;
+    text-align: center;
+    font-weight: normal;
+  }
+}
+
 h3 {
   font-size: 20px;
   font-family: "Product Sans", "Montserrat" !important;
@@ -50,6 +73,20 @@ h3 {
   &.title-dialog {
     margin-block-start: 0px;
     margin-block-end: 0px;
+  }
+  &.preferences-filter {
+    font-size: 15px;
+    color: #1976d2;
+    &.sort {
+      transform: translateY(-2px);
+      color: gray;
+      align-items: center;
+      justify-content: center;
+      max-height: 40px;
+      &.select-all {
+        transform: none;
+      }
+    }
   }
 }
 
@@ -150,19 +187,7 @@ h3 {
   }
 }
 
-h1 {
-  // font-size: 40px;
-  font-family: "Gotham Medium", "Montserrat";
-  // color: #262254;
-  font-size: 25px;
-  // font-family: "Product Sans";
-  color: #000000;
-  font-weight: bold;
-  // font-style: italic;
-  &.modal {
-    text-align: center;
-  }
-}
+
 
 .profile-h1 {
   color: black;
@@ -182,10 +207,7 @@ h1 {
 //   font-family: "Product Sans";
 // }
 
-h2 {
-  font-size: 33px;
-  font-family: "Product Sans", "Montserrat";
-}
+
 
 .full-name {
   color: #043026;

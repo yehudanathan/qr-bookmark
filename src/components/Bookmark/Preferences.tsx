@@ -110,7 +110,6 @@ const Preferences = ({
 					}}
 				>
 					<Button
-						// flex={1}
 						variant="outlined"
 						startIcon={isDesktop ? <FilterList /> : <></>}
 						sx={{
@@ -124,7 +123,7 @@ const Preferences = ({
 						onClick={() => setFilterOpen(true)}
 						endIcon={<KeyboardArrowDown />}
 					>
-						<Typography>Filter</Typography>
+						<h3 className="preferences-filter">Filter</h3>
 					</Button>
 					<StyledModal
 						open={filterOpen}
@@ -134,16 +133,17 @@ const Preferences = ({
 					>
 						<Box
 							width={550}
-							height={200}
+							height={220}
 							bgcolor={"background.default"}
 							color={"text.primary"}
 							p={3}
-							borderRadius={5}
+							borderRadius={2}
 							sx={{ position: "relative" }}
 						>
-							<Typography variant="h6" color="gray" textAlign="center" mb="15px">
+							{/* <Typography variant="h6" color="gray" textAlign="center" mb="15px">
 								Filter Settings
-							</Typography>
+							</Typography> */}
+							<h2 className="filter-settings-preferences">Filter Settings</h2>
 							<Box
 								sx={{
 									mb: "15px",
@@ -217,14 +217,10 @@ const Preferences = ({
 					>
 						<InputLabel
 							id="demo-simple-select-label"
-							sx={{
-								fontSize: { isDesktop: true ? "17px" : "10px" },
-								alignItems: "center",
-								justifyContent: "center",
-								maxHeight: "40px",
-							}}
 						>
-							{isDesktop ? "Sort by" : "Sort"}
+							<h3 className="preferences-filter sort">
+								{isDesktop ? "Sort by" : "Sort"}
+							</h3>
 						</InputLabel>
 						<Select
 							labelId="select-label"
@@ -253,10 +249,11 @@ const Preferences = ({
 					</FormControl>
 					<Stack 
 						direction="row" 
-						spacing={1}
+						spacing={0.5}
 						sx={{
-							transform: "translate(-5px, 18px)"
+							transform: "translate(-5px, 7px)"
 						}}
+						alignItems="center"
 					>
 						<input
 							type="checkbox"
@@ -273,14 +270,9 @@ const Preferences = ({
 								}
 							}}
 						/>
-						<Typography 
-							fontWeight={500}
-							sx={{
-								transform: "translate(-5px, 1px)"
-							}}
-						>
+						<h3 className="preferences-filter sort select-all">
 							Select all
-						</Typography>
+						</h3>
 					</Stack>
 				</Stack>
 			</IconAndText>

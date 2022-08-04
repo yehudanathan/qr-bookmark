@@ -6,6 +6,7 @@ import {
 	InputBase,
 	Menu,
 	MenuItem,
+	Stack,
 	styled,
 	Toolbar,
 	Typography,
@@ -75,20 +76,23 @@ const Navbar = () => {
 				</div>
 				<div className="bookmark-navbar">
 					<TitleBox className="navbar-titlebox">
-						<CropFree sx={{ fontSize: "40px" }} />
-						<Typography variant="h4">QR-Bookmark</Typography>
+						<Stack direction="row" spacing={0.5} alignItems="center">
+							<CropFree sx={{ fontSize: "40px" }} />
+							<h1 className="bookmark-title">QR-Bookmark</h1>
+						</Stack>
 					</TitleBox>
 					<Search>
 						<SearchIconWrapper>
 							<SearchIcon />
 						</SearchIconWrapper>
 						<StyledInputBase
-							placeholder="Search…"
-							inputProps={{ "aria-label": "search" }}
+							placeholder="Search bookmarks…"
+							inputProps={{ "aria-label": "search", style: {fontFamily: "Product Sans, Montserrat"}}}
 						/>
 					</Search>
 				</div>
 			</StyledToolbar>
+			{/* This menu thing doesn't show? */}
 			<Menu
 				id="demo-positioned-menu"
 				aria-labelledby="demo-positioned-button"

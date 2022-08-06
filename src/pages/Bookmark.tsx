@@ -231,11 +231,11 @@ const Bookmark = () => {
 	// };
 
 	return (<>
+	<div className="bookmark-div">
 		<ThemeProvider theme={dualTheme}>
 			<Box
 				bgcolor={"background.default"}
 				color={"text.primary"}
-				sx={{ m: "-12px", marginRight: "auto" }}
 			>
 				<Navbar />
 				<Preferences
@@ -290,7 +290,8 @@ const Bookmark = () => {
 				</Stack>
 			</Box>
 		</ThemeProvider>
-		</>
+	</div>
+	</>
 	);
 };
 

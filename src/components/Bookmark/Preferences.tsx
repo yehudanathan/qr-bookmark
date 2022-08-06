@@ -116,8 +116,7 @@ const Preferences = ({
 					sx={{
 						marginTop: "15px",
 						minWidth: "calc(100vw - 30px)",
-						marginRight: "10px",
-						height: "40px"
+						height: "40px",
 					}}
 				>
 					<Button

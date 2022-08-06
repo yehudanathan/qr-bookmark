@@ -225,13 +225,13 @@ const Post = ({
 									<div className="media-background"></div>
 									<CardMedia
 										component="img"
-										sx={{width: "30%",
+										sx={{width: "20%",
 											height: "auto", 
 											objectFit: "cover",
 											opacity: "60%",
 											position: "absolute",
-											top: "10%",
-											left: "35%",
+											top: "15%",
+											left: "40%",
 										}}
 										height="30%"
 										image={"https://cdn-icons-png.flaticon.com/512/3214/3214746.png"}

@@ -25,8 +25,6 @@ const StyledToolbar = styled(Toolbar)({
 const TitleBox = styled(Box)({
 	display: "flex",
 	alignItems: "center",
-	gap: "10px",
-	margin: "15px 10px 10px 10px",
 });
 
 const Search = styled("div")(({ theme }) => ({
@@ -69,48 +67,36 @@ const Navbar = () => {
 	const [open, setOpen] = React.useState(false);
 
 	return (
-		<AppBar sx={{position:"sticky", margin: "0px"}}>
+		<AppBar sx={{position:"fixed", 
+			padding: "30px", 
+			paddingTop: "30px", 
+			paddingBottom: "30px",
+			}}
+		>
 			<StyledToolbar >
 				<div className="bookmark-sidebar">
 					<TemporaryDrawer />
 				</div>
 				<div className="bookmark-navbar">
-					<TitleBox className="navbar-titlebox">
-						<Stack direction="row" spacing={0.5} alignItems="center">
-							<CropFree sx={{ fontSize: "40px" }} />
-							<h1 className="bookmark-title">QR-Bookmark</h1>
-						</Stack>
-					</TitleBox>
-					<Search>
-						<SearchIconWrapper>
-							<SearchIcon />
-						</SearchIconWrapper>
-						<StyledInputBase
-							placeholder="Search bookmarks…"
-							inputProps={{ "aria-label": "search", style: {fontFamily: "Product Sans, Montserrat"}}}
-						/>
-					</Search>
+					<Stack spacing={1}>
+						<TitleBox className="navbar-titlebox">
+							<Stack direction="row" spacing={0.5} alignItems="center">
+								<CropFree sx={{ fontSize: "40px" }} />
+								<h1 className="bookmark-title">QR-Bookmark</h1>
+							</Stack>
+						</TitleBox>
+						<Search>
+							<SearchIconWrapper>
+								<SearchIcon />
+							</SearchIconWrapper>
+							<StyledInputBase
+								placeholder="Search bookmarks…"
+								inputProps={{ "aria-label": "search", style: {fontFamily: "Product Sans, Montserrat"}}}
+							/>
+						</Search>
+					</Stack>
 				</div>
 			</StyledToolbar>
-			{/* This menu thing doesn't show? */}
-			<Menu
-				id="demo-positioned-menu"
-				aria-labelledby="demo-positioned-button"
-				open={open}
-				onClose={(e) => setOpen(false)}
-				anchorOrigin={{
-					vertical: "top",
-					horizontal: "right",
-				}}
-				transformOrigin={{
-					vertical: "top",
-					horizontal: "left",
-				}}
-			>
-				<MenuItem>Profile</MenuItem>
-				<MenuItem>My account</MenuItem>
-				<MenuItem>Logout</MenuItem>
-			</Menu>
 		</AppBar>
 	);
 };

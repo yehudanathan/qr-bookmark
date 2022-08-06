@@ -62,6 +62,7 @@ const Preferences = ({
 	setFavorite,
 	handleFilter,
 	setSort,
+	sortBy,
 	setClear,
 	allSelected,
 	setSelectAll,
@@ -94,6 +95,16 @@ const Preferences = ({
 	// 	setClear(option);
 	//   console.log("a");
 	// };
+
+	const handleDropdownChange = async (e) => {
+		setSort(e.target.value);
+		const result = await sortBy(sort);
+		if (result === true) {
+			alert("Sort complete");
+		} else {
+			alert("Sort error");
+		}
+	}
 
 	return (
 		<StyledBox>
@@ -140,9 +151,6 @@ const Preferences = ({
 							borderRadius={2}
 							sx={{ position: "relative" }}
 						>
-							{/* <Typography variant="h6" color="gray" textAlign="center" mb="15px">
-								Filter Settings
-							</Typography> */}
 							<h2 className="filter-settings-preferences">Filter Settings</h2>
 							<Box
 								sx={{
@@ -227,24 +235,10 @@ const Preferences = ({
 							id="select"
 							value={sort}
 							label="Sort by"
-							onChange={(e) => {
-								const sortBy = e.target.value;
-								const oldLinks = links;
-								setSort(sortBy);
-								if (sortBy === "Oldest") {
-									oldLinks.sort((a, b) =>
-										a.time < b.time ? 1 : b.time < a.time ? -1 : 0
-									);
-								} else {
-									oldLinks.sort((a, b) =>
-										a.time > b.time ? 1 : b.time > a.time ? -1 : 0
-									);
-								}
-								setLinks(links);
-							}}
+							onChange={handleDropdownChange}
 						>
-							<MenuItem value={"Oldest"}>Oldest</MenuItem>
-							<MenuItem value={"Newest"}>Newest</MenuItem>
+							<MenuItem value={"Oldest"}><h3 className="preferences-filter dropdown">Oldest</h3></MenuItem>
+							<MenuItem value={"Newest"}><h3 className="preferences-filter dropdown">Most recent</h3></MenuItem>
 						</Select>
 					</FormControl>
 					<Stack 

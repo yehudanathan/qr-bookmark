@@ -1,4 +1,17 @@
-import { getDatabase, ref, query, equalTo, get, push, orderByChild, QueryConstraint, update } from 'firebase/database';
+import { 
+    getDatabase, 
+    ref, 
+    query, 
+    equalTo, 
+    get, 
+    push, 
+    orderByChild, 
+    QueryConstraint, 
+    update,
+    startAt, 
+    child,
+    orderByValue
+} from 'firebase/database';
 import firebaseApp from '../index';
 import { getUser } from '../auth/auth_user';
 import { Link } from '../models/Link';
@@ -16,7 +29,37 @@ export const getLinks = (options: QueryConstraint[] = []) => {
     return null;
 }
 
-export const orderByTime = orderByChild('createdAt');
+export const getLinksOrderByTime = () => {
+    const user = getUser();
+    if (user) {
+        const userPath = `${basePath}/${user.uid}`;
+        const dbRef = ref(database, userPath).getKey();
+        return dbRef;
+        // return get(query(dbRef, orderByChild('dateTime'))).then(snapshot => snapshot.val() as {[id: string]: Link}) as Promise<{[id: string]: Link}>;
+    }
+    return null;
+}
+
+export const getLinksOrderByTitle = () => {
+    const user = getUser();
+    if (user) {
+        const userPath = `${basePath}/${user.uid}`;
+        const dbRef = ref(database, userPath);
+        return get(query(dbRef)).then(snapshot => snapshot.val() as {[id: string]: Link}) as Promise<{[id: string]: Link}>;
+    }
+    return null;
+}
+
+// export const orderByTime = () => {
+//     const user = getUser();
+//     if (user) {
+//         const userPath = `${basePath}/${user.uid}/category/dateTime`;
+//         return orderByChild(userPath) as QueryConstraint;
+//     }
+//     return startAt(0);
+// }
+
+export const orderByTime = orderByChild('dateTime');
 export const orderByTitle = orderByChild('title');
 export const orderByUrl = orderByChild('url');
 export const filterByFavorite = equalTo(true, 'favorite');

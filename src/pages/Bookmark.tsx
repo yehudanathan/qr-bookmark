@@ -1,5 +1,5 @@
 import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
-import { deleteLinks, getLinks } from "../firebase/database/links";
+import { deleteLinks, getLinks, getLinksOrderByTime, getLinksOrderByTitle } from "../firebase/database/links";
 import { useEffect, useState } from "react";
 // import { Link } from '../firebase/models/Link';
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
@@ -41,7 +41,7 @@ const Bookmark = () => {
 					index: index,
 				}
 			));
-      console.log("🚀 ~ file: Bookmark.tsx ~ line 42 ~ fetchData ~ newData", newData)
+      // console.log("🚀 ~ file: Bookmark.tsx ~ line 42 ~ fetchData ~ newData", newData)
 			setLinks(newData);
 
 			const selectedArray : boolean[] = [];
@@ -169,7 +169,6 @@ const Bookmark = () => {
 		} else {
 			alert("Deletion error");
 		}
-
 	}
 
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
@@ -199,6 +198,28 @@ const Bookmark = () => {
 	// 	setLinks(newLinks);
 	// };
 
+	const sortBy = async (category) => {
+		if (category === 'Oldest') {
+			const newLinks = await getLinksOrderByTitle();
+      console.log("🚀 ~ file: Bookmark.tsx ~ line 204 ~ sortBy ~ newLinks", newLinks)
+			if (newLinks === null) {
+				console.log("links is null bruh");
+				return;
+			} else {
+				const newData : any = Object.values(newLinks).map((link, index) => (
+					{
+						...link,
+						index: index,
+					}
+				));
+				// console.log("🚀 ~ file: Bookmark.tsx ~ line 42 ~ fetchData ~ newData", newData)
+				setLinks(newData);
+				return true;
+			}
+		} else { // Newest
+		}
+	}
+
 	const dualTheme = createTheme({
 		palette: {
 			mode: mode as PaletteMode,
@@ -210,7 +231,6 @@ const Bookmark = () => {
 	// };
 
 	return (<>
-		
 		<ThemeProvider theme={dualTheme}>
 			<Box
 				bgcolor={"background.default"}
@@ -231,6 +251,7 @@ const Bookmark = () => {
 					setTo={setTo}
 					setFavorite={setFavorite}
 					setSort={setSort}
+					sortBy={sortBy}
 					setClear={setClear}
 					handleFilter={() => {console.log("handle filter");}}
 					allSelected={selectAll}

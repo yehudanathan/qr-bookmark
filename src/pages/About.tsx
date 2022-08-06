@@ -2,14 +2,9 @@ import { ArrowBack, CropFree } from "@mui/icons-material";
 import { Button, Card, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 import { Helmet } from 'react-helmet';
-import { useState } from "react";
 import MetaTags from 'react-meta-tags';
-import PictGenerator from "../components/PictGenerator";
 
 const About = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const toggleLoading = () => {setIsLoading(false)};
   let navigate = useNavigate();
 
   return (<>
@@ -71,7 +66,7 @@ const About = () => {
             <p className="p-name">Edward Alvin</p>
           </Stack>
         </Stack>
-        <Button variant="contained" onClick={() => navigate('/')} startIcon={<ArrowBack/>}
+        <Button variant="contained" onClick={() => navigate(-1)} startIcon={<ArrowBack/>}
           sx={{marginTop: "60px",
             color: "white",
             backgroundColor: "#115e90",

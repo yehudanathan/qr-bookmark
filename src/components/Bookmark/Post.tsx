@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { faker } from '@faker-js/faker';
 import { Link } from "../../firebase/models/Link";
+import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
@@ -76,6 +77,23 @@ const Post = ({
 	// const mockLinks : any = [];
 	// Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
 
+	// const linkPreview = async (url) => {
+	// 	const fallbackImage =  "https://cdn-icons-png.flaticon.com/512/3214/3214746.png";
+	// 	try {
+	// 		const response = await fetch(`https://rlp-proxy.herokuapp.com/v2?url=${url}`);
+	// 		const json = await response.json();
+	// 		const metadata = json.metadata;
+	// 		if (metadata.image === null || metadata === null) {
+	// 			console.log("error catched, in try block")
+	// 			return fallbackImage;
+	// 		}
+	// 		return metadata.image;
+	// 	} catch (error) {
+	// 		console.log("error catched")
+	// 		return fallbackImage;
+	// 	}
+	// }
+	
 	const redirectLink = (url) => {
 		if (url.startsWith("http")) {
 			return url;
@@ -167,15 +185,15 @@ const Post = ({
 		{/* {isDesktop ? <DesktopPost links={links} /> :	<MobilePost links={links} />} */}
 		{/* <MobilePost links={{ alex: "hello" }} /> */}
 
+		
 		<QRScanner open={openQrReader} setOpen={setOpenQrReader}/>
 		<AddLinkDialog open={openAddLinkDialog} handleClose={() => {setOpenAddLinkDialog(false);}} />
 		<Container sx={{ paddingTop: "30px" }} maxWidth="md" >
 			<Grid container spacing={4} sx={{paddingBottom: "50px"}} >
 				{links.filter((link) => link.isDeleted !== true).map((link) => {
-					// const content = dataArray[index];
-          // console.log("🚀 ~ file: Post.tsx ~ line 128 ~ {dataArray.map ~ content", content);
+					// const getLinkPreview = await linkPreview(link.URL);
 					return (<>
-						<Grid item xs={12} sm={6} md={4} sx={{ height: "450px" }}>
+						<Grid item xs={12} sm={6} md={4} sx={{ height: "300px" }}>
 						<Card
 							sx={{
 								height: "100%",
@@ -203,14 +221,25 @@ const Post = ({
 									/>
 								}
 							</div>
-							<a href={redirectLink(link.URL)}>
-								<CardMedia
-									component="img"
-									height="65%"
-									image="https://boardinggate.com.sg/wp-content/uploads/2016/08/dummy-prod-1.jpg"
-									alt="Some alt text"
-									/>
-							</a>
+								<a href={redirectLink(link.URL)}>
+									<div className="media-background"></div>
+									<CardMedia
+										component="img"
+										sx={{width: "30%",
+											height: "auto", 
+											objectFit: "cover",
+											opacity: "60%",
+											position: "absolute",
+											top: "10%",
+											left: "35%",
+										}}
+										height="30%"
+										image={"https://cdn-icons-png.flaticon.com/512/3214/3214746.png"}
+										alt="Some alt text"
+										/>
+										{/* <img src={getLinkPreview} alt="URL"></img> */}
+									{/* <LinkPreview url={link.URL}/> */}
+								</a>
 								<CardContent>
 								<h3 className="text-truncate">
 									{link.title}

@@ -35,13 +35,14 @@ const Bookmark = () => {
 				return;
 			}
 			
-			const newData : any = Object.values(links).map((link, index) => (
+			const newData : any = Object.values(links)
+			.filter((link) => link.isDeleted !== true)
+			.map((link, index) => (
 				{
 					...link,
 					index: index,
 				}
 			));
-      // console.log("🚀 ~ file: Bookmark.tsx ~ line 42 ~ fetchData ~ newData", newData)
 			setLinks(newData);
 
 			const selectedArray : boolean[] = [];

@@ -61,6 +61,9 @@ h2 {
     text-align: center;
     font-weight: normal;
   }
+  &.get-to-know {
+    font-size: 27px;
+  }
 }
 
 h3 {
@@ -453,10 +456,10 @@ span {
 }
 
 .about-div {
-  margin: auto;
-  width: 50%;
-  text-align: justify;
-  margin-top: 40px;
+  background: linear-gradient(60deg,#022358,#2ecffb);
+  padding: 30px;
+  height: calc(100vh - 60px);
+  margin: -8px;
 }
 
 .p-name {
@@ -474,6 +477,11 @@ span {
 
 .card-config {
   position: relative;
+  margin: auto;
+  width: 50%;
+  text-align: justify;
+  margin-top: 40px;
+  display: flex;
 }
 
 .config-profile {

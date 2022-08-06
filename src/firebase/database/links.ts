@@ -33,9 +33,9 @@ export const getLinksOrderByTime = () => {
     const user = getUser();
     if (user) {
         const userPath = `${basePath}/${user.uid}`;
-        const dbRef = ref(database, userPath).getKey();
-        return dbRef;
-        // return get(query(dbRef, orderByChild('dateTime'))).then(snapshot => snapshot.val() as {[id: string]: Link}) as Promise<{[id: string]: Link}>;
+        const dbRef = ref(database, userPath);
+        // return dbRef;
+        return get(query(dbRef, orderByChild('dateTime'))).then(snapshot => snapshot.val() as {[id: string]: Link}) as Promise<{[id: string]: Link}>;
     }
     return null;
 }

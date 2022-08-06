@@ -9,9 +9,6 @@ import {
 	Grid,
 	IconButton,
 } from "@mui/material";
-import { faker } from '@faker-js/faker';
-import { Link } from "../../firebase/models/Link";
-import { LinkPreview } from '@dhaiwat10/react-link-preview';
 import InfoIcon from '@mui/icons-material/Info';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
@@ -107,6 +104,7 @@ const Post = ({
 			if (value === true) {
 				indexToDelete.push(index);
 			}
+			return null;
 		});
 
 		deleteLink(indexToDelete);

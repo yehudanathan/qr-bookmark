@@ -4,12 +4,9 @@ import {
 	AppBar,
 	Box,
 	InputBase,
-	Menu,
-	MenuItem,
 	Stack,
 	styled,
 	Toolbar,
-	Typography,
 } from "@mui/material";
 import React from "react";
 import { Search as SearchIcon } from "@mui/icons-material";
@@ -64,8 +61,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-	const [open, setOpen] = React.useState(false);
-
 	return (
 		<AppBar sx={{position:"fixed", 
 			padding: "30px", 

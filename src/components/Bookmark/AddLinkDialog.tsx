@@ -13,7 +13,6 @@ import {
 import { useState } from "react";
 import { pushLink } from "../../firebase/database/links";
 import { Link } from '../../firebase/models/Link';
-import { useNavigate } from "react-router";
 import validator from "validator";
 import moment from "moment";
 
@@ -21,7 +20,6 @@ const AddLinkDialog = ({open, handleClose}) => {
   const [url, setURL] = useState("");
   const [title, setTitle] = useState("");
   const [favorite, setFavorite] = useState(false);
-  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();

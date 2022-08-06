@@ -10,8 +10,7 @@ import LeftBar from "../components/Bookmark/LeftBar";
 import RightBar from "../components/Bookmark/RightBar";
 
 const Bookmark = () => {
-	// eslint-disable-next-line no-unused-vars
-	const [mode, setMode] = useState("light");
+	// const [mode, setMode] = useState("light");
 	const [links, setLinks] = useState<any[]>([]);
 	const [selected, setSelected] = useState<boolean[]>([]);
 	const [favorite, setFavorite] = useState<boolean[]>([]);
@@ -219,11 +218,11 @@ const Bookmark = () => {
 		}
 	}
 
-	const dualTheme = createTheme({
-		palette: {
-			mode: mode as PaletteMode,
-		},
-	});
+	// const dualTheme = createTheme({
+	// 	palette: {
+	// 		mode: mode as PaletteMode,
+	// 	},
+	// });
 
 	// const setSort = (event) => {
 	// 	setSort(event.target.value);

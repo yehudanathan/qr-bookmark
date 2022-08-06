@@ -190,7 +190,13 @@ const Post = ({
 		<AddLinkDialog open={openAddLinkDialog} handleClose={() => {setOpenAddLinkDialog(false);}} />
 		<Container sx={{ paddingTop: "30px" }} maxWidth="md" >
 			<Grid container spacing={4} sx={{paddingBottom: "50px"}} >
-				{links.filter((link) => link.isDeleted !== true).map((link) => {
+				{links.length === 0 ? 
+				<>
+				<div className="empty-link">
+					<h3 className="empty">No links to display.</h3>
+				</div>
+				</> :
+				links.filter((link) => link.isDeleted !== true).map((link) => {
 					// const getLinkPreview = await linkPreview(link.URL);
 					return (<>
 						<Grid item xs={12} sm={6} md={4} sx={{ height: "300px" }}>

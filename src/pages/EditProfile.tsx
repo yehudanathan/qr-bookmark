@@ -30,8 +30,8 @@ const EditProfile = () => {
       displayName: displayName,
       photoURL: undefined,
     }, () => {
-      navigate("/config"); 
       alert("Profile updated!");
+      navigate("/"); 
     });
   }
 

@@ -29,6 +29,7 @@ import QRScanner from "../QRScanner";
 const Post = ({ 
 	links,
 	favorite,
+	handleFavorite,
 	sort, 
 	clear, 
 	setSort, 
@@ -46,7 +47,9 @@ const Post = ({
 	setOpenAddLinkDialog,
 	openQrReader,
 	setOpenQrReader,
-	deleteLink
+	deleteLink,
+	displayInfo,
+	setDisplayInfo,
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
 	
@@ -110,6 +113,22 @@ const Post = ({
 		});
 
 		deleteLink(indexToDelete);
+	}
+
+	const handleShare = (linkIndex) => {
+		const linkOfInterest = links.filter((link) => link.index === linkIndex)[0];
+		const URL = linkOfInterest.URL;
+		const title = linkOfInterest.title;
+		const text = title + '\n' + URL;
+		navigator.clipboard.writeText(text).then(() => {
+			alert("Copied to clipboard!");
+		})
+	}
+
+	const handleDisplay = (linkIndex) => {
+		const currentState = displayInfo[linkIndex];
+		const newDisplayInfo = [...displayInfo.slice(0, linkIndex), !currentState, ...displayInfo.slice(linkIndex + 1)];
+		setDisplayInfo(newDisplayInfo);
 	}
 
 	const handleFab = () => {
@@ -196,7 +215,8 @@ const Post = ({
 					<h3 className="empty">No links to display.</h3>
 				</div>
 				</> :
-				links.filter((link) => link.isDeleted !== true).map((link) => {
+				links.filter((link) => link.isDeleted !== true)
+				.map((link) => {
 					// const getLinkPreview = await linkPreview(link.URL);
 					return (<>
 						<Grid item xs={12} sm={6} md={4} sx={{ height: "300px" }}>
@@ -265,9 +285,7 @@ const Post = ({
 							>
 							<IconButton 
 								aria-label="details" 
-								onClick={() => {
-									// handle open and close dialog
-								}}
+								onClick={() => handleDisplay(link.index)}
 							>
 								<InfoIcon />
 							</IconButton>
@@ -276,24 +294,32 @@ const Post = ({
 										icon={<FavoriteBorder />}
 										checkedIcon={<Favorite sx={{ color: "red" }} />}
 										checked={favorite[link.index] ?? false}
-										onClick={() => alert("favorite feature IP")}
+										onChange={() => handleFavorite(link.index)}
 									/>
 								</IconButton>
-								<IconButton aria-label="share">
+								<IconButton 
+									aria-label="share"
+									onClick={() => handleShare(link.index)}
+								>
 									<Share />
 								</IconButton>
 							</CardActions>
 						</Card>
 					</Grid>
-					<InfoDialog
-						displayDialog={false}
-						handleCloseDialog={() => {alert("inprogress")}}
-						title={link.title}
-						URL={link.URL}
-						dateTime={link.dateTime}
-					/>
 					</>)
 				})}
+				{displayInfo.map((value, index) => {
+					const currentLink = links.filter((link) => link.index === index)[0];
+					return <>
+					<InfoDialog
+						displayDialog={value}
+						handleCloseDialog={() => handleDisplay(index)}
+						title={currentLink.title}
+						URL={currentLink.URL}
+						dateTime={currentLink.dateTime}
+					/>
+					</>;
+					})}
 			</Grid>
 		</Container>
 		{handleFab()}

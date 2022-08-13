@@ -251,9 +251,9 @@ const Preferences = ({
 						<input
 							type="checkbox"
 							className="active-checkbox select-all"
-							checked={allSelected || checkSelectAll}
+							checked={allSelected && checkSelectAll}
 							onClick={() => {
-								if (!allSelected) {
+								if ((!allSelected && !checkSelectAll) || !checkSelectAll) {
 									handleSelectAll();
 									setSelectAll(true);
 								} else {

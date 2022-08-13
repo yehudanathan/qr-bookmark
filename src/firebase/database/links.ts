@@ -99,7 +99,7 @@ export const getLinkID = async (link) => {
     }
 }
 
-export const deleteLinks = async (linkArray: any[]) => {
+export const updateLinks = async (linkArray: any[]) => {
     const user = getUser();
     if (user) {
         const userPath = `${basePath}/${user.uid}`;

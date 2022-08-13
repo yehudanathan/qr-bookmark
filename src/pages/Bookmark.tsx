@@ -1,5 +1,5 @@
 import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
-import { deleteLinks, getLinks, getLinksOrderByTime, getLinksOrderByTitle } from "../firebase/database/links";
+import { updateLinks, getLinks, getLinksOrderByTime, getLinksOrderByTitle } from "../firebase/database/links";
 import { useEffect, useState } from "react";
 // import { Link } from '../firebase/models/Link';
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
@@ -24,6 +24,7 @@ const Bookmark = () => {
 	const [selectAll, setSelectAll] = useState(selected.every((value) => value === true) && selected.length !== 0);
 	const [openAddLinkDialog, setOpenAddLinkDialog] = useState(false);
 	const [openQrReader, setOpenQrReader] = useState(false);
+	const [displayInfo, setDisplayInfo] = useState<boolean[]>([]);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -47,13 +48,16 @@ const Bookmark = () => {
 
 			const selectedArray : boolean[] = [];
 			const favoriteArray : boolean[] = [];
+			const displayInfoArray : boolean[] = [];
 
 			newData.forEach((link) => {
 				selectedArray.push(false);
 				favoriteArray.push(link.favorite);
+				displayInfoArray.push(false);
 			});
 			setSelected(selectedArray);
 			setFavorite(favoriteArray);
+			setDisplayInfo(displayInfoArray);
 		}
 		fetchData();
 	}, []);
@@ -90,6 +94,31 @@ const Bookmark = () => {
 
 		const updatedSelected = [...selected.slice(0, index), !selected.at(index), ...selected.slice(index + 1)];
 		setSelected(updatedSelected);
+	}
+
+	const handleFavorite =  async (linkIndex) => {
+		const getCurrentFav = favorite[linkIndex];
+		const updatedLinks = links.filter((link) => linkIndex === link.index).map((link) => ({
+			...link,
+			favorite: !getCurrentFav,
+		}));
+
+		const newLinks = [...links.slice(0, linkIndex), updatedLinks[0], ...links.slice(linkIndex + 1)];
+		
+		const newFavorite = newLinks.map(link => link.favorite);
+		const newSelected : boolean[] = [];
+		newLinks.forEach((link) => {
+			newSelected.splice(link.index, 1, false);
+		});
+		
+		const response = await updateLinks(updatedLinks);
+		if (response === true) {
+			setLinks(newLinks);
+			setSelected(newSelected);
+			setFavorite(newFavorite);
+		} else {
+			alert("Error with favorite button");
+		}
 	}
 
 	const clearAllSelection = () => {
@@ -160,7 +189,7 @@ const Bookmark = () => {
 			newSelected.splice(link.index, 1, false);
 		});
 		
-		const response = await deleteLinks(linkToDelete);
+		const response = await updateLinks(linkToDelete);
 		
 		if (response === true) {
 			setLinks(newLinks);
@@ -268,6 +297,7 @@ const Bookmark = () => {
 					<Post 
 						links={links} 
 						favorite={favorite}
+						handleFavorite={handleFavorite}
 						sort={sort} 	
 						clear={clear} 
 						setSort={setSort} 
@@ -286,6 +316,8 @@ const Bookmark = () => {
 						openQrReader={openQrReader}
 						setOpenQrReader={setOpenQrReader}
 						deleteLink={deleteLink}
+						displayInfo={displayInfo}
+						setDisplayInfo={setDisplayInfo}
 					/>
 					<RightBar />
 				</Stack>

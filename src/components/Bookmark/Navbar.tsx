@@ -67,8 +67,8 @@ const Navbar = () => {
 	return (
 		<AppBar sx={{position:"fixed", 
 			padding: "30px", 
-			paddingTop: "30px", 
-			paddingBottom: "30px",
+			paddingTop: "20px", 
+			paddingBottom: "20px",
 			}}
 		>
 			<StyledToolbar >
@@ -77,13 +77,13 @@ const Navbar = () => {
 				</div>
 				<div className="bookmark-navbar">
 					<Stack spacing={1} justifyContent="center">
-						<TitleBox className="navbar-titlebox">
-							<Stack direction="row" spacing={0.5} alignItems="center">
+						<TitleBox className="navbar-titlebox" sx={{justifyContent: "center"}}>
+							<Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center">
 								<CropFree sx={{ fontSize: "40px" }} />
 								<h1 className="bookmark-title">QR-Bookmark</h1>
 							</Stack>
 						</TitleBox>
-						<Search sx={{display: "flex"}}>
+						<Search sx={{width: "350px"}}>
 							<SearchIconWrapper>
 								<SearchIcon />
 							</SearchIconWrapper>

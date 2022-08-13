@@ -1,5 +1,5 @@
 import { Button, Stack } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser, logOut } from "../firebase/auth/auth_user";
 import profilePicture from '../static/profile-picture.png';
 

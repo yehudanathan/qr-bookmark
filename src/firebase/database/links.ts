@@ -8,9 +8,6 @@ import {
     orderByChild, 
     QueryConstraint, 
     update,
-    startAt, 
-    child,
-    orderByValue
 } from 'firebase/database';
 import firebaseApp from '../index';
 import { getUser } from '../auth/auth_user';
@@ -94,6 +91,7 @@ export const getLinkID = async (link) => {
                 linkIndex = index;
                 return idList[index];
             }
+            return;
         })[linkIndex];
         return result;
     }

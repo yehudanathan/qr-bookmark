@@ -4,12 +4,9 @@ import {
 	AppBar,
 	Box,
 	InputBase,
-	Menu,
-	MenuItem,
 	Stack,
 	styled,
 	Toolbar,
-	Typography,
 } from "@mui/material";
 import React from "react";
 import { Search as SearchIcon } from "@mui/icons-material";

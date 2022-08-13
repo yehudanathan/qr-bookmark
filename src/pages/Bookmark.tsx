@@ -1,5 +1,5 @@
 import { Box, createTheme, PaletteMode, Stack, ThemeProvider } from "@mui/material";
-import { updateLinks, getLinks, getLinksOrderByTime, getLinksOrderByTitle } from "../firebase/database/links";
+import { updateLinks, getLinks } from "../firebase/database/links";
 import { useEffect, useState } from "react";
 // import { Link } from '../firebase/models/Link';
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
@@ -8,12 +8,10 @@ import Post from "../components/Bookmark/Post";
 import Preferences from "../components/Bookmark/Preferences";
 import LeftBar from "../components/Bookmark/LeftBar";
 import RightBar from "../components/Bookmark/RightBar";
-import moment from "moment";
-// import update from 'react-addons-update';
 
 const Bookmark = () => {
-	// eslint-disable-next-line no-unused-vars
-	const [mode, setMode] = useState("light");
+	// const [mode, setMode] = useState("light");
+	const mode = "light";
 	const [links, setLinks] = useState<any[]>([]);
 	const [selected, setSelected] = useState<boolean[]>([]);
 	const [favorite, setFavorite] = useState<boolean[]>([]);

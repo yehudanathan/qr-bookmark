@@ -2,6 +2,10 @@
   "name": "qr-bookmark",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
+  },
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@dhaiwat10/react-link-preview": "^1.14.2",

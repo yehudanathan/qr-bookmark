@@ -64,8 +64,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-	const [open, setOpen] = React.useState(false);
-
 	return (
 		<AppBar sx={{position:"fixed", 
 			padding: "30px", 
@@ -78,14 +76,14 @@ const Navbar = () => {
 					<TemporaryDrawer />
 				</div>
 				<div className="bookmark-navbar">
-					<Stack spacing={1}>
+					<Stack spacing={1} justifyContent="center">
 						<TitleBox className="navbar-titlebox">
 							<Stack direction="row" spacing={0.5} alignItems="center">
 								<CropFree sx={{ fontSize: "40px" }} />
 								<h1 className="bookmark-title">QR-Bookmark</h1>
 							</Stack>
 						</TitleBox>
-						<Search>
+						<Search sx={{display: "flex"}}>
 							<SearchIconWrapper>
 								<SearchIcon />
 							</SearchIconWrapper>

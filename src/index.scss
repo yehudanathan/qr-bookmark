@@ -511,13 +511,7 @@ span {
 }
 
 .bookmark-navbar {
-  min-width: 700px;
-  align-items: center;
-  width: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  transform: translate(150px);
+  display: flex;
 }
 
 .bookmark-sidebar {
@@ -526,9 +520,9 @@ span {
   left: 30px;
 }
 
-.navbar-titlebox {
-  transform: translateX(42px);
-}
+// .navbar-titlebox {
+//   transform: translateX(42px);
+// }
 
 .link-checkbox {
   opacity: 0.0;

@@ -77,30 +77,11 @@ const Preferences = ({
 	const isDesktop = useMediaQuery((theme : any) => theme.breakpoints.up("sm"));
 	const checkSelectAll = selected.every((value) => value === true) && selected.length !== 0;
 
-	// const [links, setLinks] = useState((async () => {await getLinks()})());
-	// const [isSelected, setIsSelected] = useState(links.map())
-
-	// const handleFilter = (event) => {
-	//   let dateAndTime = value;
-	// 	console.log(dateAndTime); //TODO: error null
-	//   setFilterOpen(false)
-	// };
-
-	// useEffect(() => {
-	//   sort === "Oldest" ? links.orderByChild
-	// }, [sort]);
-
-	// const setClear = (event) => {
-	//   let option = event.target.value;
-	// 	setClear(option);
-	//   console.log("a");
-	// };
-
 	const handleDropdownChange = async (e) => {
 		setSort(e.target.value);
-		const result = await sortBy(sort);
+		const result = await sortBy(e.target.value);
 		if (result === true) {
-			alert("Sort complete");
+			console.log("Sort complete");
 		} else {
 			alert("Sort error");
 		}
@@ -137,7 +118,7 @@ const Preferences = ({
 					</Button>
 					<StyledModal
 						open={filterOpen}
-						onClose={(e) => setFilterOpen(false)}
+						onClose={() => setFilterOpen(false)}
 						aria-labelledby="modal-modal-title"
 						aria-describedby="modal-modal-description"
 					>

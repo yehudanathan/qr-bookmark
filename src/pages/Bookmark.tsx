@@ -8,6 +8,7 @@ import Post from "../components/Bookmark/Post";
 import Preferences from "../components/Bookmark/Preferences";
 import LeftBar from "../components/Bookmark/LeftBar";
 import RightBar from "../components/Bookmark/RightBar";
+import moment from "moment";
 // import update from 'react-addons-update';
 
 const Bookmark = () => {
@@ -71,27 +72,6 @@ const Bookmark = () => {
 	}
 
 	const setSelect = (index) => {
-		// Draft 1
-		// if (dataArray) {
-		// 	const newData : any = dataArray;
-		// 	const currentSelect = dataArray[index]["isSelected"];
-		// 	newData[index]["isSelected"] = !currentSelect;
-		// 	setDataArray(newData);
-		// }
-
-		// Draft 2
-		// const currentState = links.filter((link) => link.index === index).map((link) => link.isSelected)[0];	
-		// const newLink = links.filter((link) => link.index === index).map((link) =>
-		// 	({
-		// 		...link,
-		// 		isSelected: !currentState,
-		// 	})
-		// );
-
-		// const remainingLinks = links.filter((link) => link.index !== index);
-		// const updatedLinks = [...remainingLinks.slice(0, index), newLink[0], ...remainingLinks.slice(index)];
-    // console.log("🚀 ~ file: Bookmark.tsx ~ line 79 ~ setSelect ~ updatedLinks", updatedLinks)
-
 		const updatedSelected = [...selected.slice(0, index), !selected.at(index), ...selected.slice(index + 1)];
 		setSelected(updatedSelected);
 	}
@@ -122,33 +102,6 @@ const Bookmark = () => {
 	}
 
 	const clearAllSelection = () => {
-		// const newLinks = [];
-		// links.forEach((link) =>
-		// 	newLinks.concat({
-		// 		...link,
-		// 		isSelected: false,
-		// 	})
-		// );
-
-		// const newLinks : any[] = [];
-		// links.forEach((link) => {
-			// 	newLinks.push({
-				// 		...link,
-				// 		isSelected: false,
-		// 	})
-		// });
-
-		// Newest Draft
-		// const newLinks = links.map((link) => {
-		// 	if (link.isSelected === true) {
-		// 		return ({
-		// 		...link,
-		// 		isSelected: false
-		// 		})
-		// 	}
-		// 	return link;
-		// });
-
 		const length = selected.length;
 		const newSelected = new Array(length).fill(false);
 
@@ -158,11 +111,6 @@ const Bookmark = () => {
 	const handleSelectAll = () => {
 		if (!selectionMode) {
 			activateSelectionMode();
-			// const theLink = links.map((link) => Object.assign({}, link));
-			// theLink.forEach((link) => link.isSelected = true);
-			
-			// setLinks(theLink);
-
 			const length = selected.length;
 			const newSelected = new Array(length).fill(true);
 
@@ -229,25 +177,27 @@ const Bookmark = () => {
 	// };
 
 	const sortBy = async (category) => {
-		if (category === 'Oldest') {
-			const newLinks = await getLinksOrderByTitle();
-      console.log("🚀 ~ file: Bookmark.tsx ~ line 204 ~ sortBy ~ newLinks", newLinks)
-			if (newLinks === null) {
-				console.log("links is null bruh");
-				return;
-			} else {
-				const newData : any = Object.values(newLinks).map((link, index) => (
-					{
-						...link,
-						index: index,
-					}
-				));
-				// console.log("🚀 ~ file: Bookmark.tsx ~ line 42 ~ fetchData ~ newData", newData)
-				setLinks(newData);
-				return true;
-			}
-		} else { // Newest
+		const newLinks = await getLinks();
+		if (newLinks === null) {
+			console.log("links is null bruh");
+			return;
 		}
+		const newData : any = Object.values(newLinks).map((link, index) => (
+			{
+				...link,
+				index: index,
+			}
+		)).sort(function (firstLink: any, secondLink: any) { 
+			const firstDate = new Date(firstLink.dateTime); 
+			const secondDate = new Date(secondLink.dateTime);
+			if (category === 'Oldest') {
+				return +firstDate - +secondDate as number;
+			}
+				return +secondDate - +firstDate as number;
+		});
+		console.log("🚀 ~ file: Bookmark.tsx ~ line 278 ~ sortBy ~ newData", newData)
+		setLinks(newData);
+		return true;
 	}
 
 	const dualTheme = createTheme({
@@ -255,10 +205,6 @@ const Bookmark = () => {
 			mode: mode as PaletteMode,
 		},
 	});
-
-	// const setSort = (event) => {
-	// 	setSort(event.target.value);
-	// };
 
 	return (<>
 	<div className="bookmark-div">

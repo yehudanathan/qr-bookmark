@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import Post from "./Post";
 
 const Feed = () => {
 	return (

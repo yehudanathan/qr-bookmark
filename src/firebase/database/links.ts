@@ -91,7 +91,7 @@ export const getLinkID = async (link) => {
                 linkIndex = index;
                 return idList[index];
             }
-            return;
+            return "";
         })[linkIndex];
         return result;
     }

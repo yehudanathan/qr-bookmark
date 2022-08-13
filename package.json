@@ -50,7 +50,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "eslintConfig": {
     "extends": [
@@ -73,5 +74,6 @@
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",
     "@types/validator": "^13.7.1"
-  }
+  },
+  "heroku-run-build-script": true
 }

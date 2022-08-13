@@ -6,14 +6,14 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Favorite from "../static/favorite.png";
 import User from "../static/user.png";
 import Info from "../static/info.png";
 import Logout from "../static/logout.png";
 import Bookmarks from "../static/bookmark.png";
+import Home from "../static/home.png";
 // commented code is for mock data.
 // import {authLogout, isSignedIn} from "../apis/auth";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logOut } from "../firebase/auth/auth_user";
 
 
@@ -40,7 +40,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {[
-          { text: "Favorites", path: Favorite, onClick: () => navigate("/links") },
+          { text: "Dashboard", path: Home, onClick: () => navigate("/") },
           { text: "Bookmarks", path: Bookmarks, onClick: () => navigate("/links") },
           { text: "Profile", path: User, onClick: () => navigate("/config") },
         ].map((obj) => (

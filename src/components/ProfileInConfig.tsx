@@ -33,7 +33,7 @@ const ProfileInConfig = () => {
           <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" onClick={() => {navigate("/account");}}>Configure Account</Button>
         </Link>
         <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() =>{logOut(); navigate("/signin");}}>Log out</Button>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() => navigate("/")}>Back</Button>
+        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() => navigate("/")}>Back to dashboard</Button>
       </div>
     </Stack>
   )

@@ -12,15 +12,107 @@
       font-size: 40px;
       font-family: "Gotham Medium", "Montserrat";
       color: #262254;
+      margin-block-end: 1px !important;
+      text-align: left;
     }
   }
   margin: -8px;
   height: 100vh;
 }
 
+h1 {
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+  font-size: 25px;
+  font-family: "Gotham Medium", "Montserrat";
+  font-weight: bold;
+  color: black;
+  &.bookmark-title {
+    color: white;
+    font-size: 30px;
+  }
+  &.modal {
+    text-align: center;
+  }
+}
+
 p {
   font-size: 18px;
   font-family: "Product Sans", "Montserrat";
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+  &.title-url {
+    font-size: 16px;
+    text-align: center;
+    margin-block-start: 0px;
+  }
+  &.favorite-title-dialog {
+    font-size: 17px;
+  }
+}
+
+h2 {
+  font-size: 33px;
+  font-family: "Product Sans", "Montserrat";
+  &.filter-settings-preferences {
+    font-size: 25px;
+    color: gray;
+    margin-block-start: 0px;
+    text-align: center;
+    font-weight: normal;
+  }
+  &.get-to-know {
+    font-size: 27px;
+  }
+}
+
+h3 {
+  font-size: 20px;
+  font-family: "Product Sans", "Montserrat" !important;
+  color: #000000;
+  font-weight: normal;
+  margin-block-start: 3px;
+  margin-block-end: 3px;
+  &.empty {
+    color: gray;
+  }
+  &.title-dialog {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+  }
+  &.preferences-filter {
+    font-size: 15px;
+    color: #1976d2;
+    &.sort {
+      transform: translateY(-2px);
+      color: gray;
+      align-items: center;
+      justify-content: center;
+      max-height: 40px;
+      &.select-all {
+        transform: none;
+      }
+    }
+    &.dropdown {
+      color: black;
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+  }
+}
+
+.text-truncate {
+  display: inline-block;
+  max-width: 225px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.datetime-post {
+  font-style: italic;
+  font-size: 15px !important;
+  color: gray;
 }
 
 .form-control {
@@ -106,19 +198,7 @@ p {
   }
 }
 
-h1 {
-  // font-size: 40px;
-  font-family: "Gotham Medium", "Montserrat";
-  // color: #262254;
-  font-size: 25px;
-  // font-family: "Product Sans";
-  color: #000000;
-  font-weight: bold;
-  // font-style: italic;
-  &.modal {
-    text-align: center;
-  }
-}
+
 
 .profile-h1 {
   color: black;
@@ -138,10 +218,7 @@ h1 {
 //   font-family: "Product Sans";
 // }
 
-h2 {
-  font-size: 33px;
-  font-family: "Product Sans", "Montserrat";
-}
+
 
 .full-name {
   color: #043026;
@@ -382,14 +459,13 @@ span {
 }
 
 .about-div {
-  margin: auto;
-  width: 50%;
-  text-align: justify;
-  margin-top: 40px;
-}
-
-.p-name {
-  text-align: center;
+  background: linear-gradient(60deg,#022358,#2ecffb);
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  margin: -8px;
+  margin-bottom: -20px;
+  align-items: center;
 }
 
 .pict-generator-config {
@@ -401,8 +477,13 @@ span {
   opacity: 80%;
 }
 
+.p-name {
+  text-align: center;
+}
+
 .card-config {
   position: relative;
+  align-items: center;
 }
 
 .config-profile {
@@ -425,8 +506,87 @@ span {
   align-items: center;
 }
 
-.hi{
+.hi {
   background-color: #730c0c;
+}
+
+.bookmark-navbar {
+  display: flex;
+}
+
+.bookmark-sidebar {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+}
+
+// .navbar-titlebox {
+//   transform: translateX(42px);
+// }
+
+.link-checkbox {
+  opacity: 0.0;
+  transition: .3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.active-checkbox {
+  opacity: 1;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  &.select-all {
+    position: static;
+  }
+}
+
+.checkbox-hover {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  cursor: pointer;
+}
+
+.checkbox-hover:hover .link-checkbox {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.disable-text-decor {
+  text-decoration: none;
+}
+
+.URL {
+  font-style: italic;
+  &:hover {
+    color: #42a5f5;
+  }
+}
+
+.media-background {
+  background-color: #efefef;
+  width: auto;
+  height: 133px;
+}
+
+.bookmark-div {
+  margin-top: 135px;
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.empty-link {
+  position: fixed;
+  left: 45%;
+  top: 45%;
 }
 
 

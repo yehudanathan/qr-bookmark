@@ -4,14 +4,13 @@ import {
 	AppBar,
 	Box,
 	InputBase,
-	Menu,
-	MenuItem,
+	Stack,
 	styled,
 	Toolbar,
-	Typography,
 } from "@mui/material";
 import React from "react";
 import { Search as SearchIcon } from "@mui/icons-material";
+import TemporaryDrawer from "../SideBar";
 
 const StyledToolbar = styled(Toolbar)({
 	display: "flex",
@@ -23,8 +22,6 @@ const StyledToolbar = styled(Toolbar)({
 const TitleBox = styled(Box)({
 	display: "flex",
 	alignItems: "center",
-	gap: "10px",
-	margin: "15px 10px 10px 10px",
 });
 
 const Search = styled("div")(({ theme }) => ({
@@ -64,43 +61,37 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-	const [open, setOpen] = React.useState(false);
-
 	return (
-		<AppBar sx={{position:"sticky", margin: "0px"}}>
-			<StyledToolbar>
-				<TitleBox>
-					<CropFree sx={{ fontSize: "40px" }} />
-					<Typography variant="h4">QR-Bookmark</Typography>
-				</TitleBox>
-				<Search>
-					<SearchIconWrapper>
-						<SearchIcon />
-					</SearchIconWrapper>
-					<StyledInputBase
-						placeholder="Search…"
-						inputProps={{ "aria-label": "search" }}
-					/>
-				</Search>
+		<AppBar sx={{position:"fixed", 
+			padding: "30px", 
+			paddingTop: "20px", 
+			paddingBottom: "20px",
+			}}
+		>
+			<StyledToolbar >
+				<div className="bookmark-sidebar">
+					<TemporaryDrawer />
+				</div>
+				<div className="bookmark-navbar">
+					<Stack spacing={1} justifyContent="center">
+						<TitleBox className="navbar-titlebox" sx={{justifyContent: "center"}}>
+							<Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center">
+								<CropFree sx={{ fontSize: "40px" }} />
+								<h1 className="bookmark-title">QR-Bookmark</h1>
+							</Stack>
+						</TitleBox>
+						<Search sx={{width: "350px"}}>
+							<SearchIconWrapper>
+								<SearchIcon />
+							</SearchIconWrapper>
+							<StyledInputBase
+								placeholder="Search bookmarks…"
+								inputProps={{ "aria-label": "search", style: {fontFamily: "Product Sans, Montserrat"}}}
+							/>
+						</Search>
+					</Stack>
+				</div>
 			</StyledToolbar>
-			<Menu
-				id="demo-positioned-menu"
-				aria-labelledby="demo-positioned-button"
-				open={open}
-				onClose={(e) => setOpen(false)}
-				anchorOrigin={{
-					vertical: "top",
-					horizontal: "right",
-				}}
-				transformOrigin={{
-					vertical: "top",
-					horizontal: "left",
-				}}
-			>
-				<MenuItem>Profile</MenuItem>
-				<MenuItem>My account</MenuItem>
-				<MenuItem>Logout</MenuItem>
-			</Menu>
 		</AppBar>
 	);
 };

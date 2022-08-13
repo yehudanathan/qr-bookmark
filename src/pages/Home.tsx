@@ -4,13 +4,16 @@ import TemporaryDrawer from "../components/SideBar";
 import CustomSnackBar from "../components/CustomSnackBar";
 import Profile from "../components/Profile";
 import MetaTags from "react-meta-tags";
-import { Stack } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 import "../index.scss";
+import { useState } from "react";
 
 const Home = () => {
+    const [openQrReader, setOpenQrReader] = useState(false);
     const location = useLocation();
+
     const checkPreviousLocation = () => {
         // console.log(location.state);
         if (location.state !== null) {
@@ -35,9 +38,19 @@ const Home = () => {
                 <Profile/>
             </Stack>
             <Stack direction="column" spacing={1} alignItems="center">
-                <h1 className="title">Bookmark your link now.</h1>
+                <h1 className="title">Quick add bookmarks...</h1>
                 <AddLink/>
-                <QRScanner/>
+                <Button
+                    style={{backgroundColor: "#7c40a9"}} //TODO bikin toggle color for button
+                    variant = "contained"
+                    size= "large"
+                    sx={{height:"48px", fontFamily: "Montserrat",}}
+                    onClick={() => {setOpenQrReader(true)}}
+                    type="submit"
+                    >
+                    {"Open Camera"}
+                </Button>
+                <QRScanner open={openQrReader} setOpen={setOpenQrReader} />
             </Stack>
             <CustomSnackBar severity="success" message="You have successfully logged in!" autoHide={6000} open={checkPreviousLocation}/>
             {/* how to set such that the snackbar only opens when first time logging in? */}

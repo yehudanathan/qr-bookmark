@@ -92,11 +92,11 @@ const Preferences = ({
 			<IconAndText>
 				<Stack
 					direction="row"
-					justifyContent="flex-end"
 					spacing={2}
+					justifyContent="center"
 					sx={{
 						marginTop: "15px",
-						minWidth: "calc(100vw - 30px)",
+						minWidth: "845px",
 						height: "40px",
 					}}
 				>
@@ -107,7 +107,6 @@ const Preferences = ({
 							textTransform: "none",
 							display: "flex",
 							minHeight: "56.8px",
-							maxWidth: "160px",
 							flexGrow: 1,
 							p: { xs: 0, sm: 0 },
 						}}
@@ -200,7 +199,6 @@ const Preferences = ({
 							flexGrow: 1,
 							display: "flex",
 							maxHeight: "40px",
-							maxWidth: "160px",
 						}}
 					>
 						<InputLabel

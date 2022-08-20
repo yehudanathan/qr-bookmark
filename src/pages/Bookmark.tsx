@@ -212,58 +212,64 @@ const Bookmark = () => {
 				color={"text.primary"}
 			>
 				<Navbar />
-				<Preferences
-          links={links}
-					selected={selected}
-					favorite={favorite}
-					from={from}
-					to={to}
-					sort={sort}
-					clear={clear}
-          setLinks={setLinks}
-					setFrom={setFrom}
-					setTo={setTo}
-					setFavorite={setFavorite}
-					setSort={setSort}
-					sortBy={sortBy}
-					setClear={setClear}
-					handleFilter={() => {console.log("handle filter");}}
-					allSelected={selectAll}
-					setSelectAll={setSelectAll}
-					handleSelectAll={handleSelectAll}
-					clearSelection={clearAllSelection}
-					selectionMode={selectionMode}
-					activateSelectionMode={activateSelectionMode}
-					deactivateSelectionMode={deactivateSelectionMode}
-				/>
-				<Stack direction="row" spacing={2} justifyContent="space-between">
-					<LeftBar />
-					<Post 
-						links={links} 
-						favorite={favorite}
-						handleFavorite={handleFavorite}
-						sort={sort} 	
-						clear={clear} 
-						setSort={setSort} 
-						theme={() => {console.log("theme");}}
-						selectMode={selectionMode}
-						activateSelectMode={activateSelectionMode}
-						deactivateSelectMode={deactivateSelectionMode}
-						clearSelection={clearAllSelection}
-						allSelected={selectAll}
-						handleSelectAll={handleSelectAll}
-						setSelectAll={setSelectAll}
-						setSelect={setSelect}
-						selected={selected}
-						openAddLinkDialog={openAddLinkDialog}
-						setOpenAddLinkDialog={setOpenAddLinkDialog}
-						openQrReader={openQrReader}
-						setOpenQrReader={setOpenQrReader}
-						deleteLink={deleteLink}
-						displayInfo={displayInfo}
-						setDisplayInfo={setDisplayInfo}
-					/>
-					<RightBar />
+				<Stack 	
+					spacing={2} 
+					alignItems="center"
+					sx={{
+						minWidth: "1200px"
+					}}
+				>
+					{/* <LeftBar /> */}
+						<Preferences
+							links={links}
+							selected={selected}
+							favorite={favorite}
+							from={from}
+							to={to}
+							sort={sort}
+							clear={clear}
+							setLinks={setLinks}
+							setFrom={setFrom}
+							setTo={setTo}
+							setFavorite={setFavorite}
+							setSort={setSort}
+							sortBy={sortBy}
+							setClear={setClear}
+							handleFilter={() => {console.log("handle filter");}}
+							allSelected={selectAll}
+							setSelectAll={setSelectAll}
+							handleSelectAll={handleSelectAll}
+							clearSelection={clearAllSelection}
+							selectionMode={selectionMode}
+							activateSelectionMode={activateSelectionMode}
+							deactivateSelectionMode={deactivateSelectionMode}
+						/>
+						<Post 
+							links={links} 
+							favorite={favorite}
+							handleFavorite={handleFavorite}
+							sort={sort} 	
+							clear={clear} 
+							setSort={setSort} 
+							theme={() => {console.log("theme");}}
+							selectMode={selectionMode}
+							activateSelectMode={activateSelectionMode}
+							deactivateSelectMode={deactivateSelectionMode}
+							clearSelection={clearAllSelection}
+							allSelected={selectAll}
+							handleSelectAll={handleSelectAll}
+							setSelectAll={setSelectAll}
+							setSelect={setSelect}
+							selected={selected}
+							openAddLinkDialog={openAddLinkDialog}
+							setOpenAddLinkDialog={setOpenAddLinkDialog}
+							openQrReader={openQrReader}
+							setOpenQrReader={setOpenQrReader}
+							deleteLink={deleteLink}
+							displayInfo={displayInfo}
+							setDisplayInfo={setDisplayInfo}
+						/>
+					{/* <RightBar /> */}
 				</Stack>
 			</Box>
 		</ThemeProvider>

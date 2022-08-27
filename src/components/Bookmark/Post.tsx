@@ -19,24 +19,15 @@ import InfoDialog from "./InfoDialog";
 import AddLinkDialog from "./AddLinkDialog";
 import moment from "moment";
 import QRScanner from "../QRScanner";
-// for MOCK DATA below
-// import { getUserLinks } from "../../apis/link";
-// import { getCurrentUserId } from "../../apis/session";
 
 const Post = ({ 
 	links,
 	favorite,
 	handleFavorite,
-	sort, 
-	clear, 
-	setSort, 
-	theme, 
 	selectMode,
 	activateSelectMode,
 	deactivateSelectMode,
 	clearSelection,
-	allSelected,
-	handleSelectAll,
 	setSelectAll,
 	setSelect,
 	selected,
@@ -49,50 +40,6 @@ const Post = ({
 	setDisplayInfo,
 }) => {
 	// const isDesktop = useMediaQuery(theme.breakpoints.up("sm")); // return true/false
-	
-	// const cards = linksWithIndex.map(el => {
-	// 	return (
-	// 		<Card>
-	// 			{el.url}
-	// 			{el.title}
-	// 			{el.isSelected}
-	// 			<button onClick={() => handleSelect(el)} />
-	// 		</Card>
-	// 	)
-	// })
-	
-	// function createRandomLinks(index) {
-	// 	return {
-	// 		title: faker.word.adjective()	,
-	// 		URL: faker.internet.domainName(),
-	// 		dateTime:faker.date.past(),
-	// 		favorite:false,
-	// 		userID:index,
-	// 		index: index,
-	// 		isSelected: false,
-	// 		display: true
-	// 	};
-	// }
-
-	// const mockLinks : any = [];
-	// Array.from({ length: 10 }).forEach((v, index) => mockLinks.push(createRandomLinks(index)));
-
-	// const linkPreview = async (url) => {
-	// 	const fallbackImage =  "https://cdn-icons-png.flaticon.com/512/3214/3214746.png";
-	// 	try {
-	// 		const response = await fetch(`https://rlp-proxy.herokuapp.com/v2?url=${url}`);
-	// 		const json = await response.json();
-	// 		const metadata = json.metadata;
-	// 		if (metadata.image === null || metadata === null) {
-	// 			console.log("error catched, in try block")
-	// 			return fallbackImage;
-	// 		}
-	// 		return metadata.image;
-	// 	} catch (error) {
-	// 		console.log("error catched")
-	// 		return fallbackImage;
-	// 	}
-	// }
 	
 	const redirectLink = (url) => {
 		if (url.startsWith("http")) {
@@ -197,8 +144,6 @@ const Post = ({
 	
 	return (<>
 		{/* {isDesktop ? <DesktopPost links={links} /> :	<MobilePost links={links} />} */}
-		{/* <MobilePost links={{ alex: "hello" }} /> */}
-
 		
 		<QRScanner open={openQrReader} setOpen={setOpenQrReader}/>
 		<AddLinkDialog open={openAddLinkDialog} handleClose={() => {setOpenAddLinkDialog(false);}} />

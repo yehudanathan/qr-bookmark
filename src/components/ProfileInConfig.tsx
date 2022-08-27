@@ -4,11 +4,11 @@ import { getUser, logOut } from "../firebase/auth/auth_user";
 import profilePicture from '../static/profile-picture.png';
 
 const ProfileInConfig = () => {
-  let navigate = useNavigate();
   const defaultPicture = profilePicture;
   const user = getUser();
   const email = user?.email;
   const fullName = user?.displayName;
+  let navigate = useNavigate();
   let displayPicture = user?.photoURL;
 
   if (displayPicture === null) {

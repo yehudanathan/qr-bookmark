@@ -2,8 +2,6 @@ import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import GoogleButton from 'react-google-button';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import { authLogin } from '../apis/auth';
-// import users from "../data/users.json";
 import { emailSignIn } from '../firebase/auth/auth_email_password';
 import { googleSignIn } from '../firebase/auth/auth_google';
 import VerificationEmailModal from './VerificationEmailModal';
@@ -13,8 +11,6 @@ const SignInForm = ({ isLoading }) => {
     const location = useLocation();
     
     const checkPreviousPage = () => {
-        // console.log("previous page before sign in");
-        // console.log(location.state);
         if (location.state !== null) {
             return true;
         }
@@ -44,35 +40,7 @@ const SignInForm = ({ isLoading }) => {
         setEmailError("");
         setPasswordError("");
 
-        // PART FOR MOCK DATA
-        // uncomment this part if backend is not available
-
-        // const findUser = users["registered-users"].find(user => user.email === email) || "{}"
-        // const name = findUser["name"];
-        // const userID = findUser["userID"];
-        // const user = {userID, name, email, password};
-        // const response = await authLogin(user);
-
-        // if (response === "Cannot find user") {
-        //     setEmailError("We could not find an account associated with this email.");
-        //     setPasswordError("");
-        //     setPassword("");
-        // } else if (response === "Incorrect password") {
-        //     // alert("Incorrect password");
-        //     setPassword("");
-        //     setPasswordError("Incorrect password.");
-        //     setEmailError("");
-        // } else if (response === "Password is too short") {
-        //     setPassword("");
-        //     setPasswordError("Password must be at least 4 characters.");
-        //     setEmailError("");
-        // } else if (response === "Logged in") {
-        //     navigate('/', { state : { user } });
-        //     console.log("check!");
-        // }
-
         const response = await emailSignIn(email, password);
-        // console.log(response);
 
         if (typeof response === "string") {
             if (response === Object.keys(errorCodes["password"])[0]) {
@@ -89,7 +57,6 @@ const SignInForm = ({ isLoading }) => {
     }
 
     const handleGoogleSignIn = () => {
-        // console.log("google sign in");
         googleSignIn();
     }
 

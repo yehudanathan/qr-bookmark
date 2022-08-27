@@ -5,30 +5,17 @@ import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import Home from "./pages/Home";
 import Config from "./pages/Config";
-// import Links from "./pages/Links";
 import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
 import EditProfile from "./pages/EditProfile";
 import ConfigureAccount from "./components/ConfigureAccount";
 import Bookmark from "./pages/Bookmark";
-// PART FOR MOCK DATA
-// uncomment this part if backend is not available
-// import { isSignedIn } from "./apis/auth";
 
 const PrivateRoute = () => {
   const auth = getAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   isSignedIn().then((res) => {
-  //     console.log("before: " + isAuthenticated);
-  //     setIsAuthenticated(res);
-  //     console.log("after: " + isAuthenticated);
-  //     setIsLoading(false);
-  //   });;
-  // }, [isAuthenticated]);
 
   useEffect(() => {
     auth.onAuthStateChanged(user => { // TODO masukin firebase api
@@ -52,14 +39,7 @@ const PrivateRoute = () => {
 const SignInRoute = () => {
   const [signedIn, setSignedIn] = useState(false);
   const auth = getAuth();
-
-  // useEffect(() => {
-  //   isSignedIn().then((res) => {
-  //     console.log("Info retrieved; signed in state set.");
-  //     setSignedIn(res);
-  //   });
-  // }, [signedIn]);
-
+  
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user?.emailVerified) {
@@ -78,7 +58,6 @@ const SignInRoute = () => {
 }
 
 function App() {
-  // console.log("rendering app");
   return (
     <>
       {

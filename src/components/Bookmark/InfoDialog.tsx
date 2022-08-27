@@ -28,7 +28,6 @@ const InfoDialog = ({
       <DialogTitle
         sx={{
           fontFamily: "Gotham Medium", 
-          // fontWeight: "bold", 
           fontSize: "22px", 
           color: "black",
           paddingBottom: "10px",

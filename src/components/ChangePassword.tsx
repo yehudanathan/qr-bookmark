@@ -15,7 +15,7 @@ const ChangePassword = ({ openDialog, handleCloseDialog }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfNewPassword] = useState("");
 
-  // const [fieldError, setFieldError] = useState("");
+  // const [fieldError, setFieldError] = useState(""); // TODO
   const user = getUser();
   const currentEmail = user?.email;
   let navigate = useNavigate();

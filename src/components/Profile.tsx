@@ -4,17 +4,11 @@ import { getUser } from "../firebase/auth/auth_user";
 import profilePicture from '../static/profile-picture.png';
 
 const Profile = () => {
-  // FOR MOCK DATA. uncomment if backend is not available
-  // const user = sessionStorage.getItem("user") || "{}";
-  // const email = JSON.parse(user)["email"];
-  // const fullName = JSON.parse(user)["name"];
-  
-  let navigate = useNavigate();
-
   const defaultPicture = profilePicture;
   const user = getUser();
   const email = user?.email;
   const fullName = user?.displayName;
+  let navigate = useNavigate();
   let displayPicture = user?.photoURL;
   
   if (displayPicture === null)  {

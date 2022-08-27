@@ -1,7 +1,6 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { authRegister } from '../apis/auth';
 import { emailSignUp, sendEmailVerification } from '../firebase/auth/auth_email_password';
 import { logOut, updateUser } from '../firebase/auth/auth_user';
 
@@ -15,7 +14,6 @@ const RegisterForm = ({ isLoading }) => {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [confPasswordError, setConfPasswordError] = useState("");
-    // const [userIDCount, addUserIDCount] = useState(0);
 
     const errorCodes = {
         "email" : {
@@ -42,37 +40,11 @@ const RegisterForm = ({ isLoading }) => {
         if (passNotMatch) {
             setConfPasswordError("Passwords do not match.");
         } else {
-            // PART FOR MOCK DATA
-            // uncomment this part if backend is not available
-
-            // const userID = userIDCount + 1;
-            // addUserIDCount(userID); 
-            // currently userID diset dari 1 disini
-
-            // const user = {userID, name, email, password};
-            
-            // const response = await authRegister(user);
-            // console.log(response);
-
-            // if (response === "Registered") {
-            //     alert("User registered successfully");
-            //     navigate('/'); // this will navigate to signin first, redirects user to signin (again) after registering.
-            // }
-            // if (response === "Email already exists") {
-            //     setEmailError("Email is already in use.");
-            //     setPasswordError("");
-            // }
-            // if (response === "Password is too short") {
-            //     setEmailError("");
-            //     setPasswordError("Password must be at least 4 characters.");
-            // }
-
             const response = await emailSignUp(email, password);
             const profile = {
                 displayName: name,
                 photoURL: undefined,
             }
-            // console.log(response);                
             
             if (typeof response === "string") {
                 if (response === Object.keys(errorCodes["password"])[0]) {
@@ -83,7 +55,6 @@ const RegisterForm = ({ isLoading }) => {
             } else {
                 updateUser(profile, () => {
                     sendEmailVerification(() => {
-                        // alert("Email verification sent. Please check your email.");
                         logOut();
                         navigate('/signin', { state: profile });
                         // this will redirect to /signin first, 

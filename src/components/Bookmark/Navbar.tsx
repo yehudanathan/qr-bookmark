@@ -8,7 +8,6 @@ import {
 	styled,
 	Toolbar,
 } from "@mui/material";
-import React from "react";
 import { Search as SearchIcon } from "@mui/icons-material";
 import TemporaryDrawer from "../SideBar";
 
@@ -36,7 +35,7 @@ const Search = styled("div")(({ theme }) => ({
 	[theme.breakpoints.up("sm")]: {
 		marginLeft: theme.spacing(1),
 	},
-  marginBottom: "15px"
+	marginBottom: "15px"
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({

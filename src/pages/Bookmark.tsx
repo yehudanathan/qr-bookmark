@@ -147,33 +147,6 @@ const Bookmark = () => {
 		}
 	}
 
-	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
-	// // link = {url:..., title:..., index:....}
-
-	// const handleSelect = (el) => {
-	// 	const newIsSelected = !el.isSelected;
-	// 	const indexToReplace = el.index;
-	// 	// 1
-	// 	const filteredLinks = links.filter((el, i) => i !== indexToReplace); // links without link yg pny index itu
-	// 	const newLinks = [...filteredLinks, { ...el, isSelected: newIsSelected }];
-	// 	setLinks(newLinks);
-	// 	// // 2
-	// 	// links[indexToReplace] = { ...el, isSelected: newIsSelected };
-	// 	// setLinks(links);
-	// };
-
-
-	// const setSort = () => {
-	// 	const newLinks = await getLinks(orderByTime);
-	// 	setLinks(newLinks);
-	// };
-
-	// alvin
-	// const setSort = async () => {
-	// 	const newLinks = await getLinks(orderByTime);
-	// 	setLinks(newLinks);
-	// };
-
 	const sortBy = async (category) => {
 		const newLinks = await getLinks();
 		if (newLinks === null) {
@@ -213,27 +186,20 @@ const Bookmark = () => {
 			>
 				<Navbar />
 				<Preferences
-          links={links}
+					links={links}
 					selected={selected}
-					favorite={favorite}
 					from={from}
 					to={to}
 					sort={sort}
-					clear={clear}
-          setLinks={setLinks}
+					setLinks={setLinks}
 					setFrom={setFrom}
 					setTo={setTo}
-					setFavorite={setFavorite}
 					setSort={setSort}
 					sortBy={sortBy}
-					setClear={setClear}
-					handleFilter={() => {console.log("handle filter");}}
-					allSelected={selectAll}
 					setSelectAll={setSelectAll}
+					allSelected={selectAll}
 					handleSelectAll={handleSelectAll}
 					clearSelection={clearAllSelection}
-					selectionMode={selectionMode}
-					activateSelectionMode={activateSelectionMode}
 					deactivateSelectionMode={deactivateSelectionMode}
 				/>
 				<Stack direction="row" spacing={2} justifyContent="space-between">
@@ -242,16 +208,10 @@ const Bookmark = () => {
 						links={links} 
 						favorite={favorite}
 						handleFavorite={handleFavorite}
-						sort={sort} 	
-						clear={clear} 
-						setSort={setSort} 
-						theme={() => {console.log("theme");}}
 						selectMode={selectionMode}
 						activateSelectMode={activateSelectionMode}
 						deactivateSelectMode={deactivateSelectionMode}
 						clearSelection={clearAllSelection}
-						allSelected={selectAll}
-						handleSelectAll={handleSelectAll}
 						setSelectAll={setSelectAll}
 						setSelect={setSelect}
 						selected={selected}

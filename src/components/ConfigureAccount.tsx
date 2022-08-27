@@ -25,13 +25,6 @@ const ConfigureAccount = () => {
   const [emailEditMode, setEmailEditMode] = useState(false);
   const [email, setEmail] = useState(currentEmail);
 
-  // console.log("emaileditmode");
-  // console.log(emailEditMode);
-  // console.log("provider id:");
-  // console.log(currentProvider);
-  // console.log("provider data:");
-  // console.log(user?.providerData);
-
   const handleBack = () => {
     navigate("/config");
   }

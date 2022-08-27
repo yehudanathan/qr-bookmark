@@ -7,22 +7,20 @@ import MetaTags from "react-meta-tags";
 import { Stack, Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { Helmet } from 'react-helmet';
-import "../index.scss";
 import { useState } from "react";
+import "../index.scss";
 
 const Home = () => {
     const [openQrReader, setOpenQrReader] = useState(false);
     const location = useLocation();
 
     const checkPreviousLocation = () => {
-        // console.log(location.state);
         if (location.state !== null) {
             return true;
         }
         return false;
     }
 
-    // console.log("rendering home");
     return (
         <div className="body home">
             <MetaTags>

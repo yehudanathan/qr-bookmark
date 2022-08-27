@@ -1,5 +1,4 @@
 import { Fab } from "@mui/material";
-// import { Component } from "react";
 
 const CustomFab = ({ color, iconComponent, onClick, style }) => {
   return (<>

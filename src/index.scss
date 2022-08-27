@@ -189,7 +189,6 @@ h3 {
   height: 100%;
 }
 
-
 .config {
   &.span {
     display: inline-block;
@@ -198,8 +197,6 @@ h3 {
   }
 }
 
-
-
 .profile-h1 {
   color: black;
   text-align: center;
@@ -207,18 +204,6 @@ h3 {
   margin-bottom: 15px;
   font-size: 40px !important;
 }
-
-// TODO for sidebar
-// .MuiPaper-root-MuiDrawer-paper {
-//   background-color: #f2dcff;
-// }
-
-// .MuiTypography-root {
-//   font-size: 17px;
-//   font-family: "Product Sans";
-// }
-
-
 
 .full-name {
   color: #043026;
@@ -519,10 +504,6 @@ span {
   top: 30px;
   left: 30px;
 }
-
-// .navbar-titlebox {
-//   transform: translateX(42px);
-// }
 
 .link-checkbox {
   opacity: 0.0;

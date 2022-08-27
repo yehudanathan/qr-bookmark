@@ -11,8 +11,6 @@ import Info from "../static/info.png";
 import Logout from "../static/logout.png";
 import Bookmarks from "../static/bookmark.png";
 import Home from "../static/home.png";
-// commented code is for mock data.
-// import {authLogout, isSignedIn} from "../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "../firebase/auth/auth_user";
 
@@ -28,7 +26,6 @@ export default function TemporaryDrawer() {
 
   const toggleDrawer = (anchor, open) => {
     setState({ ...state, [anchor]: open });
-    // console.log(state);
   };
 
   const list = (anchor) => (

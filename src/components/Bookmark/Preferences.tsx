@@ -52,24 +52,17 @@ const Preferences = ({
 	links,
 	from,
 	to,
-	favorite,
 	selected,
 	sort,
-	clear,
 	setLinks,
 	setFrom,
 	setTo,
-	setFavorite,
-	handleFilter,
 	setSort,
 	sortBy,
-	setClear,
 	allSelected,
 	setSelectAll,
 	handleSelectAll,
 	clearSelection,
-	selectionMode,
-	activateSelectionMode,
 	deactivateSelectionMode,
 }) => {
 	const [filterOpen, setFilterOpen] = useState(false);
@@ -157,7 +150,6 @@ const Preferences = ({
 									<LocalizationProvider dateAdapter={AdapterDateFns}>
 										<DateTimePicker
 											renderInput={(props) => <TextField {...props} />}
-											// id="To"
 											label="To"
 											value={to}
 											onChange={(newTo) => {

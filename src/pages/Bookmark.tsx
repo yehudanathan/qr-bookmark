@@ -18,7 +18,6 @@ const Bookmark = () => {
 	const [from, setFrom] = useState(new Date());
 	const [to, setTo] = useState(new Date());
 	const [sort, setSort] = useState("");
-	const [clear, setClear] = useState("");
 	const [selectionMode, setSelectionMode] = useState(selected.includes(true));
 	const [selectAll, setSelectAll] = useState(selected.every((value) => value === true) && selected.length !== 0);
 	const [openAddLinkDialog, setOpenAddLinkDialog] = useState(false);

@@ -304,7 +304,7 @@ const Post = ({
 					</>)
 				})}
 				{displayInfo.map((value, index) => {
-					const currentLink = links.filter((link) => link.index === index)[0];
+					const currentLink = links[index];
 					return <>
 					<InfoDialog
 						displayDialog={value}
@@ -314,7 +314,7 @@ const Post = ({
 						dateTime={currentLink.dateTime}
 					/>
 					</>;
-					})}
+				})}
 			</Grid>
 		</Container>
 		{handleFab()}

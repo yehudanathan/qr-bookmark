@@ -13,6 +13,7 @@ const Bookmark = () => {
 	// const [mode, setMode] = useState("light");
 	const mode = "light";
 	const [links, setLinks] = useState<any[]>([]);
+	const [linksLibrary, setLinksLibrary] = useState<any[]>([]);
 	const [selected, setSelected] = useState<boolean[]>([]);
 	const [favorite, setFavorite] = useState<boolean[]>([]);
 	const [from, setFrom] = useState(new Date());
@@ -44,6 +45,7 @@ const Bookmark = () => {
 				}
 			));
 			setLinks(newData);
+			setLinksLibrary(newData);
 
 			const selectedArray : boolean[] = [];
 			const favoriteArray : boolean[] = [];
@@ -57,6 +59,7 @@ const Bookmark = () => {
 			setSelected(selectedArray);
 			setFavorite(favoriteArray);
 			setDisplayInfo(displayInfoArray);
+			console.log("🚀 ~ file: Bookmark.tsx ~ line 62 ~ fetchData ~ displayInfoArray", displayInfoArray)
 		}
 		fetchData();
 	}, []);
@@ -131,20 +134,39 @@ const Bookmark = () => {
 
 		const newFavorite = newLinks.map((link) => link.favorite);
 		const newSelected : boolean[] = [];
+		const newDisplayInfo : boolean[] = [];
 		newLinks.forEach((link) => {
 			newSelected.splice(link.index, 1, false);
+			newDisplayInfo.splice(link.index, 1, false);
 		});
+		// const newSelected : boolean[] = new Array(newLinks.length).fill(false);
+		// const newDisplayInfo : boolean[] = new Array(newLinks.length).fill(false);
 		
 		const response = await updateLinks(linkToDelete);
 		
 		if (response === true) {
+			console.log("🚀 ~ file: Bookmark.tsx ~ line 147 ~ deleteLink ~ response === true", response === true)
 			setLinks(newLinks);
+			setLinksLibrary(newLinks);
 			setSelected(newSelected);
 			setFavorite(newFavorite);
+			setDisplayInfo(newDisplayInfo);
 			alert("Deletion complete");
 		} else {
 			alert("Deletion error");
 		}
+	}
+
+	const handleSearchSubmit = (value) => {
+		const linksOfInterest = linksLibrary.filter((link) => link.title.includes(value) || link.URL.includes(value));
+		const newFavorite = linksOfInterest.map(link => link.favorite);
+		const newSelected : boolean[] = new Array(linksOfInterest.length).fill(false);
+		const newDisplayInfo : boolean[] = new Array(linksOfInterest.length).fill(false);
+
+		setLinks(linksOfInterest);
+		setSelected(newSelected);
+		setFavorite(newFavorite);
+		setDisplayInfo(newDisplayInfo);
 	}
 
 	// const linksWithIndex = links.map((link, index) => ({ ...link, index }));
@@ -211,7 +233,10 @@ const Bookmark = () => {
 				bgcolor={"background.default"}
 				color={"text.primary"}
 			>
-				<Navbar />
+				<Navbar 
+					links={links}
+					handleSearchSubmit={handleSearchSubmit}
+				/>
 				<Stack 	
 					spacing={2} 
 					alignItems="center"

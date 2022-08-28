@@ -2,6 +2,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
 
 const DeleteIconButton = () => {
+  // outermost <></> is unnecessary
   return (<>
     <Button 
     variant="contained"

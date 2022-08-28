@@ -237,6 +237,7 @@ const Post = ({
 										onChange={() => handleFavorite(link.index)}
 									/>
 								</IconButton>
+								{/*Misleading icon, share !== copy to clipboard, copy icon should be better than share icon*/}
 								<IconButton 
 									aria-label="share"
 									onClick={() => handleShare(link.index)}

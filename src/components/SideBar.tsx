@@ -36,6 +36,7 @@ export default function TemporaryDrawer() {
       onKeyDown={() => toggleDrawer(anchor, false)}
     >
       <List>
+        {/*Should use a component that have text, path, and onClick as props instead? */}
         {[
           { text: "Dashboard", path: Home, onClick: () => navigate("/") },
           { text: "Bookmarks", path: Bookmarks, onClick: () => navigate("/links") },

@@ -23,11 +23,15 @@ const Config = () => {
     displayPicture = defaultPicture;
   }
 
+  // what is this state use for?
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  // why we need this function? isnt () => setIsLoading(false); on the usage is good enough?
   const toggleLoading = () => {setIsLoading(false)};
   const path = useLocation().pathname;
 
+  // Think this shouldnt be put here, should be put in the jsx itself { path !== ..... ? <></> : <ProfileInConfig />} kind
+  // and why we need the path checking here? shouldnt the routes is the one handling this?
   const handleRendering = () => {
     if (path !== '/config/' && path !== '/config') {
       return <></>;

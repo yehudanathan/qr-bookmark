@@ -37,6 +37,7 @@ const QRScanner = ({open, setOpen}) => {
         console.error(e);
     }
 
+    // this should be a component (PascalCaseNoun), not a function (camelCaseVerb)
     const handleOpenReader = () => {
         return (<>
         <Dialog
@@ -56,6 +57,7 @@ const QRScanner = ({open, setOpen}) => {
                 </DialogContent>
                 <DialogActions>
                     <Button
+                        {/*You might want to use autoformatter (like prettier)*/}
                         variant = "contained"
                         size= "large"
                         sx={{height:"48px", fontFamily: "Montserrat",}}

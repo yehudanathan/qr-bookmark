@@ -9,6 +9,8 @@ import {
 import { useState } from "react";
 import { getUser, reAuthenticate } from "../firebase/auth/auth_user";
 
+// 1. I think open (or isOpen) and handleClose should be concise enough
+// 2. since this is using typescript, shouldnt we add type annotation in the props?
 const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfPassword] = useState("");
@@ -99,6 +101,7 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
         </form>
       </DialogContent>
       <DialogActions>
+        {/*  Styled Button can be extracted into a common components or at least this page component */}
         <Button 
           style={{
             borderColor: "#398564", 

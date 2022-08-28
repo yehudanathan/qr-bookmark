@@ -11,6 +11,20 @@ import EditProfile from "./pages/EditProfile";
 import ConfigureAccount from "./components/ConfigureAccount";
 import Bookmark from "./pages/Bookmark";
 
+// Instead of using PrivateRoute and SignInRoute here, where the content are actually quite similar, using a context should be better?
+// Then the usage can be like
+
+// <UserContext>
+//   <Routes />
+// </UserContext>
+
+// function Routes() {
+//   const { isLoggedIn } = useUserContext();
+//   return {
+//     isLoggedIn ? <LoggedInRoutes /> : <SignInRoutes />
+//   }
+// }
+
 const PrivateRoute = () => {
   const auth = getAuth();
 
@@ -69,12 +83,15 @@ function App() {
                 <Route path="edit-profile" element={<EditProfile />} />
                 <Route path="account" element={<ConfigureAccount />} />
               </Route>
+              {/* Not sure if it is just me, but I feel the bookmark cards page and add bookmark page should be on one page*/}
+              {/* But anyway I'm not a UX designer so maybe I am wrong haha */}
               <Route path="links" element={<Bookmark />} />
               <Route path="about" element={<About />} />
             </Route>
             <Route path="/signin" element={<SignInRoute />}>
               <Route path="" element={<AuthPage />} />
             </Route>
+            {/*Usually when the body is empty <Component /> is preferable than <Component></Component>*/}
             <Route path="/register" element={<AuthPage />}></Route>
             <Route path='*' element={<Navigate to='/'/>}></Route>
           </Routes>

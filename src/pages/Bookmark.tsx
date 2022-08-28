@@ -12,13 +12,19 @@ import RightBar from "../components/Bookmark/RightBar";
 const Bookmark = () => {
 	// const [mode, setMode] = useState("light");
 	const mode = "light";
+
+	// any is not preferred when using typescript
 	const [links, setLinks] = useState<any[]>([]);
+	// for selected, cant we just maintain the id list instead of always having boolean with the same length? or zip it into an interface with the links?
 	const [selected, setSelected] = useState<boolean[]>([]);
+	// why do we need to maintain a separate favourite array? we should be able to get the data from the links all the time right?
 	const [favorite, setFavorite] = useState<boolean[]>([]);
 	const [from, setFrom] = useState(new Date());
 	const [to, setTo] = useState(new Date());
 	const [sort, setSort] = useState("");
+	// why do we need this? cant we obtain this info from the selected array all the time?
 	const [selectionMode, setSelectionMode] = useState(selected.includes(true));
+	// same as this
 	const [selectAll, setSelectAll] = useState(selected.every((value) => value === true) && selected.length !== 0);
 	const [openAddLinkDialog, setOpenAddLinkDialog] = useState(false);
 	const [openQrReader, setOpenQrReader] = useState(false);
@@ -80,6 +86,7 @@ const Bookmark = () => {
 			favorite: !getCurrentFav,
 		}));
 
+		// feels lots of duplicate here, probably logic can be extracted to a context?
 		const newLinks = [...links.slice(0, linkIndex), updatedLinks[0], ...links.slice(linkIndex + 1)];
 		
 		const newFavorite = newLinks.map(link => link.favorite);
@@ -152,11 +159,13 @@ const Bookmark = () => {
 			console.log("links is null bruh");
 			return;
 		}
+
 		const newData : any = Object.values(newLinks).map((link, index) => (
 			{
 				...link,
 				index: index,
 			}
+			// lodash has sort function, I think can use lodash instead
 		)).sort(function (firstLink: any, secondLink: any) { 
 			const firstDate = new Date(firstLink.dateTime); 
 			const secondDate = new Date(secondLink.dateTime);
@@ -184,6 +193,7 @@ const Bookmark = () => {
 				color={"text.primary"}
 			>
 				<Navbar />
+				{/*Think can be extracted to context so we dont need to pass this many things to the Preferences and Post*/}
 				<Preferences
 					links={links}
 					selected={selected}

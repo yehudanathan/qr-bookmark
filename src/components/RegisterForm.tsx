@@ -15,6 +15,7 @@ const RegisterForm = ({ isLoading }) => {
     const [passwordError, setPasswordError] = useState("");
     const [confPasswordError, setConfPasswordError] = useState("");
 
+    // error handling can be extracted using hooks or separate function here
     const errorCodes = {
         "email" : {
             "auth/email-already-in-use": "Email is already in use.",
@@ -53,6 +54,7 @@ const RegisterForm = ({ isLoading }) => {
                     setEmailError(errorCodes["email"][response]);
                 }
             } else {
+                // I think the user-firebase interface can be extracted into a hook or context, looks cleaner I believe
                 updateUser(profile, () => {
                     sendEmailVerification(() => {
                         logOut();
@@ -71,7 +73,8 @@ const RegisterForm = ({ isLoading }) => {
         <form className="form-control" onSubmit={handleSubmit}>
             <Stack alignItems="center" spacing={3}>
                 <Stack alignItems="center">
-                    <h1 className="subtitle"><strong>Register now. </strong>  It's free.</h1> 
+                    <h1 className="subtitle"><strong>Register now. </strong>  It's free.</h1>
+                    {/*How about extracting these into a styled components instead of doing lots of style duplication here? */}
                     <TextField
                         required
                         label="Name"
@@ -196,6 +199,8 @@ const RegisterForm = ({ isLoading }) => {
                         >
                         Register
                     </Button>
+                    {/*UX wise, not sure if you should have a sign in button here,
+                    I think better use text button like when you move from register to signin*/}
                     <Button
                         style={{backgroundColor: "#019875"}}
                         variant = "contained"

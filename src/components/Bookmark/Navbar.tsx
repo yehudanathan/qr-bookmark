@@ -23,6 +23,11 @@ const TitleBox = styled(Box)({
 	alignItems: "center",
 });
 
+//I think this is the easier way to read
+// const Search = styled.div`
+// 	position: relative;
+// ...
+// `;
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
 	borderRadius: theme.shape.borderRadius,

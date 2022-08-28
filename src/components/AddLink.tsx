@@ -3,6 +3,7 @@ import { useState } from "react";
 import validator from "validator";
 import TitleDialog from "./TitleDialog";
 
+// this should be a noun, not verb
 const AddLink = () => {
     const [url, setURL] = useState('');
     const [showTitleDialog, setShowTitleDialog] = useState(false);

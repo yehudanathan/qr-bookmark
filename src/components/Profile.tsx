@@ -9,6 +9,9 @@ const Profile = () => {
   const email = user?.email;
   const fullName = user?.displayName;
   let navigate = useNavigate();
+
+  // more concise with
+  // const displayPicture = user?.photoURL || defaultPicture;
   let displayPicture = user?.photoURL;
   
   if (displayPicture === null)  {

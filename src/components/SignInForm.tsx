@@ -23,6 +23,7 @@ const SignInForm = ({ isLoading }) => {
     const [passwordError, setPasswordError] = useState("");
     const [openModal, setOpenModal] = useState(checkPreviousPage());
 
+    // Yup definitely all of these can be extracted (as I mentioned in register form)
     const errorCodes = {
         "email" : {
             "auth/invalid-email" : "Invalid email address.",

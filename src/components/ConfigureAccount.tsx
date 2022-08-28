@@ -43,6 +43,7 @@ const ConfigureAccount = () => {
 
   const handleCloseReauthDialog = () => {
     if (currentEmail === email) {
+      // this is also triggered when I press cancel button, behaviour seems to be incorrect
       alert("Please enter a different email.") // TODO bikin email error dibawah textfield
     } else {
       updateEmail(email as string, () => {
@@ -64,6 +65,7 @@ const ConfigureAccount = () => {
     return <></>;
   }
 
+  // naming is very confusing, this should not be camelCase verb, but PascalCase noun, since this is component, not helper function
   const handleEmail = () => {
     if (emailEditMode) {
       return <>
@@ -116,6 +118,7 @@ const ConfigureAccount = () => {
 
   const toggleEditEmail = () => {
     if (!emailEditMode) {
+      // This one confirm shouldnt use alert here from product perspective, not nice for user flow
       alert("Update your email");
     }
     setEmailEditMode(!emailEditMode);

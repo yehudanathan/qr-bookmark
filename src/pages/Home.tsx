@@ -53,6 +53,7 @@ const Home = () => {
             <CustomSnackBar severity="success" message="You have successfully logged in!" autoHide={6000} open={checkPreviousLocation}/>
             {/* how to set such that the snackbar only opens when first time logging in? */}
             {/* locate previous page, pake useHistory() https://reactrouter.com/docs/en/v6/routers/history-router */}
+        {/*    Product wise, I think will be useful to display at least some url here? less effort for user*/}
         </div>
     )
 }

@@ -10,6 +10,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import MetaTags from 'react-meta-tags';
 import profilePicture from '../static/profile-picture.png';
 
+// Naming should be a noun instead of verb, probably EditProfilePage?
 const EditProfile = () => {
   let navigate = useNavigate();
 
@@ -30,6 +31,8 @@ const EditProfile = () => {
       displayName: displayName,
       photoURL: undefined,
     }, () => {
+      // Personally I dont like alert popping up, feels annoying haha,
+      // what if using dialog instead? (location of Ok button will be closer with your current mouse compared when using alert)
       alert("Profile updated!");
       navigate("/"); 
     });
@@ -70,6 +73,7 @@ const EditProfile = () => {
     </Helmet>
 
     <Stack sx={{padding: 3, marginBottom: "10px"}} alignItems="center" spacing={1.5}>
+      {/* Please use styled-components (https://styled-components.com/) instead of using className css, it makes life much easier */}
       <h1 className="profile-h1">Configure Your Profile</h1>
 
       <div className="profile-picture-hover">    

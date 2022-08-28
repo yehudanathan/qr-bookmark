@@ -14,6 +14,7 @@ const AuthPage = () => {
     
     const toggleLoading = () => {setIsLoading(false)};
 
+    // I think this is not a good idea, better having different component for register and sign in and use different component there
     if (location === '/register') {
         return (
             <div className="body">

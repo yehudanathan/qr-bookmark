@@ -1,6 +1,3 @@
-import { useState } from "react";
-import QrReader from "react-qr-scanner";
-import validator from "validator";
 import {
     Button,
     Dialog,
@@ -9,8 +6,11 @@ import {
     DialogTitle,
     Stack
 } from "@mui/material";
-import TitleDialog from "./TitleDialog";
+import { useState } from "react";
 import { useLocation } from "react-router";
+import QrReader from "react-qr-scanner";
+import TitleDialog from "./TitleDialog";
+import validator from "validator";
 
 const QrScanner = ({ open, setOpen }) => {
     const location = useLocation();
@@ -37,8 +37,8 @@ const QrScanner = ({ open, setOpen }) => {
         console.error(e);
     }
 
-    const handleOpenReader = () => {
-        return (<>
+    const QrReaderDialog = () => {
+        return (
             <Dialog
                 open={open}
                 onClose={() => { setOpen(false); }}
@@ -68,13 +68,13 @@ const QrScanner = ({ open, setOpen }) => {
                     </DialogActions>
                 </Stack>
             </Dialog>
-        </>);
+        );
     }
 
     return (
         <>
             <TitleDialog open={showTitleDialog} handleClose={() => setShowTitleDialog(false)} URL={result} />
-            {handleOpenReader()}
+            {QrReaderDialog()}
         </>
     )
 }

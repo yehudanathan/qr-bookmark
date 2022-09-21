@@ -57,16 +57,16 @@ const ConfigureAccountPage = () => {
     setOpenChangePasswordDialog(false);
   }
 
-  const handleVerified = () => {
+  const VerificationIcon = () => {
     if (user?.emailVerified) { // to be restructured in auth_user api
       return <VerifiedIcon sx={{ color: "#1179f2" }} />;
     }
     return <></>;
   }
 
-  const handleEmail = () => {
+  const EmailBar = () => {
     if (emailEditMode) {
-      return <>
+      return (
         <Stack direction="row" spacing={0.5} alignItems="baseline" sx={{ marginTop: "-13px" }}>
           <Stack>
             <TextField
@@ -97,11 +97,11 @@ const ConfigureAccountPage = () => {
             <DoneIcon fontSize="small" sx={{ color: "#35363a" }} />
           </Button>
         </Stack>
-      </>;
+      );
     }
-    return <>
+    return (
       <Stack direction="row" spacing={0.5} alignItems="center" sx={{ marginTop: "-3px" }}>
-        {handleVerified()}
+        {VerificationIcon()}
         <span className="config-span">{email}</span>
         <Button
           onClick={toggleEditEmail}
@@ -111,7 +111,7 @@ const ConfigureAccountPage = () => {
           <EditIcon fontSize="small" sx={{ color: "#35363a" }} />
         </Button>
       </Stack>
-    </>;
+    );
   }
 
   const toggleEditEmail = () => {
@@ -141,7 +141,7 @@ const ConfigureAccountPage = () => {
   }
 
   return (
-    <>
+    <div>
       <MetaTags>
         <title>Configure Account</title>
         <meta name="description" content="Configure your account" />
@@ -154,7 +154,7 @@ const ConfigureAccountPage = () => {
           <Stack alignItems="center" spacing={1}>
             <div className="config-profile account-config">
               <span className="config-span"><strong>Email</strong></span>
-              {handleEmail()}
+              {EmailBar()}
             </div>
             <div className="config-profile edit">
               <Button style={{ backgroundColor: "#398564", height: "40px", fontFamily: "Montserrat" }} variant="contained" size="large" onClick={handleChangePassword} disabled={handleDisableButton()}>Change Password</Button>
@@ -168,7 +168,7 @@ const ConfigureAccountPage = () => {
       <DeleteAccountDialog openDialog={openDeleteDialog} handleCloseDialog={handleCloseDeleteDialog} />
       <ReauthDialog openDialog={openReauthDialog} handleCloseDialog={handleCloseReauthDialog} />
       <ChangePasswordDialog openDialog={openChangePasswordDialog} handleCloseDialog={handleCloseChangePasswordDialog} />
-    </>
+    </div>
   )
 }
 

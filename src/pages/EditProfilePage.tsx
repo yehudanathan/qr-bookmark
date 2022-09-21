@@ -58,7 +58,7 @@ const EditProfilePage = () => {
   };
 
   return (
-    <>
+    <div>
       <MetaTags>
         <title>Edit Profile</title>
         <meta name="description" content="Configure your profile" />
@@ -94,8 +94,8 @@ const EditProfilePage = () => {
           </Stack>
         </form>
       </Stack>
-    </>
-  )
+    </div>
+  );
 }
 
 export default EditProfilePage;

@@ -136,7 +136,6 @@ const Preferences = ({
 									<LocalizationProvider dateAdapter={AdapterDateFns}>
 										<DateTimePicker
 											renderInput={(props) => <TextField {...props} />}
-											// id="From"
 											label="From"
 											value={from}
 											onChange={(newFrom) => {

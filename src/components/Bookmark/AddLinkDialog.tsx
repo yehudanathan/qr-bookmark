@@ -41,7 +41,7 @@ const AddLinkDialog = ({ open, handleClose }) => {
     }
   };
 
-  return (<>
+  return (
     <Dialog
       open={open}
       onClose={handleClose}
@@ -136,7 +136,7 @@ const AddLinkDialog = ({ open, handleClose }) => {
         </Stack>
       </Stack>
     </Dialog>
-  </>);
+  );
 }
 
 export default AddLinkDialog;

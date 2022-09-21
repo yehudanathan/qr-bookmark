@@ -44,7 +44,6 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
   }
 
   return (
-    <>
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
@@ -126,7 +125,6 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
   )
 }
 

@@ -30,7 +30,7 @@ const Config = () => {
   }
 
   return (
-    <>
+    <div>
       <MetaTags>
         <title>Profile</title>
         <meta name="description" content="Profile page" />
@@ -55,8 +55,7 @@ const Config = () => {
           </Card>
         </Stack>
       </div>
-
-    </>
+    </div>
   );
 };
 

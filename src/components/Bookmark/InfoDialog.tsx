@@ -18,7 +18,7 @@ const InfoDialog = ({
   URL,
   dateTime
 }) => {
-  return (<>
+  return (
     <Dialog
       open={displayDialog}
       onClose={handleCloseDialog}
@@ -82,7 +82,7 @@ const InfoDialog = ({
         </IconButton>
       </DialogActions>
     </Dialog>
-  </>);
+  );
 }
 
 export default InfoDialog;

@@ -30,7 +30,7 @@ const DeleteAccountDialog = ({ openDialog, handleCloseDialog }) => {
   }
 
   return (
-    <>
+    <div>
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
@@ -59,7 +59,7 @@ const DeleteAccountDialog = ({ openDialog, handleCloseDialog }) => {
       </Dialog>
 
       <ReauthDialog openDialog={openReauthDialog} handleCloseDialog={handleCloseReauthDialog} />
-    </>
+    </div>
   )
 }
 

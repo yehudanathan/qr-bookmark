@@ -52,7 +52,6 @@ const ChangePasswordDialog = ({ openDialog, handleCloseDialog }) => {
   };
 
   return (
-    <>
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
@@ -152,7 +151,6 @@ const ChangePasswordDialog = ({ openDialog, handleCloseDialog }) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
   )
 };
 

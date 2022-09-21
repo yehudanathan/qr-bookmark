@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -28,7 +27,7 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
+  const List = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
@@ -77,7 +76,7 @@ export default function TemporaryDrawer() {
           open={state.left}
           onClose={() => toggleDrawer("left", false)}
         >
-          {list("left")}
+          {List("left")}
         </Drawer>
       </React.Fragment>
     </div>

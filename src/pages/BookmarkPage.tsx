@@ -176,7 +176,7 @@ const BookmarkPage = () => {
 		},
 	});
 
-	return (<>
+	return (
 		<div className="bookmark-div">
 			<ThemeProvider theme={dualTheme}>
 				<Box
@@ -227,7 +227,6 @@ const BookmarkPage = () => {
 				</Box>
 			</ThemeProvider>
 		</div>
-	</>
 	);
 };
 

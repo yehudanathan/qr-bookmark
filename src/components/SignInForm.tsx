@@ -1,9 +1,9 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
-import GoogleButton from 'react-google-button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { emailSignIn } from '../firebase/auth/auth_email_password';
 import { googleSignIn } from '../firebase/auth/auth_google';
+import GoogleButton from 'react-google-button';
 import VerificationEmailModal from './VerificationEmailModal';
 
 const SignInForm = ({ isLoading }) => {
@@ -67,7 +67,7 @@ const SignInForm = ({ isLoading }) => {
     if (isLoading) {
         return (<></>);
     } return (
-        <>
+        <div>
             <VerificationEmailModal openState={openModal} handleCloseModal={handleCloseModal} />
             <form className="form-control" onSubmit={handleSubmit}>
                 <Stack alignItems="center" spacing={3}>
@@ -167,7 +167,7 @@ const SignInForm = ({ isLoading }) => {
                     </Stack>
                 </Stack>
             </form>
-        </>
+        </div>
     )
 }
 

@@ -43,7 +43,7 @@ const TitleDialog = ({ open, handleClose, URL }) => {
     }
   };
 
-  return (<>
+  return (
     <Dialog
       open={open}
       onClose={handleClose}
@@ -129,7 +129,7 @@ const TitleDialog = ({ open, handleClose, URL }) => {
         </Stack>
       </Stack>
     </Dialog>
-  </>);
+  );
 }
 
 export default TitleDialog;

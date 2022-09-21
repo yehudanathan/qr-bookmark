@@ -7,14 +7,18 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { getUser, reAuthenticate } from "../firebase/auth/auth_user";
+import { useNavigate } from "react-router";
+import { getUser, reAuthenticate, updatePassword } from "../firebase/auth/auth_user";
 
-const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfPassword] = useState("");
-  // const [fieldError, setFieldError] = useState("");
+const ChangePasswordDialog = ({ openDialog, handleCloseDialog }) => {
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfNewPassword] = useState("");
+
+  // const [fieldError, setFieldError] = useState(""); // TODO
   const user = getUser();
   const currentEmail = user?.email;
+  let navigate = useNavigate();
 
   const style = {
     backgroundColor: "#d9efff",
@@ -27,21 +31,25 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
 
   const handleCheckPassword = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-    } else {
-      const response = await reAuthenticate(currentEmail, password);
+    const response = await reAuthenticate(currentEmail, oldPassword);
 
-      if (response === "reauthenticated") {
-        handleCloseDialog();
-      } else if (response in errorCodes) {
-        // set errors. TODO
-        // setFieldError(errorCodes[response]);
+    if (response === "reauthenticated") {
+      if (newPassword === confirmNewPassword) {
+        updatePassword(newPassword, () => {
+          alert("Password updated");
+          handleCloseDialog();
+          navigate("/config");
+        });
       } else {
-        alert(response);
+        alert("New passwords do not match");
       }
+    } else if (response in errorCodes) {
+      // TODO
+      // setFieldError(errorCodes[response]);
+    } else {
+      alert(response);
     }
-  }
+  };
 
   return (
     <>
@@ -64,7 +72,7 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
               required
               type="password"
               className="error-text-field"
-              label="Password"
+              label="Old Password"
               sx={{
                 m: 1,
                 width: "40ch",
@@ -74,15 +82,15 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
                 display: "flex"
               }}
               size="small"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={oldPassword}
+              onChange={e => setOldPassword(e.target.value)}
               inputProps={{ style: { fontFamily: "Product Sans" } }}
             />
             <TextField
               required
               type="password"
               className="error-text-field"
-              label="Confirm Password"
+              label="New Password"
               sx={{
                 m: 1,
                 width: "40ch",
@@ -92,8 +100,26 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
                 display: "flex"
               }}
               size="small"
-              value={confirmPassword}
-              onChange={e => setConfPassword(e.target.value)}
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              inputProps={{ style: { fontFamily: "Product Sans" } }}
+            />
+            <TextField
+              required
+              type="password"
+              className="error-text-field"
+              label="Confirm New Password"
+              sx={{
+                m: 1,
+                width: "40ch",
+                backgroundColor: "white",
+                borderTopLeftRadius: "4px",
+                borderTopRightRadius: "4px",
+                display: "flex"
+              }}
+              size="small"
+              value={confirmNewPassword}
+              onChange={e => setConfNewPassword(e.target.value)}
               inputProps={{ style: { fontFamily: "Product Sans" } }}
             />
           </form>
@@ -128,6 +154,6 @@ const ReauthDialog = ({ openDialog, handleCloseDialog }) => {
       </Dialog>
     </>
   )
-}
+};
 
-export default ReauthDialog;
+export default ChangePasswordDialog;

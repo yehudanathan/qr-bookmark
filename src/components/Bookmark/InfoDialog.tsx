@@ -1,6 +1,6 @@
-import { 
-  IconButton, 
-  Dialog, 
+import {
+  IconButton,
+  Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
@@ -27,8 +27,8 @@ const InfoDialog = ({
     >
       <DialogTitle
         sx={{
-          fontFamily: "Gotham Medium", 
-          fontSize: "22px", 
+          fontFamily: "Gotham Medium",
+          fontSize: "22px",
           color: "black",
           paddingBottom: "10px",
         }}
@@ -36,11 +36,11 @@ const InfoDialog = ({
         {title}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText 
+        <DialogContentText
           id="alert-dialog-description"
           sx={{
-            fontFamily: "Product Sans", 
-            fontSize: "17px", 
+            fontFamily: "Product Sans",
+            fontSize: "17px",
             color: "#000000"
           }}
         >
@@ -56,11 +56,11 @@ const InfoDialog = ({
             </a>
           </Stack>
         </DialogContentText>
-        <DialogContentText 
+        <DialogContentText
           id="alert-dialog-description"
           sx={{
-            fontFamily: "Product Sans", 
-            fontSize: "17px", 
+            fontFamily: "Product Sans",
+            fontSize: "17px",
             color: "#000000"
           }}
         >
@@ -68,7 +68,7 @@ const InfoDialog = ({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <IconButton 
+        <IconButton
           onClick={handleCloseDialog}
           sx={{
             position: "absolute",

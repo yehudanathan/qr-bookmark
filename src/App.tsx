@@ -7,9 +7,9 @@ import Home from "./pages/Home";
 import Config from "./pages/Config";
 import AuthPage from "./pages/AuthPage";
 import About from "./pages/About";
-import EditProfile from "./pages/EditProfile";
-import ConfigureAccount from "./components/ConfigureAccount";
-import Bookmark from "./pages/Bookmark";
+import EditProfilePage from "./pages/EditProfilePage";
+import ConfigureAccountPage from "./pages/ConfigureAccountPage";
+import BookmarkPage from "./pages/BookmarkPage";
 
 const PrivateRoute = () => {
   const auth = getAuth();
@@ -28,7 +28,7 @@ const PrivateRoute = () => {
     })
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   return (
     <>
       {!isLoading && (isAuthenticated ? <Outlet /> : <Navigate to="/signin" />)}
@@ -39,15 +39,16 @@ const PrivateRoute = () => {
 const SignInRoute = () => {
   const [signedIn, setSignedIn] = useState(false);
   const auth = getAuth();
-  
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user?.emailVerified) {
         setSignedIn(true);
       } else {
         setSignedIn(false);
-      }});
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (signedIn) {
@@ -65,18 +66,18 @@ function App() {
           <Routes>
             <Route path="/" element={<PrivateRoute />}>
               <Route path="" element={<Home />} />
-              <Route path="config" element={<Config />}> 
-                <Route path="edit-profile" element={<EditProfile />} />
-                <Route path="account" element={<ConfigureAccount />} />
+              <Route path="config" element={<Config />}>
+                <Route path="edit-profile" element={<EditProfilePage />} />
+                <Route path="account" element={<ConfigureAccountPage />} />
               </Route>
-              <Route path="links" element={<Bookmark />} />
+              <Route path="links" element={<BookmarkPage />} />
               <Route path="about" element={<About />} />
             </Route>
             <Route path="/signin" element={<SignInRoute />}>
               <Route path="" element={<AuthPage />} />
             </Route>
-            <Route path="/register" element={<AuthPage />}></Route>
-            <Route path='*' element={<Navigate to='/'/>}></Route>
+            <Route path="/register" element={<AuthPage />} />
+            <Route path='*' element={<Navigate to='/' />} />
           </Routes>
         </Router>
       }

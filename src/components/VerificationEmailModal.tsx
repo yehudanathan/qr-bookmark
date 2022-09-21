@@ -16,7 +16,7 @@ const style = {
 const VerificationEmailModal = ({ openState, handleCloseModal }) => {
   return (
     <div>
-      <Modal 
+      <Modal
         open={openState}
         onClose={handleCloseModal}
       >

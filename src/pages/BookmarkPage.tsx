@@ -3,13 +3,13 @@ import { updateLinks, getLinks } from "../firebase/database/links";
 import { useEffect, useState } from "react";
 // import { Link } from '../firebase/models/Link';
 // import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
-import Navbar from "../components/Bookmark/Navbar";
-import Post from "../components/Bookmark/Post";
-import Preferences from "../components/Bookmark/Preferences";
-import LeftBar from "../components/Bookmark/LeftBar";
-import RightBar from "../components/Bookmark/RightBar";
+import Navbar from "../components/bookmark/Navbar";
+import Post from "../components/bookmark/Post";
+import Preferences from "../components/bookmark/Preferences";
+import LeftBar from "../components/bookmark/LeftBar";
+import RightBar from "../components/bookmark/RightBar";
 
-const Bookmark = () => {
+const BookmarkPage = () => {
 	// const [mode, setMode] = useState("light");
 	const mode = "light";
 	const [links, setLinks] = useState<any[]>([]);
@@ -28,25 +28,25 @@ const Bookmark = () => {
 		async function fetchData() {
 			// initialize by fetching links
 			const links = await getLinks();
-			
+
 			if (links === null) {
 				console.log("links is null bruh");
 				return;
 			}
-			
-			const newData : any = Object.values(links)
-			.filter((link) => link.isDeleted !== true)
-			.map((link, index) => (
-				{
-					...link,
-					index: index,
-				}
-			));
+
+			const newData: any = Object.values(links)
+				.filter((link) => link.isDeleted !== true)
+				.map((link, index) => (
+					{
+						...link,
+						index: index,
+					}
+				));
 			setLinks(newData);
 
-			const selectedArray : boolean[] = [];
-			const favoriteArray : boolean[] = [];
-			const displayInfoArray : boolean[] = [];
+			const selectedArray: boolean[] = [];
+			const favoriteArray: boolean[] = [];
+			const displayInfoArray: boolean[] = [];
 
 			newData.forEach((link) => {
 				selectedArray.push(false);
@@ -73,7 +73,7 @@ const Bookmark = () => {
 		setSelected(updatedSelected);
 	}
 
-	const handleFavorite =  async (linkIndex) => {
+	const handleFavorite = async (linkIndex) => {
 		const getCurrentFav = favorite[linkIndex];
 		const updatedLinks = links.filter((link) => linkIndex === link.index).map((link) => ({
 			...link,
@@ -81,13 +81,13 @@ const Bookmark = () => {
 		}));
 
 		const newLinks = [...links.slice(0, linkIndex), updatedLinks[0], ...links.slice(linkIndex + 1)];
-		
+
 		const newFavorite = newLinks.map(link => link.favorite);
-		const newSelected : boolean[] = [];
+		const newSelected: boolean[] = [];
 		newLinks.forEach((link) => {
 			newSelected.splice(link.index, 1, false);
 		});
-		
+
 		const response = await updateLinks(updatedLinks);
 		if (response === true) {
 			setLinks(newLinks);
@@ -116,7 +116,7 @@ const Bookmark = () => {
 			deactivateSelectionMode();
 			clearAllSelection();
 		}
-		
+
 	}
 
 	const deleteLink = async (linkIndex) => {
@@ -124,18 +124,18 @@ const Bookmark = () => {
 			...link,
 			isDeleted: true,
 		}));
-				
+
 		const newLinks = links.filter((link) => !linkIndex.includes(link.index));
 		newLinks.concat(linkToDelete);
 
 		const newFavorite = newLinks.map((link) => link.favorite);
-		const newSelected : boolean[] = [];
+		const newSelected: boolean[] = [];
 		newLinks.forEach((link) => {
 			newSelected.splice(link.index, 1, false);
 		});
-		
+
 		const response = await updateLinks(linkToDelete);
-		
+
 		if (response === true) {
 			setLinks(newLinks);
 			setSelected(newSelected);
@@ -152,18 +152,18 @@ const Bookmark = () => {
 			console.log("links is null bruh");
 			return;
 		}
-		const newData : any = Object.values(newLinks).map((link, index) => (
+		const newData: any = Object.values(newLinks).map((link, index) => (
 			{
 				...link,
 				index: index,
 			}
-		)).sort(function (firstLink: any, secondLink: any) { 
-			const firstDate = new Date(firstLink.dateTime); 
+		)).sort(function (firstLink: any, secondLink: any) {
+			const firstDate = new Date(firstLink.dateTime);
 			const secondDate = new Date(secondLink.dateTime);
 			if (category === 'Oldest') {
 				return +firstDate - +secondDate as number;
 			}
-				return +secondDate - +firstDate as number;
+			return +secondDate - +firstDate as number;
 		});
 		console.log("🚀 ~ file: Bookmark.tsx ~ line 278 ~ sortBy ~ newData", newData)
 		setLinks(newData);
@@ -177,58 +177,58 @@ const Bookmark = () => {
 	});
 
 	return (<>
-	<div className="bookmark-div">
-		<ThemeProvider theme={dualTheme}>
-			<Box
-				bgcolor={"background.default"}
-				color={"text.primary"}
-			>
-				<Navbar />
-				<Preferences
-					links={links}
-					selected={selected}
-					from={from}
-					to={to}
-					sort={sort}
-					setLinks={setLinks}
-					setFrom={setFrom}
-					setTo={setTo}
-					setSort={setSort}
-					sortBy={sortBy}
-					setSelectAll={setSelectAll}
-					allSelected={selectAll}
-					handleSelectAll={handleSelectAll}
-					clearSelection={clearAllSelection}
-					deactivateSelectionMode={deactivateSelectionMode}
-				/>
-				<Stack direction="row" spacing={2} justifyContent="space-between">
-					<LeftBar />
-					<Post 
-						links={links} 
-						favorite={favorite}
-						handleFavorite={handleFavorite}
-						selectMode={selectionMode}
-						activateSelectMode={activateSelectionMode}
-						deactivateSelectMode={deactivateSelectionMode}
-						clearSelection={clearAllSelection}
-						setSelectAll={setSelectAll}
-						setSelect={setSelect}
+		<div className="bookmark-div">
+			<ThemeProvider theme={dualTheme}>
+				<Box
+					bgcolor={"background.default"}
+					color={"text.primary"}
+				>
+					<Navbar />
+					<Preferences
+						links={links}
 						selected={selected}
-						openAddLinkDialog={openAddLinkDialog}
-						setOpenAddLinkDialog={setOpenAddLinkDialog}
-						openQrReader={openQrReader}
-						setOpenQrReader={setOpenQrReader}
-						deleteLink={deleteLink}
-						displayInfo={displayInfo}
-						setDisplayInfo={setDisplayInfo}
+						from={from}
+						to={to}
+						sort={sort}
+						setLinks={setLinks}
+						setFrom={setFrom}
+						setTo={setTo}
+						setSort={setSort}
+						sortBy={sortBy}
+						setSelectAll={setSelectAll}
+						allSelected={selectAll}
+						handleSelectAll={handleSelectAll}
+						clearSelection={clearAllSelection}
+						deactivateSelectionMode={deactivateSelectionMode}
 					/>
-					<RightBar />
-				</Stack>
-			</Box>
-		</ThemeProvider>
-	</div>
+					<Stack direction="row" spacing={2} justifyContent="space-between">
+						<LeftBar />
+						<Post
+							links={links}
+							favorite={favorite}
+							handleFavorite={handleFavorite}
+							selectMode={selectionMode}
+							activateSelectMode={activateSelectionMode}
+							deactivateSelectMode={deactivateSelectionMode}
+							clearSelection={clearAllSelection}
+							setSelectAll={setSelectAll}
+							setSelect={setSelect}
+							selected={selected}
+							openAddLinkDialog={openAddLinkDialog}
+							setOpenAddLinkDialog={setOpenAddLinkDialog}
+							openQrReader={openQrReader}
+							setOpenQrReader={setOpenQrReader}
+							deleteLink={deleteLink}
+							displayInfo={displayInfo}
+							setDisplayInfo={setDisplayInfo}
+						/>
+						<RightBar />
+					</Stack>
+				</Box>
+			</ThemeProvider>
+		</div>
 	</>
 	);
 };
 
-export default Bookmark;
+export default BookmarkPage;

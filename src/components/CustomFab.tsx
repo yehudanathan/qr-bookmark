@@ -2,14 +2,14 @@ import { Fab } from "@mui/material";
 
 const CustomFab = ({ color, iconComponent, onClick, style }) => {
   return (<>
-    <Fab 
+    <Fab
       onClick={onClick}
-			color={color}
-			sx={style}
-		>
-			{iconComponent}
-		</Fab>
-    </>
+      color={color}
+      sx={style}
+    >
+      {iconComponent}
+    </Fab>
+  </>
   )
 }
 

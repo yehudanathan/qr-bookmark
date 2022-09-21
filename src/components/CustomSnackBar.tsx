@@ -1,7 +1,7 @@
 import { Snackbar, Alert } from "@mui/material";
 import { useState } from "react";
 
-const CustomSnackBar = ({severity, message, autoHide, open}) => {
+const CustomSnackBar = ({ severity, message, autoHide, open }) => {
   const [openState, setOpen] = useState(open);
   const handleClose = () => {
     setOpen(false);

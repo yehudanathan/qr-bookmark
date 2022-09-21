@@ -43,9 +43,9 @@ export default function TemporaryDrawer() {
         ].map((obj) => (
           <ListItem button key={obj.text} onClick={obj.onClick}>
             <ListItemIcon>
-              <img src={obj.path} alt="logo" width="20" height="20"/>
+              <img src={obj.path} alt="logo" width="20" height="20" />
             </ListItemIcon>
-            <ListItemText primary={obj.text} sx={{fontFamily: "Product Sans", fontSize: "17px", color: "black"}}/>
+            <ListItemText primary={obj.text} sx={{ fontFamily: "Product Sans", fontSize: "17px", color: "black" }} />
           </ListItem>
         ))}
       </List>
@@ -53,25 +53,25 @@ export default function TemporaryDrawer() {
       <List>
         <ListItem button key="About" onClick={() => navigate('/about')}>
           <ListItemIcon>
-            <img src={Info} alt="logo" width="20" height="20"/>
+            <img src={Info} alt="logo" width="20" height="20" />
           </ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
-        <ListItem button key="Log out" onClick={() => {logOut(); navigate('/signin')}}>
+        <ListItem button key="Log out" onClick={() => { logOut(); navigate('/signin') }}>
           <ListItemIcon>
-            <img src={Logout} alt="logo" width="20" height="20"/>
+            <img src={Logout} alt="logo" width="20" height="20" />
           </ListItemIcon>
           <ListItemText primary="Log out" />
         </ListItem>
       </List>
     </Box>
   );
-  
+
   const path = process.env.PUBLIC_URL + '/hamb-blue.png';
   return (
     <div>
       <React.Fragment>
-        <button style={{background: `url("${path}") `, width: "30px", height: "30px", backgroundSize: 'cover', border: 'none', cursor: 'pointer'}} onClick={e => toggleDrawer("left", true)}></button>
+        <button style={{ background: `url("${path}") `, width: "30px", height: "30px", backgroundSize: 'cover', border: 'none', cursor: 'pointer' }} onClick={e => toggleDrawer("left", true)}></button>
         <Drawer
           anchor="left"
           open={state.left}

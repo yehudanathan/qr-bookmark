@@ -10,19 +10,19 @@ const Profile = () => {
   const fullName = user?.displayName;
   let navigate = useNavigate();
   let displayPicture = user?.photoURL;
-  
-  if (displayPicture === null)  {
+
+  if (displayPicture === null) {
     displayPicture = defaultPicture;
   }
 
-  const handleClick = (e : React.SyntheticEvent) => {
+  const handleClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     navigate('/config');
   }
 
   return (
     <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
-      <img alt="profile" className="profile-picture small" src={displayPicture as string}/>
+      <img alt="profile" className="profile-picture small" src={displayPicture as string} />
       <Stack>
         <span className="config-span small profile-section" onClick={handleClick}>{fullName}</span>
         <span className="config-span smaller profile-section">{email}</span>

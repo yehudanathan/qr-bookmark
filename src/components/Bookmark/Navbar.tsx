@@ -61,11 +61,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
 	return (
-		<AppBar sx={{position:"fixed", 
-			padding: "30px", 
-			paddingTop: "20px", 
+		<AppBar sx={{
+			position: "fixed",
+			padding: "30px",
+			paddingTop: "20px",
 			paddingBottom: "20px",
-			}}
+		}}
 		>
 			<StyledToolbar >
 				<div className="bookmark-sidebar">
@@ -73,19 +74,19 @@ const Navbar = () => {
 				</div>
 				<div className="bookmark-navbar">
 					<Stack spacing={1} justifyContent="center">
-						<TitleBox className="navbar-titlebox" sx={{justifyContent: "center"}}>
+						<TitleBox className="navbar-titlebox" sx={{ justifyContent: "center" }}>
 							<Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center">
 								<CropFree sx={{ fontSize: "40px" }} />
 								<h1 className="bookmark-title">QR-Bookmark</h1>
 							</Stack>
 						</TitleBox>
-						<Search sx={{width: "350px"}}>
+						<Search sx={{ width: "350px" }}>
 							<SearchIconWrapper>
 								<SearchIcon />
 							</SearchIconWrapper>
 							<StyledInputBase
 								placeholder="Search bookmarks…"
-								inputProps={{ "aria-label": "search", style: {fontFamily: "Product Sans, Montserrat"}}}
+								inputProps={{ "aria-label": "search", style: { fontFamily: "Product Sans, Montserrat" } }}
 							/>
 						</Search>
 					</Stack>

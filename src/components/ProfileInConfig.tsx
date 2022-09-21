@@ -16,9 +16,9 @@ const ProfileInConfig = () => {
   }
 
   return (
-    <Stack sx={{padding: 3}} alignItems="center" spacing={1.5}>
+    <Stack sx={{ padding: 3 }} alignItems="center" spacing={1.5}>
       <h1 className="profile-h1">Your Profile</h1>
-      <img className="profile-picture" src={displayPicture} alt="profile"/>
+      <img className="profile-picture" src={displayPicture} alt="profile" />
       <h2 className="full-name">{fullName}</h2>
       <Stack alignItems="center" spacing={0.5}>
         <span className="config-span">{email}</span>
@@ -26,14 +26,14 @@ const ProfileInConfig = () => {
       </Stack>
 
       <div className="config-profile">
-        <Link to="edit-profile" style={{textDecoration: "none"}}>
-          <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" onClick={() => {navigate("/edit-profile");}}>Edit Profile</Button>
+        <Link to="edit-profile" style={{ textDecoration: "none" }}>
+          <Button style={{ backgroundColor: "#398564", height: "40px", fontFamily: "Montserrat", width: "100%" }} variant="contained" size="large" onClick={() => { navigate("/edit-profile"); }}>Edit Profile</Button>
         </Link>
-        <Link to="account" style={{textDecoration: "none"}}>
-          <Button style={{backgroundColor: "#398564", height:"40px", fontFamily:"Montserrat", width: "100%"}} variant="contained" size="large" onClick={() => {navigate("/account");}}>Configure Account</Button>
+        <Link to="account" style={{ textDecoration: "none" }}>
+          <Button style={{ backgroundColor: "#398564", height: "40px", fontFamily: "Montserrat", width: "100%" }} variant="contained" size="large" onClick={() => { navigate("/account"); }}>Configure Account</Button>
         </Link>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() =>{logOut(); navigate("/signin");}}>Log out</Button>
-        <Button style={{borderColor: "#398564", height:"40px", fontFamily:"Montserrat", color: "#398564", marginBottom: "10px"}} variant="outlined" size="large" onClick={() => navigate("/")}>Back to dashboard</Button>
+        <Button style={{ borderColor: "#398564", height: "40px", fontFamily: "Montserrat", color: "#398564", marginBottom: "10px" }} variant="outlined" size="large" onClick={() => { logOut(); navigate("/signin"); }}>Log out</Button>
+        <Button style={{ borderColor: "#398564", height: "40px", fontFamily: "Montserrat", color: "#398564", marginBottom: "10px" }} variant="outlined" size="large" onClick={() => navigate("/")}>Back to dashboard</Button>
       </div>
     </Stack>
   )

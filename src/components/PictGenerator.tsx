@@ -19,13 +19,13 @@ const PictGenerator = ({ onGenerate }) => {
 
     useEffect(() => {
         setPhoto();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     if (photoError) {
         return <img className="img" src="https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg" alt="background" />;
     } else if (photo === null) {
-        return <></>; 
+        return <></>;
         // TODO create error page
     } else {
         return (
@@ -34,7 +34,7 @@ const PictGenerator = ({ onGenerate }) => {
                 target="_blank"
                 href={`https://unsplash.com/@${photo.data.user.username}`} rel="noreferrer"
             >
-                <img className="img" src={photo.data.urls.regular} alt="background"/>
+                <img className="img" src={photo.data.urls.regular} alt="background" />
             </a>
         );
     }

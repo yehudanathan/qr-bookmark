@@ -67,7 +67,7 @@ const Preferences = ({
 }) => {
 	const [filterOpen, setFilterOpen] = useState(false);
 	// TODO find out theme type
-	const isDesktop = useMediaQuery((theme : any) => theme.breakpoints.up("sm"));
+	const isDesktop = useMediaQuery((theme: any) => theme.breakpoints.up("sm"));
 	const checkSelectAll = selected.every((value) => value === true) && selected.length !== 0;
 
 	const handleDropdownChange = async (e) => {
@@ -187,8 +187,8 @@ const Preferences = ({
 						</Box>
 					</StyledModal>
 
-					<FormControl 
-						sx={{ 
+					<FormControl
+						sx={{
 							flexGrow: 1,
 							display: "flex",
 							maxHeight: "40px",
@@ -213,8 +213,8 @@ const Preferences = ({
 							<MenuItem value={"Newest"}><h3 className="preferences-filter dropdown">Most recent</h3></MenuItem>
 						</Select>
 					</FormControl>
-					<Stack 
-						direction="row" 
+					<Stack
+						direction="row"
 						spacing={0.5}
 						sx={{
 							transform: "translate(-5px, 7px)"
